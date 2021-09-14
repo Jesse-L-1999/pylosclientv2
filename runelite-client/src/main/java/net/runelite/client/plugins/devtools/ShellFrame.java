@@ -49,7 +49,7 @@ class ShellFrame extends DevToolsFrame
 		};
 		setContentPane(shellPanel);
 
-		setTitle("OpenOSRS Shell");
+		setTitle("Pylos V2 Shell");
 
 		pack();
 	}
