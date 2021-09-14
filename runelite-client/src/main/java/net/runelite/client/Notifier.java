@@ -399,7 +399,7 @@ public class Notifier
 	{
 		if (OSType.getOSType() == OSType.Linux && !Files.exists(notifyIconPath))
 		{
-			try (InputStream stream = Notifier.class.getResourceAsStream("/openosrs.png"))
+			try (InputStream stream = Notifier.class.getResourceAsStream("/pylos.png"))
 			{
 				Files.copy(stream, notifyIconPath);
 			}
