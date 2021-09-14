@@ -327,7 +327,7 @@ public abstract class RSClientMixin implements RSClient
 	@Override
 	public String getBuildID()
 	{
-		return "OpenOSRS";
+		return "Pylos V2";
 	}
 
 	@Inject
