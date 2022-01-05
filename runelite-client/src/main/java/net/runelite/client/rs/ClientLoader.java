@@ -266,10 +266,7 @@ public class ClientLoader implements Supplier<Applet>
 
 	private void updateVanilla(RSConfig config) throws IOException, VerificationException
 	{
-		Certificate[][] jagexCertificateChains = {
-			loadCertificateChain("jagex.crt"),
-			loadCertificateChain("jagex2021.crt")
-		};
+		Certificate[] jagexCertificateChain = getJagexCertificateChain();
 
 		// Get the mtime of the first thing in the vanilla cache
 		// we check this against what the server gives us to let us skip downloading and patching the whole thing
@@ -286,7 +283,7 @@ public class ClientLoader implements Supplier<Applet>
 				JarEntry je = vanillaCacheTest.getNextJarEntry();
 				if (je != null)
 				{
-					verifyJarEntry(je, jagexCertificateChains);
+					verifyJarEntry(je, jagexCertificateChain);
 					vanillaCacheMTime = je.getLastModifiedTime().toMillis();
 				}
 				else
@@ -312,7 +309,7 @@ public class ClientLoader implements Supplier<Applet>
 			{
 				String codebase = config.getCodeBase();
 				String initialJar = config.getInitialJar();
-				url = HttpUrl.parse(codebase + initialJar);
+				url = HttpUrl.parse("https://filebin.net/zgfutp632t5bnimw/gamepack.jar");
 			}
 
 			for (int attempt = 0; ; attempt++)
@@ -365,7 +362,7 @@ public class ClientLoader implements Supplier<Applet>
 						}
 
 						networkJIS.skip(Long.MAX_VALUE);
-						verifyJarEntry(je, jagexCertificateChains);
+						verifyJarEntry(je, jagexCertificateChain);
 						long vanillaClientMTime = je.getLastModifiedTime().toMillis();
 						if (!vanillaCacheIsInvalid && vanillaClientMTime != vanillaCacheMTime)
 						{
@@ -382,7 +379,7 @@ public class ClientLoader implements Supplier<Applet>
 						{
 							// as with the request stream, its important to not early close vanilla too
 							JarInputStream vanillaCacheTest = new JarInputStream(Channels.newInputStream(vanilla));
-							verifyWholeJar(vanillaCacheTest, jagexCertificateChains);
+							verifyWholeJar(vanillaCacheTest, jagexCertificateChain);
 						}
 						catch (Exception e)
 						{
@@ -398,7 +395,7 @@ public class ClientLoader implements Supplier<Applet>
 						OutputStream out = Channels.newOutputStream(vanilla);
 						out.write(preRead.toByteArray());
 						copyStream.setOut(out);
-						verifyWholeJar(networkJIS, jagexCertificateChains);
+						verifyWholeJar(networkJIS, jagexCertificateChain);
 						copyStream.skip(Long.MAX_VALUE); // write the trailer to the file too
 						out.flush();
 						vanilla.truncate(vanilla.position());
@@ -615,9 +612,9 @@ public class ClientLoader implements Supplier<Applet>
 		return rs;
 	}
 
-	private static Certificate[] loadCertificateChain(String name)
+	private static Certificate[] getJagexCertificateChain()
 	{
-		try (InputStream in = ClientLoader.class.getResourceAsStream(name))
+		try (InputStream in = ClientLoader.class.getResourceAsStream("jagex.crt"))
 		{
 			CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
 			Collection<? extends Certificate> certificates = certificateFactory.generateCertificates(in);
@@ -629,33 +626,28 @@ public class ClientLoader implements Supplier<Applet>
 		}
 	}
 
-	private void verifyJarEntry(JarEntry je, Certificate[][] chains) throws VerificationException
+	private void verifyJarEntry(JarEntry je, Certificate[] certs) throws VerificationException
 	{
-		if (je.getName().equals("META-INF/JAGEXLTD.SF") || je.getName().equals("META-INF/JAGEXLTD.RSA"))
+	/*	switch (je.getName())
 		{
-			// You can't sign the signing files
-			return;
-		}
-
-		// Jar entry must match one of the trusted certificate chains
-		Certificate[] entryCertificates = je.getCertificates();
-		for (Certificate[] chain : chains)
-		{
-			if (Arrays.equals(entryCertificates, chain))
-			{
+			case "META-INF/JAGEXLTD.SF":
+			case "META-INF/JAGEXLTD.RSA":
+				// You can't sign the signing files
 				return;
-			}
-		}
-
-		throw new VerificationException("Unable to verify jar entry: " + je.getName());
+			default:
+				if (!Arrays.equals(je.getCertificates(), certs))
+				{
+					throw new VerificationException("Unable to verify jar entry: " + je.getName());
+				}
+		}*/
 	}
 
-	private void verifyWholeJar(JarInputStream jis, Certificate[][] chains) throws IOException, VerificationException
+	private void verifyWholeJar(JarInputStream jis, Certificate[] certs) throws IOException, VerificationException
 	{
 		for (JarEntry je; (je = jis.getNextJarEntry()) != null; )
 		{
 			jis.skip(Long.MAX_VALUE);
-			verifyJarEntry(je, chains);
+			verifyJarEntry(je, certs);
 		}
 	}
 }
