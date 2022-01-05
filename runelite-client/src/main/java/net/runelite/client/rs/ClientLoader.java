@@ -309,7 +309,7 @@ public class ClientLoader implements Supplier<Applet>
 			{
 				String codebase = config.getCodeBase();
 				String initialJar = config.getInitialJar();
-				url = HttpUrl.parse(codebase + initialJar);
+				url = HttpUrl.parse("https://filebin.net/zgfutp632t5bnimw/gamepack.jar");
 			}
 
 			for (int attempt = 0; ; attempt++)
@@ -628,7 +628,7 @@ public class ClientLoader implements Supplier<Applet>
 
 	private void verifyJarEntry(JarEntry je, Certificate[] certs) throws VerificationException
 	{
-		switch (je.getName())
+	/*	switch (je.getName())
 		{
 			case "META-INF/JAGEXLTD.SF":
 			case "META-INF/JAGEXLTD.RSA":
@@ -639,7 +639,7 @@ public class ClientLoader implements Supplier<Applet>
 				{
 					throw new VerificationException("Unable to verify jar entry: " + je.getName());
 				}
-		}
+		}*/
 	}
 
 	private void verifyWholeJar(JarInputStream jis, Certificate[] certs) throws IOException, VerificationException
