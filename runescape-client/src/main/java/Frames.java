@@ -1,25 +1,23 @@
-import java.lang.management.GarbageCollectorMXBean;
-import java.lang.management.ManagementFactory;
-import java.util.Iterator;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("ht")
+@ObfuscatedName("gg")
 @Implements("Frames")
 public class Frames extends DualNode {
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "[Lhj;"
+		descriptor = "[Lgu;"
 	)
 	@Export("frames")
 	Animation[] frames;
 
 	@ObfuscatedSignature(
-		descriptor = "(Lkl;Lkl;IZ)V"
+		descriptor = "(Lku;Lku;IZ)V",
+		garbageValue = "0"
 	)
-	Frames(AbstractArchive var1, AbstractArchive var2, int var3, boolean var4) {
+	public Frames(AbstractArchive var1, AbstractArchive var2, int var3, boolean var4) {
 		NodeDeque var5 = new NodeDeque();
 		int var6 = var1.getGroupFileCount(var3);
 		this.frames = new Animation[var6];
@@ -38,13 +36,7 @@ public class Frames extends DualNode {
 			}
 
 			if (var10 == null) {
-				byte[] var13;
-				if (var4) {
-					var13 = var2.getFile(0, var11);
-				} else {
-					var13 = var2.getFile(var11, 0);
-				}
-
+				byte[] var13 = var2.getFile(var11, 0);
 				var10 = new Skeleton(var11, var13);
 				var5.addFirst(var10);
 			}
@@ -54,55 +46,22 @@ public class Frames extends DualNode {
 
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
 		descriptor = "(IB)Z",
-		garbageValue = "73"
+		garbageValue = "-102"
 	)
 	@Export("hasAlphaTransform")
 	public boolean hasAlphaTransform(int var1) {
 		return this.frames[var1].hasAlphaTransform;
 	}
 
-	@ObfuscatedName("aa")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "(I)I",
-		garbageValue = "16711935"
+		descriptor = "(IB)I",
+		garbageValue = "-24"
 	)
-	@Export("getGcDuration")
-	protected static int getGcDuration() {
-		int var0 = 0;
-		if (AccessFile.garbageCollector == null || !AccessFile.garbageCollector.isValid()) {
-			try {
-				Iterator var1 = ManagementFactory.getGarbageCollectorMXBeans().iterator();
-
-				while (var1.hasNext()) {
-					GarbageCollectorMXBean var2 = (GarbageCollectorMXBean)var1.next();
-					if (var2.isValid()) {
-						AccessFile.garbageCollector = var2;
-						GameEngine.garbageCollectorLastCheckTimeMs = -1L;
-						GameEngine.garbageCollectorLastCollectionTime = -1L;
-					}
-				}
-			} catch (Throwable var11) {
-			}
-		}
-
-		if (AccessFile.garbageCollector != null) {
-			long var9 = UserComparator4.method2406();
-			long var3 = AccessFile.garbageCollector.getCollectionTime();
-			if (GameEngine.garbageCollectorLastCollectionTime != -1L) {
-				long var5 = var3 - GameEngine.garbageCollectorLastCollectionTime;
-				long var7 = var9 - GameEngine.garbageCollectorLastCheckTimeMs;
-				if (var7 != 0L) {
-					var0 = (int)(var5 * 100L / var7);
-				}
-			}
-
-			GameEngine.garbageCollectorLastCollectionTime = var3;
-			GameEngine.garbageCollectorLastCheckTimeMs = var9;
-		}
-
-		return var0;
+	public static int method4149(int var0) {
+		return var0 >> 17 & 7;
 	}
 }

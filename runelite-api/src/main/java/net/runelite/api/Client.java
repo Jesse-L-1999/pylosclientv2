@@ -184,6 +184,18 @@ public interface Client extends GameEngine
 	void stopNow();
 
 	/**
+	 * Gets the login screen world select state.
+	 *
+	 * @return the world select state
+	 */
+	boolean isWorldSelectOpen();
+
+	/**
+	 * Sets the login screen world select state.
+	 */
+	void setWorldSelectOpen(boolean open);
+
+	/**
 	 * Gets the current logged in username.
 	 *
 	 * @return the logged in username
@@ -457,6 +469,11 @@ public interface Client extends GameEngine
 	IndexDataBase getIndexConfig();
 
 	/**
+	 * Gets an index by id
+	 */
+	IndexDataBase getIndex(int id);
+
+	/**
 	 * Returns the x-axis base coordinate.
 	 * <p>
 	 * This value is the x-axis world coordinate of tile (0, 0) in
@@ -635,6 +652,19 @@ public interface Client extends GameEngine
 	 * @return world list
 	 */
 	World[] getWorldList();
+
+	/**
+	 * Create a new menu entry
+	 * @param idx the index to create the menu entry at. Accepts negative indexes eg. -1 inserts at the end.
+	 * @return the newly created menu entry
+	 */
+	MenuEntry createMenuEntry(int idx);
+
+	/**
+	 * Create a new menu entry
+	 * @return the newly created menu entry
+	 */
+	MenuEntry createMenuEntry(String option, String target, int identifier, int opcode, int param1, int param2, boolean forceLeftClick);
 
 	/**
 	 * Gets an array of currently open right-click menu entries that can be
@@ -953,20 +983,6 @@ public interface Client extends GameEngine
 	long getOverallExperience();
 
 	/**
-	 * Gets the game drawing mode.
-	 *
-	 * @return the game drawing mode
-	 */
-	int getGameDrawingMode();
-
-	/**
-	 * Sets the games drawing mode.
-	 *
-	 * @param gameDrawingMode the new drawing mode
-	 */
-	void setGameDrawingMode(int gameDrawingMode);
-
-	/**
 	 * Refreshes the chat.
 	 */
 	void refreshChat();
@@ -1093,18 +1109,38 @@ public interface Client extends GameEngine
 	LocalPoint getLocalDestinationLocation();
 
 	/**
+	 * Create a projectile.
+	 * @param id projectile/spotanim id
+	 * @param plane plane the projectile is on
+	 * @param startX local x coordinate the projectile starts at
+	 * @param startY local y coordinate the projectile starts at
+	 * @param startZ local z coordinate the projectile starts at - includes tile height
+	 * @param startCycle cycle the project starts
+	 * @param endCycle cycle the projectile ends
+	 * @param slope
+	 * @param startHeight start height of projectile - excludes tile height
+	 * @param endHeight end height of projectile - excludes tile height
+	 * @param target optional actor target
+	 * @param targetX target x - if an actor target is supplied should be the target x
+	 * @param targetY taret y - if an actor target is supplied should be the target y
+	 * @return the new projectile
+	 */
+	Projectile createProjectile(int id, int plane, int startX, int startY, int startZ, int startCycle, int endCycle,
+		int slope, int startHeight, int endHeight, @Nullable Actor target, int targetX, int targetY);
+
+	/**
 	 * Gets a list of all projectiles currently spawned.
 	 *
 	 * @return all projectiles
 	 */
-	List<Projectile> getProjectiles();
+	Deque<Projectile> getProjectiles();
 
 	/**
 	 * Gets a list of all graphics objects currently drawn.
 	 *
 	 * @return all graphics objects
 	 */
-	List<GraphicsObject> getGraphicsObjects();
+	Deque<GraphicsObject> getGraphicsObjects();
 
 	/**
 	 * Creates a RuneLiteObject, which is a modified {@link GraphicsObject}
@@ -1112,10 +1148,31 @@ public interface Client extends GameEngine
 	RuneLiteObject createRuneLiteObject();
 
 	/**
-	 * Loads a model from the cache
+	 * Loads an unlit model from the cache. The returned model shares
+	 * data such as faces, face colors, face transparencies, and vertex points with
+	 * other models. If you want to mutate these you MUST call the relevant {@code cloneX}
+	 * method.
+	 *
+	 * @see ModelData#cloneColors()
 	 *
 	 * @param id the ID of the model
+	 * @return the model or null if it is loading or nonexistent
 	 */
+	@Nullable
+	ModelData loadModelData(int id);
+
+	ModelData mergeModels(ModelData[] models, int length);
+	ModelData mergeModels(ModelData ...models);
+
+	/**
+	 * Loads and lights a model from the cache
+	 *
+	 * This is equivalent to {@code loadModelData(id).light()}
+	 *
+	 * @param id the ID of the model
+	 * @return the model or null if it is loading or nonexistent
+	 */
+	@Nullable
 	Model loadModel(int id);
 
 	/**
@@ -1124,7 +1181,9 @@ public interface Client extends GameEngine
 	 * @param id the ID of the model
 	 * @param colorToFind array of hsl color values to find in the model to replace
 	 * @param colorToReplace array of hsl color values to replace in the model
+	 * @return the model or null if it is loading or nonexistent
 	 */
+	@Nullable
 	Model loadModel(int id, short[] colorToFind, short[] colorToReplace);
 
 	/**
@@ -1133,7 +1192,7 @@ public interface Client extends GameEngine
 	 * @param id the ID of the animation. Any int is allowed, but implementations in the client
 	 * should be defined in {@link AnimationID}
 	 */
-	Sequence loadAnimation(int id);
+	Animation loadAnimation(int id);
 
 	/**
 	 * Gets the music volume
@@ -1341,7 +1400,7 @@ public interface Client extends GameEngine
 	/**
 	 * Retrieve the nameable container containing friends
 	 */
-	NameableContainer<Friend> getFriendContainer();
+	FriendContainer getFriendContainer();
 
 	/**
 	 * Retrieve the nameable container containing ignores
@@ -1680,6 +1739,13 @@ public interface Client extends GameEngine
 	void setFriendsChatMembersHidden(boolean state);
 
 	/**
+	 * Sets whether or not clan members are hidden.
+	 *
+	 * @param state the new clan chat member hidden state
+	 */
+	void setClanChatMembersHidden(boolean state);
+
+	/**
 	 * Sets whether or not ignored players are hidden.
 	 *
 	 * @param state the new ignored player hidden state
@@ -1895,6 +1961,16 @@ public interface Client extends GameEngine
 	int getOculusOrbFocalPointY();
 
 	/**
+	 * Sets local X coord where the camera is pointing when the Oculus orb is active
+	 */
+	void setOculusOrbFocalPointX(int xPos);
+
+	/**
+	 * Sets local Y coord where the camera is pointing when the Oculus orb is active
+	 */
+	void setOculusOrbFocalPointY(int yPos);
+
+	/**
 	 * Opens in-game world hopper interface
 	 */
 	void openWorldHopper();
@@ -2108,24 +2184,6 @@ public interface Client extends GameEngine
 	void scaleSprite(int[] canvas, int[] pixels, int color, int pixelX, int pixelY, int canvasIdx, int canvasOffset, int newWidth, int newHeight, int pixelWidth, int pixelHeight, int oldWidth);
 
 	/**
-	 * Get the MenuEntry at client.getMenuOptionCount() - 1
-	 * <p>
-	 * This is useful so you don't have to use getMenuEntries,
-	 * which will create a big array, when you only want to change
-	 * the left click one.
-	 */
-	MenuEntry getLeftClickMenuEntry();
-
-	/**
-	 * Set the MenuEntry at client.getMenuOptionCount() - 1
-	 * <p>
-	 * This is useful so you don't have to use setMenuEntries,
-	 * which will arraycopy a big array to several smaller arrays lol,
-	 * when you only want to change the left click one.
-	 */
-	void setLeftClickMenuEntry(MenuEntry entry);
-
-	/**
 	 * If this field is set to true, getting 5 minute logged won't show
 	 * the "You have been disconnected." message anymore.
 	 */
@@ -2327,4 +2385,13 @@ public interface Client extends GameEngine
 	 */
 	@Nullable
 	ClanSettings getClanSettings(int clanId);
+
+	void setUnlockedFps(boolean unlock);
+	void setUnlockedFpsTarget(int fps);
+
+	/**
+	 * Gets the ambient sound effects
+	 * @return
+	 */
+	Deque<AmbientSoundEffect> getAmbientSoundEffects();
 }

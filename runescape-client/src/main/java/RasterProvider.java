@@ -14,13 +14,13 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("ah")
+@ObfuscatedName("ax")
 @Implements("RasterProvider")
 public final class RasterProvider extends AbstractRasterProvider {
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@Export("component")
 	Component component;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@Export("image")
 	Image image;
 
@@ -36,40 +36,40 @@ public final class RasterProvider extends AbstractRasterProvider {
 		this.apply();
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
 		descriptor = "(Ljava/awt/Component;I)V",
-		garbageValue = "-212105390"
+		garbageValue = "-1836317147"
 	)
 	@Export("setComponent")
 	final void setComponent(Component var1) {
 		this.component = var1;
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "(III)V",
-		garbageValue = "517256419"
+		descriptor = "(IIB)V",
+		garbageValue = "0"
 	)
 	@Export("drawFull")
 	public final void drawFull(int var1, int var2) {
 		this.drawFull0(this.component.getGraphics(), var1, var2);
 	}
 
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
 		descriptor = "(IIIII)V",
-		garbageValue = "2140501062"
+		garbageValue = "1782361529"
 	)
 	@Export("draw")
 	public final void draw(int var1, int var2, int var3, int var4) {
 		this.draw0(this.component.getGraphics(), var1, var2, var3, var4);
 	}
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
 		descriptor = "(Ljava/awt/Graphics;III)V",
-		garbageValue = "-1289290087"
+		garbageValue = "1589721591"
 	)
 	@Export("drawFull0")
 	final void drawFull0(Graphics var1, int var2, int var3) {
@@ -81,10 +81,10 @@ public final class RasterProvider extends AbstractRasterProvider {
 
 	}
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedSignature(
 		descriptor = "(Ljava/awt/Graphics;IIIII)V",
-		garbageValue = "-1394783467"
+		garbageValue = "1916847882"
 	)
 	@Export("draw0")
 	final void draw0(Graphics var1, int var2, int var3, int var4, int var5) {

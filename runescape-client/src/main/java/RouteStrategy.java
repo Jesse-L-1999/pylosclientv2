@@ -4,48 +4,33 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("fw")
+@ObfuscatedName("gv")
 @Implements("RouteStrategy")
 public abstract class RouteStrategy {
-	@ObfuscatedName("st")
-	@ObfuscatedSignature(
-		descriptor = "Lai;"
-	)
-	@Export("decimator")
-	static Decimator decimator;
-	@ObfuscatedName("et")
-	@ObfuscatedSignature(
-		descriptor = "Lky;"
-	)
-	@Export("archive2")
-	static Archive archive2;
-	@ObfuscatedName("fp")
+	@ObfuscatedName("t")
+	@Export("SpriteBuffer_yOffsets")
+	public static int[] SpriteBuffer_yOffsets;
+	@ObfuscatedName("c")
 	@ObfuscatedGetter(
-		intValue = -1344462217
-	)
-	@Export("currentPort")
-	static int currentPort;
-	@ObfuscatedName("l")
-	@ObfuscatedGetter(
-		intValue = -1263236151
+		intValue = -1093494781
 	)
 	@Export("approxDestinationX")
 	public int approxDestinationX;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedGetter(
-		intValue = 213463867
+		intValue = 601492967
 	)
 	@Export("approxDestinationY")
 	public int approxDestinationY;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedGetter(
-		intValue = -384519969
+		intValue = 1459181163
 	)
 	@Export("approxDestinationSizeX")
 	public int approxDestinationSizeX;
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedGetter(
-		intValue = -1744940785
+		intValue = 1902503467
 	)
 	@Export("approxDestinationSizeY")
 	public int approxDestinationSizeY;
@@ -53,11 +38,72 @@ public abstract class RouteStrategy {
 	protected RouteStrategy() {
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(IIILfy;I)Z",
-		garbageValue = "1728008342"
+		descriptor = "(IIILgf;I)Z",
+		garbageValue = "-563456214"
 	)
 	@Export("hasArrived")
 	public abstract boolean hasArrived(int var1, int var2, int var3, CollisionMap var4);
+
+	@ObfuscatedName("gj")
+	@ObfuscatedSignature(
+		descriptor = "(Ljava/lang/String;I)V",
+		garbageValue = "-1664950073"
+	)
+	@Export("doCheat")
+	static final void doCheat(String var0) {
+		if (var0.equalsIgnoreCase("toggleroof")) {
+			SecureRandomFuture.clientPreferences.roofsHidden = !SecureRandomFuture.clientPreferences.roofsHidden;
+			class127.savePreferences();
+			if (SecureRandomFuture.clientPreferences.roofsHidden) {
+				class194.addGameMessage(99, "", "Roofs are now all hidden");
+			} else {
+				class194.addGameMessage(99, "", "Roofs will only be removed selectively");
+			}
+		}
+
+		if (var0.equalsIgnoreCase("displayfps")) {
+			Client.displayFps = !Client.displayFps;
+		}
+
+		if (var0.equalsIgnoreCase("renderself")) {
+			Client.renderSelf = !Client.renderSelf;
+		}
+
+		if (var0.equalsIgnoreCase("mouseovertext")) {
+			Client.showMouseOverText = !Client.showMouseOverText;
+		}
+
+		if (Client.staffModLevel >= 2) {
+			if (var0.equalsIgnoreCase("errortest")) {
+				throw new RuntimeException();
+			}
+
+			if (var0.equalsIgnoreCase("showcoord")) {
+				Varcs.worldMap.showCoord = !Varcs.worldMap.showCoord;
+			}
+
+			if (var0.equalsIgnoreCase("fpson")) {
+				Client.displayFps = true;
+			}
+
+			if (var0.equalsIgnoreCase("fpsoff")) {
+				Client.displayFps = false;
+			}
+
+			if (var0.equalsIgnoreCase("gc")) {
+				System.gc();
+			}
+
+			if (var0.equalsIgnoreCase("clientdrop")) {
+				Varcs.method2411();
+			}
+		}
+
+		PacketBufferNode var1 = HitSplatDefinition.getPacketBufferNode(ClientPacket.field2846, Client.packetWriter.isaacCipher);
+		var1.packetBuffer.writeByte(var0.length() + 1);
+		var1.packetBuffer.writeStringCp1252NullTerminated(var0);
+		Client.packetWriter.addNode(var1);
+	}
 }

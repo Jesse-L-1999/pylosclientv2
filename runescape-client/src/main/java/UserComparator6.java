@@ -1,25 +1,18 @@
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
-import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("du")
+@ObfuscatedName("dt")
 @Implements("UserComparator6")
 public class UserComparator6 extends AbstractUserComparator {
 	@ObfuscatedName("ej")
 	@ObfuscatedSignature(
-		descriptor = "Lky;"
+		descriptor = "Lkz;"
 	)
-	@Export("archive12")
-	static Archive archive12;
-	@ObfuscatedName("ix")
-	@ObfuscatedGetter(
-		intValue = -863164529
-	)
-	@Export("selectedItemWidget")
-	static int selectedItemWidget;
-	@ObfuscatedName("l")
+	@Export("archive8")
+	static Archive archive8;
+	@ObfuscatedName("c")
 	@Export("reversed")
 	final boolean reversed;
 
@@ -27,10 +20,10 @@ public class UserComparator6 extends AbstractUserComparator {
 		this.reversed = var1;
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(Lmi;Lmi;I)I",
-		garbageValue = "-2006928381"
+		descriptor = "(Lmp;Lmp;I)I",
+		garbageValue = "579656332"
 	)
 	@Export("compareBuddy")
 	int compareBuddy(Buddy var1, Buddy var2) {
@@ -45,81 +38,152 @@ public class UserComparator6 extends AbstractUserComparator {
 		return this.compareBuddy((Buddy)var1, (Buddy)var2);
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(Lky;II)V",
-		garbageValue = "1624895888"
+		descriptor = "(II)Lfx;",
+		garbageValue = "-2085388383"
 	)
-	static void method2466(Archive var0, int var1) {
-		if (TriBool.NetCache_reference != null) {
-			TriBool.NetCache_reference.offset = var1 * 8 + 5;
-			int var2 = TriBool.NetCache_reference.readInt();
-			int var3 = TriBool.NetCache_reference.readInt();
-			var0.loadIndex(var2, var3);
+	@Export("ItemDefinition_get")
+	public static ItemComposition ItemDefinition_get(int var0) {
+		ItemComposition var1 = (ItemComposition)ItemComposition.ItemDefinition_cached.get((long)var0);
+		if (var1 != null) {
+			return var1;
 		} else {
-			ClanSettings.requestNetFile((Archive)null, 255, 255, 0, (byte)0, true);
-			NetCache.NetCache_archives[var1] = var0;
+			byte[] var2 = ItemComposition.ItemDefinition_archive.takeFile(10, var0);
+			var1 = new ItemComposition();
+			var1.id = var0;
+			if (var2 != null) {
+				var1.decode(new Buffer(var2));
+			}
+
+			var1.post();
+			if (var1.noteTemplate != -1) {
+				var1.genCert(ItemDefinition_get(var1.noteTemplate), ItemDefinition_get(var1.note));
+			}
+
+			if (var1.notedId != -1) {
+				var1.genBought(ItemDefinition_get(var1.notedId), ItemDefinition_get(var1.unnotedId));
+			}
+
+			if (var1.placeholderTemplate != -1) {
+				var1.genPlaceholder(ItemDefinition_get(var1.placeholderTemplate), ItemDefinition_get(var1.placeholder));
+			}
+
+			if (!ItemComposition.ItemDefinition_inMembersWorld && var1.isMembersOnly) {
+				var1.name = "Members object";
+				var1.isTradable = false;
+
+				int var3;
+				for (var3 = 0; var3 < var1.groundActions.length; ++var3) {
+					var1.groundActions[var3] = null;
+				}
+
+				for (var3 = 0; var3 < var1.inventoryActions.length; ++var3) {
+					if (var3 != 4) {
+						var1.inventoryActions[var3] = null;
+					}
+				}
+
+				var1.shiftClickIndex = -2;
+				var1.team = 0;
+				if (var1.params != null) {
+					boolean var6 = false;
+
+					for (Node var4 = var1.params.first(); var4 != null; var4 = var1.params.next()) {
+						ParamComposition var5 = VerticalAlignment.getParamDefinition((int)var4.key);
+						if (var5.autoDisable) {
+							var4.remove();
+						} else {
+							var6 = true;
+						}
+					}
+
+					if (!var6) {
+						var1.params = null;
+					}
+				}
+			}
+
+			ItemComposition.ItemDefinition_cached.put(var1, (long)var0);
+			return var1;
 		}
 	}
 
-	@ObfuscatedName("fq")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "(Ljava/lang/String;I)V",
-		garbageValue = "112358019"
+		descriptor = "(IB)Lfn;",
+		garbageValue = "81"
 	)
-	@Export("doCheat")
-	static final void doCheat(String var0) {
-		if (var0.equalsIgnoreCase("toggleroof")) {
-			WorldMapDecorationType.clientPreferences.roofsHidden = !WorldMapDecorationType.clientPreferences.roofsHidden;
-			ScriptFrame.savePreferences();
-			if (WorldMapDecorationType.clientPreferences.roofsHidden) {
-				GraphicsDefaults.addGameMessage(99, "", "Roofs are now all hidden");
-			} else {
-				GraphicsDefaults.addGameMessage(99, "", "Roofs will only be removed selectively");
+	public static HitSplatDefinition method2554(int var0) {
+		HitSplatDefinition var1 = (HitSplatDefinition)HitSplatDefinition.HitSplatDefinition_cached.get((long)var0);
+		if (var1 != null) {
+			return var1;
+		} else {
+			byte[] var2 = HitSplatDefinition.HitSplatDefinition_archive.takeFile(32, var0);
+			var1 = new HitSplatDefinition();
+			if (var2 != null) {
+				var1.decode(new Buffer(var2));
+			}
+
+			HitSplatDefinition.HitSplatDefinition_cached.put(var1, (long)var0);
+			return var1;
+		}
+	}
+
+	@ObfuscatedName("f")
+	@ObfuscatedSignature(
+		descriptor = "(ZB)V",
+		garbageValue = "-77"
+	)
+	public static void method2552(boolean var0) {
+		if (var0 != ItemComposition.ItemDefinition_inMembersWorld) {
+			ItemComposition.ItemDefinition_cached.clear();
+			ItemComposition.ItemDefinition_cachedModels.clear();
+			ItemComposition.ItemDefinition_cachedSprites.clear();
+			ItemComposition.ItemDefinition_inMembersWorld = var0;
+		}
+
+	}
+
+	@ObfuscatedName("kp")
+	@ObfuscatedSignature(
+		descriptor = "(I)V",
+		garbageValue = "88961888"
+	)
+	static void method2551() {
+		for (InterfaceParent var0 = (InterfaceParent)Client.interfaceParents.first(); var0 != null; var0 = (InterfaceParent)Client.interfaceParents.next()) {
+			int var1 = var0.group;
+			if (class242.loadInterface(var1)) {
+				boolean var2 = true;
+				Widget[] var3 = MouseRecorder.Widget_interfaceComponents[var1];
+
+				int var4;
+				for (var4 = 0; var4 < var3.length; ++var4) {
+					if (var3[var4] != null) {
+						var2 = var3[var4].isIf3;
+						break;
+					}
+				}
+
+				if (!var2) {
+					var4 = (int)var0.key;
+					Widget var5 = ChatChannel.getWidget(var4);
+					if (var5 != null) {
+						SecureRandomCallable.invalidateWidget(var5);
+					}
+				}
 			}
 		}
 
-		if (var0.equalsIgnoreCase("displayfps")) {
-			Client.displayFps = !Client.displayFps;
-		}
+	}
 
-		if (var0.equalsIgnoreCase("renderself")) {
-			Client.renderSelf = !Client.renderSelf;
-		}
-
-		if (var0.equalsIgnoreCase("mouseovertext")) {
-			Client.showMouseOverText = !Client.showMouseOverText;
-		}
-
-		if (Client.staffModLevel >= 2) {
-			if (var0.equalsIgnoreCase("errortest")) {
-				throw new RuntimeException();
-			}
-
-			if (var0.equalsIgnoreCase("showcoord")) {
-				TileItem.worldMap.showCoord = !TileItem.worldMap.showCoord;
-			}
-
-			if (var0.equalsIgnoreCase("fpson")) {
-				Client.displayFps = true;
-			}
-
-			if (var0.equalsIgnoreCase("fpsoff")) {
-				Client.displayFps = false;
-			}
-
-			if (var0.equalsIgnoreCase("gc")) {
-				System.gc();
-			}
-
-			if (var0.equalsIgnoreCase("clientdrop")) {
-				class20.method302();
-			}
-		}
-
-		PacketBufferNode var1 = LoginScreenAnimation.getPacketBufferNode(ClientPacket.field2756, Client.packetWriter.isaacCipher);
-		var1.packetBuffer.writeByte(var0.length() + 1);
-		var1.packetBuffer.writeStringCp1252NullTerminated(var0);
-		Client.packetWriter.addNode(var1);
+	@ObfuscatedName("ms")
+	@ObfuscatedSignature(
+		descriptor = "(I)V",
+		garbageValue = "1260552521"
+	)
+	static void method2549() {
+		SecureRandomFuture.clientPreferences.field1197 = Client.field473;
+		class127.savePreferences();
 	}
 }

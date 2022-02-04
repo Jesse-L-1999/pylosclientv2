@@ -4,17 +4,13 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("kc")
+@ObfuscatedName("kk")
 @Implements("GrandExchangeOfferUnitPriceComparator")
 final class GrandExchangeOfferUnitPriceComparator implements Comparator {
-	@ObfuscatedName("b")
-	@Export("ByteArrayPool_alternativeSizes")
-	public static int[] ByteArrayPool_alternativeSizes;
-
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(Lkd;Lkd;I)I",
-		garbageValue = "1882106044"
+		descriptor = "(Lkj;Lkj;I)I",
+		garbageValue = "-1121383818"
 	)
 	@Export("compare_bridged")
 	int compare_bridged(GrandExchangeEvent var1, GrandExchangeEvent var2) {

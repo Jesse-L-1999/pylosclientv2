@@ -4,38 +4,36 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("kd")
+@ObfuscatedName("kj")
 @Implements("GrandExchangeEvent")
 public class GrandExchangeEvent {
-	@ObfuscatedName("t")
-	static byte[][][] field3760;
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedGetter(
-		intValue = 663278445
+		intValue = -613018659
 	)
 	@Export("world")
 	public final int world;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedGetter(
-		longValue = -5766229753192434851L
+		longValue = -97265200533879513L
 	)
 	@Export("age")
 	public final long age;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "Lkp;"
+		descriptor = "Lkb;"
 	)
 	@Export("grandExchangeOffer")
 	public final GrandExchangeOffer grandExchangeOffer;
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@Export("offerName")
 	String offerName;
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@Export("previousOfferName")
 	String previousOfferName;
 
 	@ObfuscatedSignature(
-		descriptor = "(Lot;BI)V"
+		descriptor = "(Lpi;BI)V"
 	)
 	GrandExchangeEvent(Buffer var1, byte var2, int var3) {
 		this.offerName = var1.readStringCp1252NullTerminated();
@@ -45,8 +43,8 @@ public class GrandExchangeEvent {
 		int var4 = var1.readInt();
 		int var5 = var1.readInt();
 		this.grandExchangeOffer = new GrandExchangeOffer();
-		this.grandExchangeOffer.method5407(2);
-		this.grandExchangeOffer.method5405(var2);
+		this.grandExchangeOffer.method5765(2);
+		this.grandExchangeOffer.method5766(var2);
 		this.grandExchangeOffer.unitPrice = var4;
 		this.grandExchangeOffer.totalQuantity = var5;
 		this.grandExchangeOffer.currentQuantity = 0;
@@ -54,54 +52,44 @@ public class GrandExchangeEvent {
 		this.grandExchangeOffer.id = var3;
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
 		descriptor = "(B)Ljava/lang/String;",
-		garbageValue = "-117"
+		garbageValue = "0"
 	)
 	@Export("getOfferName")
 	public String getOfferName() {
 		return this.offerName;
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "(B)Ljava/lang/String;",
-		garbageValue = "7"
+		descriptor = "(I)Ljava/lang/String;",
+		garbageValue = "442226804"
 	)
 	@Export("getPreviousOfferName")
 	public String getPreviousOfferName() {
 		return this.previousOfferName;
 	}
 
-	@ObfuscatedName("f")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(Loy;I)I",
-		garbageValue = "770443607"
+		descriptor = "(S)V",
+		garbageValue = "3161"
 	)
-	static int method5402(PacketBuffer var0) {
-		int var1 = var0.readBits(2);
-		int var2;
-		if (var1 == 0) {
-			var2 = 0;
-		} else if (var1 == 1) {
-			var2 = var0.readBits(5);
-		} else if (var1 == 2) {
-			var2 = var0.readBits(8);
-		} else {
-			var2 = var0.readBits(11);
+	static void method5760() {
+		for (ObjectSound var0 = (ObjectSound)ObjectSound.objectSounds.last(); var0 != null; var0 = (ObjectSound)ObjectSound.objectSounds.previous()) {
+			if (var0.stream1 != null) {
+				class281.pcmStreamMixer.removeSubStream(var0.stream1);
+				var0.stream1 = null;
+			}
+
+			if (var0.stream2 != null) {
+				class281.pcmStreamMixer.removeSubStream(var0.stream2);
+				var0.stream2 = null;
+			}
 		}
 
-		return var2;
-	}
-
-	@ObfuscatedName("ez")
-	@ObfuscatedSignature(
-		descriptor = "(I)Lna;",
-		garbageValue = "192669944"
-	)
-	@Export("getWorldMap")
-	static WorldMap getWorldMap() {
-		return TileItem.worldMap;
+		ObjectSound.objectSounds.clear();
 	}
 }

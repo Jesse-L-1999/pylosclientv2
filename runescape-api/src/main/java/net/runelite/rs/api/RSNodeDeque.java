@@ -24,9 +24,10 @@
  */
 package net.runelite.rs.api;
 
+import net.runelite.api.Deque;
 import net.runelite.mapping.Import;
 
-public interface RSNodeDeque
+public interface RSNodeDeque extends Deque
 {
 	@Import("current")
 	RSNode getCurrent();
@@ -43,6 +44,12 @@ public interface RSNodeDeque
 	@Import("addFirst")
 	void addFirst(RSNode val);
 
+	@Import("addLast")
+	void addLast(RSNode val);
+
 	@Import("removeLast")
 	RSNode removeLast();
+
+	@Import("clear")
+	void clear();
 }

@@ -1,53 +1,57 @@
 import net.runelite.mapping.Export;
-import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("jp")
-public enum class269 implements MouseWheel {
-	@ObfuscatedName("l")
-	@ObfuscatedSignature(
-		descriptor = "Ljp;"
-	)
-	field3217(0),
-	@ObfuscatedName("q")
-	@ObfuscatedSignature(
-		descriptor = "Ljp;"
-	)
-	field3220(1),
-	@ObfuscatedName("f")
-	@ObfuscatedSignature(
-		descriptor = "Ljp;"
-	)
-	field3216(2),
-	@ObfuscatedName("j")
-	@ObfuscatedSignature(
-		descriptor = "Ljp;"
-	)
-	field3219(3),
-	@ObfuscatedName("m")
-	@ObfuscatedSignature(
-		descriptor = "Ljp;"
-	)
-	field3224(4);
+@ObfuscatedName("jh")
+public class class269 {
+	@ObfuscatedName("hh")
+	@Export("regions")
+	static int[] regions;
 
-	@ObfuscatedName("k")
-	@ObfuscatedGetter(
-		intValue = 659223025
-	)
-	final int field3218;
-
-	class269(int var3) {
-		this.field3218 = var3;
-	}
-
-	@ObfuscatedName("l")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "(I)I",
-		garbageValue = "661199397"
+		descriptor = "(Lkz;IIIBZI)V",
+		garbageValue = "1369454050"
 	)
-	@Export("rsOrdinal")
-	public int rsOrdinal() {
-		return this.field3218;
+	@Export("requestNetFile")
+	static void requestNetFile(Archive var0, int var1, int var2, int var3, byte var4, boolean var5) {
+		long var6 = (long)((var1 << 16) + var2);
+		NetFileRequest var8 = (NetFileRequest)NetCache.NetCache_pendingPriorityWrites.get(var6);
+		if (var8 == null) {
+			var8 = (NetFileRequest)NetCache.NetCache_pendingPriorityResponses.get(var6);
+			if (var8 == null) {
+				var8 = (NetFileRequest)NetCache.NetCache_pendingWrites.get(var6);
+				if (var8 != null) {
+					if (var5) {
+						var8.removeDual();
+						NetCache.NetCache_pendingPriorityWrites.put(var8, var6);
+						--NetCache.NetCache_pendingWritesCount;
+						++NetCache.NetCache_pendingPriorityWritesCount;
+					}
+
+				} else {
+					if (!var5) {
+						var8 = (NetFileRequest)NetCache.NetCache_pendingResponses.get(var6);
+						if (var8 != null) {
+							return;
+						}
+					}
+
+					var8 = new NetFileRequest();
+					var8.archive = var0;
+					var8.crc = var3;
+					var8.padding = var4;
+					if (var5) {
+						NetCache.NetCache_pendingPriorityWrites.put(var8, var6);
+						++NetCache.NetCache_pendingPriorityWritesCount;
+					} else {
+						NetCache.NetCache_pendingWritesQueue.addFirst(var8);
+						NetCache.NetCache_pendingWrites.put(var8, var6);
+						++NetCache.NetCache_pendingWritesCount;
+					}
+
+				}
+			}
+		}
 	}
 }

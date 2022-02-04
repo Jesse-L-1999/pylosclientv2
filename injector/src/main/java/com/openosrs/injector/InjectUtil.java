@@ -8,9 +8,12 @@
 package com.openosrs.injector;
 
 import com.openosrs.injector.injection.InjectData;
+import static com.openosrs.injector.rsapi.RSApi.API_BASE;
+import static com.openosrs.injector.rsapi.RSApi.RL_API_BASE;
 import com.openosrs.injector.rsapi.RSApiClass;
 import com.openosrs.injector.rsapi.RSApiMethod;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -42,8 +45,6 @@ import net.runelite.asm.signature.Signature;
 import net.runelite.deob.DeobAnnotations;
 import net.runelite.deob.deobfuscators.arithmetic.DMath;
 import org.jetbrains.annotations.Nullable;
-import static com.openosrs.injector.rsapi.RSApi.API_BASE;
-import static com.openosrs.injector.rsapi.RSApi.RL_API_BASE;
 
 public interface InjectUtil
 {
@@ -341,6 +342,11 @@ public interface InjectUtil
 
 	static Type apiToDeob(InjectData data, Type api)
 	{
+		return apiToDeob(data, api, null);
+	}
+
+	static Type apiToDeob(InjectData data, Type api, Type deobType)
+	{
 		if (api.isPrimitive())
 		{
 			return api;
@@ -354,29 +360,43 @@ public interface InjectUtil
 		else if (internalName.startsWith(RL_API_BASE))
 		{
 			Class rlApiC = new Class(internalName);
-			RSApiClass highestKnown = data.getRsApi().withInterface(rlApiC);
+			Set<RSApiClass> allClasses = data.getRsApi().withInterface(rlApiC);
 
 			// Cheeky unchecked exception
-			assert highestKnown != null : "No rs api class implements rl api class " + rlApiC.toString();
+			assert allClasses.size() > 0 : "No rs api class implements rl api class " + rlApiC.toString();
 
-			boolean changed;
-			do
+			if (allClasses.size() == 1)
 			{
-				changed = false;
-
-				for (RSApiClass interf : highestKnown.getApiInterfaces())
+				RSApiClass highestKnown = allClasses.stream().findFirst().get();
+				boolean changed;
+				do
 				{
-					if (interf.getInterfaces().contains(rlApiC))
+					changed = false;
+
+					for (RSApiClass interf : highestKnown.getApiInterfaces())
 					{
-						highestKnown = interf;
-						changed = true;
-						break;
+						if (interf.getInterfaces().contains(rlApiC))
+						{
+							highestKnown = interf;
+							changed = true;
+							break;
+						}
+					}
+				}
+				while (changed);
+
+				return apiToDeob(data, Type.getType(highestKnown.getName(), api.getDimensions()));
+			}
+			else
+			{
+				for (RSApiClass rsApiClass : allClasses)
+				{
+					if (rsApiClass.getName().contains(deobType.getInternalName()))
+					{
+						return apiToDeob(data, Type.getType(rsApiClass.getName(), api.getDimensions()));
 					}
 				}
 			}
-			while (changed);
-
-			return apiToDeob(data, Type.getType(highestKnown.getName(), api.getDimensions()));
 		}
 
 		return api;
@@ -551,5 +571,28 @@ public interface InjectUtil
 	static void injectObfuscatedSetter(Number getter, Instructions instrs, Consumer<Instruction> into)
 	{
 		injectObfuscatedGetter(DMath.modInverse(getter), instrs, into);
+	}
+
+	private static List<Type> findArgs(final String str, final List<Type> ret, final int from, final int to)
+	{
+		if (from >= to)
+		{
+			return ret;
+		}
+
+		int i = from;
+		while (str.charAt(i) == '[')
+		{
+			++i;
+		}
+
+		if (str.charAt(i) == 'L')
+		{
+			i = str.indexOf(';', i);
+		}
+
+		ret.add(new Type(str.substring(from, ++i)));
+
+		return findArgs(str, ret, i, to);
 	}
 }

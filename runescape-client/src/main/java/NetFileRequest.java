@@ -5,80 +5,66 @@ import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 import net.runelite.rs.ScriptOpcodes;
 
-@ObfuscatedName("kr")
+@ObfuscatedName("kx")
 @Implements("NetFileRequest")
 public class NetFileRequest extends DualNode {
-	@ObfuscatedName("bn")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "[Loz;"
-	)
-	@Export("worldSelectFlagSprites")
-	static IndexedSprite[] worldSelectFlagSprites;
-	@ObfuscatedName("l")
-	@ObfuscatedSignature(
-		descriptor = "Lky;"
+		descriptor = "Lkz;"
 	)
 	@Export("archive")
-	public Archive archive;
-	@ObfuscatedName("q")
+	Archive archive;
+	@ObfuscatedName("b")
 	@ObfuscatedGetter(
-		intValue = 782629149
+		intValue = -341474055
 	)
 	@Export("crc")
-	public int crc;
-	@ObfuscatedName("f")
+	int crc;
+	@ObfuscatedName("p")
 	@Export("padding")
-	public byte padding;
+	byte padding;
 
 	NetFileRequest() {
 	}
 
-	@ObfuscatedName("h")
+	@ObfuscatedName("d")
 	@ObfuscatedSignature(
-		descriptor = "(ILbe;ZB)I",
-		garbageValue = "32"
+		descriptor = "(ILbn;ZB)I",
+		garbageValue = "-77"
 	)
-	static int method5215(int var0, Script var1, boolean var2) {
-		Widget var3 = HealthBarUpdate.getWidget(Interpreter.Interpreter_intStack[--AbstractByteArrayCopier.Interpreter_intStackSize]);
-		if (var0 == ScriptOpcodes.IF_GETTARGETMASK) {
-			Interpreter.Interpreter_intStack[++AbstractByteArrayCopier.Interpreter_intStackSize - 1] = Interpreter.Widget_unpackTargetMask(WorldMapRegion.getWidgetFlags(var3));
+	static int method5588(int var0, Script var1, boolean var2) {
+		Widget var3 = var2 ? WorldMapArea.scriptDotWidget : Messages.scriptActiveWidget;
+		if (var0 == ScriptOpcodes.CC_GETX) {
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.x;
 			return 1;
-		} else if (var0 != ScriptOpcodes.IF_GETOP) {
-			if (var0 == ScriptOpcodes.IF_GETOPBASE) {
-				if (var3.dataText == null) {
-					Interpreter.Interpreter_stringStack[++class54.Interpreter_stringStackSize - 1] = "";
-				} else {
-					Interpreter.Interpreter_stringStack[++class54.Interpreter_stringStackSize - 1] = var3.dataText;
-				}
-
-				return 1;
-			} else {
-				return 2;
-			}
+		} else if (var0 == ScriptOpcodes.CC_GETY) {
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.y;
+			return 1;
+		} else if (var0 == ScriptOpcodes.CC_GETWIDTH) {
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.width;
+			return 1;
+		} else if (var0 == ScriptOpcodes.CC_GETHEIGHT) {
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.height;
+			return 1;
+		} else if (var0 == ScriptOpcodes.CC_GETHIDE) {
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.isHidden ? 1 : 0;
+			return 1;
+		} else if (var0 == ScriptOpcodes.CC_GETLAYER) {
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.parentId;
+			return 1;
 		} else {
-			int var4 = Interpreter.Interpreter_intStack[--AbstractByteArrayCopier.Interpreter_intStackSize];
-			--var4;
-			if (var3.actions != null && var4 < var3.actions.length && var3.actions[var4] != null) {
-				Interpreter.Interpreter_stringStack[++class54.Interpreter_stringStackSize - 1] = var3.actions[var4];
-			} else {
-				Interpreter.Interpreter_stringStack[++class54.Interpreter_stringStackSize - 1] = "";
-			}
-
-			return 1;
+			return 2;
 		}
 	}
 
-	@ObfuscatedName("jc")
+	@ObfuscatedName("fv")
 	@ObfuscatedSignature(
-		descriptor = "(II)V",
-		garbageValue = "1769707986"
+		descriptor = "(Lkz;Ljava/lang/String;I)V",
+		garbageValue = "-1653414496"
 	)
-	static void method5216(int var0) {
-		class137.tempMenuAction = new MenuAction();
-		class137.tempMenuAction.param0 = Client.menuArguments1[var0];
-		class137.tempMenuAction.param1 = Client.menuArguments2[var0];
-		class137.tempMenuAction.opcode = Client.menuOpcodes[var0];
-		class137.tempMenuAction.identifier = Client.menuIdentifiers[var0];
-		class137.tempMenuAction.action = Client.menuActions[var0];
+	static void method5587(Archive var0, String var1) {
+		ArchiveLoader var2 = new ArchiveLoader(var0, var1);
+		Client.archiveLoaders.add(var2);
+		Client.field753 += var2.groupCount;
 	}
 }
