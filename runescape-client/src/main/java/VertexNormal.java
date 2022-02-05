@@ -4,36 +4,36 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("ha")
+@ObfuscatedName("ga")
 @Implements("VertexNormal")
 public class VertexNormal {
-	@ObfuscatedName("kt")
-	@ObfuscatedGetter(
-		intValue = -1805668533
+	@ObfuscatedName("ei")
+	@ObfuscatedSignature(
+		descriptor = "Lkz;"
 	)
-	@Export("Client_plane")
-	static int Client_plane;
-	@ObfuscatedName("l")
+	@Export("archive18")
+	static Archive archive18;
+	@ObfuscatedName("b")
 	@ObfuscatedGetter(
-		intValue = 1283611121
+		intValue = 571778343
 	)
 	@Export("x")
 	int x;
-	@ObfuscatedName("q")
+	@ObfuscatedName("p")
 	@ObfuscatedGetter(
-		intValue = -812646739
+		intValue = -1513329049
 	)
 	@Export("y")
 	int y;
-	@ObfuscatedName("f")
+	@ObfuscatedName("m")
 	@ObfuscatedGetter(
-		intValue = 1799999959
+		intValue = -73747775
 	)
 	@Export("z")
 	int z;
-	@ObfuscatedName("j")
+	@ObfuscatedName("t")
 	@ObfuscatedGetter(
-		intValue = 261367591
+		intValue = 89505295
 	)
 	@Export("magnitude")
 	int magnitude;
@@ -42,7 +42,7 @@ public class VertexNormal {
 	}
 
 	@ObfuscatedSignature(
-		descriptor = "(Lha;)V"
+		descriptor = "(Lga;)V"
 	)
 	VertexNormal(VertexNormal var1) {
 		this.x = var1.x;
@@ -51,18 +51,72 @@ public class VertexNormal {
 		this.magnitude = var1.magnitude;
 	}
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("n")
 	@ObfuscatedSignature(
-		descriptor = "(ILkl;IIIZB)V",
-		garbageValue = "84"
+		descriptor = "(II)I",
+		garbageValue = "339374654"
 	)
-	public static void method4560(int var0, AbstractArchive var1, int var2, int var3, int var4, boolean var5) {
-		class247.musicPlayerStatus = 1;
-		class113.musicTrackArchive = var1;
-		Skills.musicTrackGroupId = var2;
-		class137.musicTrackFileId = var3;
-		class247.musicTrackVolume = var4;
-		class247.musicTrackBoolean = var5;
-		class247.pcmSampleLength = var0;
+	@Export("Messages_getLastChatID")
+	static int Messages_getLastChatID(int var0) {
+		Message var1 = (Message)Messages.Messages_hashTable.get((long)var0);
+		if (var1 == null) {
+			return -1;
+		} else {
+			return var1.previousDual == Messages.Messages_queue.sentinel ? -1 : ((Message)var1.previousDual).count;
+		}
+	}
+
+	@ObfuscatedName("ew")
+	@ObfuscatedSignature(
+		descriptor = "(II)V",
+		garbageValue = "-2020888732"
+	)
+	@Export("updateGameState")
+	static void updateGameState(int var0) {
+		if (var0 != Client.gameState) {
+			if (Client.gameState == 0) {
+				class295.client.method498();
+			}
+
+			if (var0 == 20 || var0 == 40 || var0 == 45) {
+				PacketBufferNode.method5016(0);
+				Client.field545 = 0;
+				Client.field541 = 0;
+				Client.timer.method6232(var0);
+				if (var0 != 20) {
+					FriendSystem.method1791(false);
+				}
+			}
+
+			if (var0 != 20 && var0 != 40 && Coord.field3186 != null) {
+				Coord.field3186.close();
+				Coord.field3186 = null;
+			}
+
+			if (Client.gameState == 25) {
+				Client.field602 = 0;
+				Client.field529 = 0;
+				Client.field530 = 1;
+				Client.field617 = 0;
+				Client.field532 = 1;
+			}
+
+			int var1;
+			if (var0 != 5 && var0 != 10) {
+				if (var0 == 20) {
+					var1 = Client.gameState == 11 ? 4 : 0;
+					DefaultsGroup.method6568(class257.archive10, UserComparator6.archive8, true, var1);
+				} else if (var0 == 11) {
+					DefaultsGroup.method6568(class257.archive10, UserComparator6.archive8, false, 4);
+				} else {
+					SoundCache.method823();
+				}
+			} else {
+				var1 = AttackOption.method2356() ? 0 : 12;
+				DefaultsGroup.method6568(class257.archive10, UserComparator6.archive8, true, var1);
+			}
+
+			Client.gameState = var0;
+		}
 	}
 }

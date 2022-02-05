@@ -1,51 +1,47 @@
-import java.util.Iterator;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
-import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("hm")
+@ObfuscatedName("gk")
 @Implements("SceneTilePaint")
 public final class SceneTilePaint {
-	@ObfuscatedName("y")
-	public static short[] field2600;
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedGetter(
-		intValue = 2030212895
+		intValue = -1849890093
 	)
 	@Export("swColor")
 	int swColor;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedGetter(
-		intValue = 1181812781
+		intValue = 325904735
 	)
 	@Export("seColor")
 	int seColor;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedGetter(
-		intValue = 1463738049
+		intValue = -79551477
 	)
 	@Export("neColor")
 	int neColor;
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedGetter(
-		intValue = -1957825957
+		intValue = -378888485
 	)
 	@Export("nwColor")
 	int nwColor;
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedGetter(
-		intValue = -435313337
+		intValue = 1880581479
 	)
 	@Export("texture")
 	int texture;
-	@ObfuscatedName("k")
+	@ObfuscatedName("s")
 	@Export("isFlat")
 	boolean isFlat;
-	@ObfuscatedName("t")
+	@ObfuscatedName("j")
 	@ObfuscatedGetter(
-		intValue = 1677192307
+		intValue = 1789996375
 	)
 	@Export("rgb")
 	int rgb;
@@ -59,25 +55,5 @@ public final class SceneTilePaint {
 		this.texture = var5;
 		this.rgb = var6;
 		this.isFlat = var7;
-	}
-
-	@ObfuscatedName("kr")
-	@ObfuscatedSignature(
-		descriptor = "(B)V",
-		garbageValue = "35"
-	)
-	@Export("FriendSystem_invalidateIgnoreds")
-	static final void FriendSystem_invalidateIgnoreds() {
-		Iterator var0 = Messages.Messages_hashTable.iterator();
-
-		while (var0.hasNext()) {
-			Message var1 = (Message)var0.next();
-			var1.clearIsFromIgnored();
-		}
-
-		if (class264.friendsChat != null) {
-			class264.friendsChat.invalidateIgnoreds();
-		}
-
 	}
 }

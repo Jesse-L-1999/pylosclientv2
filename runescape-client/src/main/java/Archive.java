@@ -5,96 +5,106 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("ky")
+@ObfuscatedName("kz")
 @Implements("Archive")
 public class Archive extends AbstractArchive {
-	@ObfuscatedName("e")
+	@ObfuscatedName("n")
 	@Export("Archive_crc")
 	static CRC32 Archive_crc;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "Lmm;"
+		descriptor = "Lmy;"
 	)
 	@Export("archiveDisk")
 	ArchiveDisk archiveDisk;
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "Lmm;"
+		descriptor = "Lmy;"
 	)
 	@Export("masterDisk")
 	ArchiveDisk masterDisk;
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedGetter(
-		intValue = -1410432427
+		intValue = 1081704419
 	)
 	@Export("index")
 	int index;
-	@ObfuscatedName("k")
-	volatile boolean field3686;
-	@ObfuscatedName("t")
-	boolean field3683;
-	@ObfuscatedName("a")
+	@ObfuscatedName("s")
+	volatile boolean field3821;
+	@ObfuscatedName("j")
+	boolean field3822;
+	@ObfuscatedName("w")
 	@Export("validGroups")
 	volatile boolean[] validGroups;
-	@ObfuscatedName("i")
+	@ObfuscatedName("r")
 	@ObfuscatedGetter(
-		intValue = -1839449919
+		intValue = -515391075
 	)
 	@Export("indexCrc")
 	int indexCrc;
-	@ObfuscatedName("y")
+	@ObfuscatedName("o")
 	@ObfuscatedGetter(
-		intValue = 886571455
+		intValue = -98227937
 	)
 	@Export("indexVersion")
 	int indexVersion;
-	@ObfuscatedName("w")
+	@ObfuscatedName("v")
 	@ObfuscatedGetter(
-		intValue = 1993950793
+		intValue = 29264523
 	)
-	int field3676;
+	int field3816;
 
 	static {
 		Archive_crc = new CRC32();
 	}
 
 	@ObfuscatedSignature(
-		descriptor = "(Lmm;Lmm;IZZZ)V"
+		descriptor = "(Lmy;Lmy;IZZZ)V"
 	)
 	public Archive(ArchiveDisk var1, ArchiveDisk var2, int var3, boolean var4, boolean var5, boolean var6) {
 		super(var4, var5);
-		this.field3686 = false;
-		this.field3683 = false;
-		this.field3676 = -1;
+		this.field3821 = false;
+		this.field3822 = false;
+		this.field3816 = -1;
 		this.archiveDisk = var1;
 		this.masterDisk = var2;
 		this.index = var3;
-		this.field3683 = var6;
-		UserComparator6.method2466(this, this.index);
+		this.field3822 = var6;
+		int var8 = this.index;
+		if (WorldMapLabel.NetCache_reference != null) {
+			WorldMapLabel.NetCache_reference.offset = var8 * 8 + 5;
+			int var9 = WorldMapLabel.NetCache_reference.readInt();
+			int var10 = WorldMapLabel.NetCache_reference.readInt();
+			this.loadIndex(var9, var10);
+		} else {
+			class269.requestNetFile((Archive)null, 255, 255, 0, (byte)0, true);
+			NetCache.NetCache_archives[var8] = this;
+		}
+
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(B)Z",
-		garbageValue = "-5"
+		descriptor = "(I)Z",
+		garbageValue = "782340670"
 	)
-	public boolean method5201() {
-		return this.field3686;
+	public boolean method5540() {
+		return this.field3821;
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "(B)I",
-		garbageValue = "64"
+		descriptor = "(I)I",
+		garbageValue = "1520569672"
 	)
 	@Export("percentage")
 	public int percentage() {
-		if (this.field3686) {
+		if (this.field3821) {
 			return 100;
 		} else if (super.groups != null) {
 			return 99;
 		} else {
-			int var1 = ArchiveDiskActionHandler.method5168(255, this.index);
+			int var1 = IsaacCipher.method7886(255, this.index);
 			if (var1 >= 100) {
 				var1 = 99;
 			}
@@ -103,95 +113,62 @@ public class Archive extends AbstractArchive {
 		}
 	}
 
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "(IB)V",
-		garbageValue = "30"
+		descriptor = "(II)V",
+		garbageValue = "-2090166080"
 	)
 	@Export("loadRegionFromGroup")
 	void loadRegionFromGroup(int var1) {
-		class150.method2874(this.index, var1);
-	}
-
-	@ObfuscatedName("j")
-	@ObfuscatedSignature(
-		descriptor = "(IB)V",
-		garbageValue = "120"
-	)
-	@Export("loadGroup")
-	void loadGroup(int var1) {
-		if (this.archiveDisk != null && this.validGroups != null && this.validGroups[var1]) {
-			ArchiveDisk var2 = this.archiveDisk;
-			byte[] var4 = null;
-			synchronized(ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue) {
-				for (ArchiveDiskAction var6 = (ArchiveDiskAction)ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue.last(); var6 != null; var6 = (ArchiveDiskAction)ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue.previous()) {
-					if ((long)var1 == var6.key && var2 == var6.archiveDisk && var6.type == 0) {
-						var4 = var6.data;
-						break;
-					}
-				}
-			}
-
-			if (var4 != null) {
-				this.load(var2, var1, var4, true);
-			} else {
-				byte[] var5 = var2.read(var1);
-				this.load(var2, var1, var5, true);
-			}
-		} else {
-			ClanSettings.requestNetFile(this, this.index, var1, super.groupCrcs[var1], (byte)2, true);
-		}
-
+		PendingSpawn.method2225(this.index, var1);
 	}
 
 	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "(III)V",
-		garbageValue = "-1828412488"
+		descriptor = "(II)V",
+		garbageValue = "2024016984"
 	)
-	@Export("loadIndex")
-	public void loadIndex(int var1, int var2) {
-		this.indexCrc = var1;
-		this.indexVersion = var2;
-		if (this.masterDisk != null) {
-			int var3 = this.index;
-			ArchiveDisk var4 = this.masterDisk;
-			byte[] var6 = null;
-			synchronized(ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue) {
-				for (ArchiveDiskAction var8 = (ArchiveDiskAction)ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue.last(); var8 != null; var8 = (ArchiveDiskAction)ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue.previous()) {
-					if ((long)var3 == var8.key && var4 == var8.archiveDisk && var8.type == 0) {
-						var6 = var8.data;
-						break;
-					}
-				}
-			}
-
-			if (var6 != null) {
-				this.load(var4, var3, var6, true);
-			} else {
-				byte[] var7 = var4.read(var3);
-				this.load(var4, var3, var7, true);
-			}
+	@Export("loadGroup")
+	void loadGroup(int var1) {
+		if (this.archiveDisk != null && this.validGroups != null && this.validGroups[var1]) {
+			class10.method122(var1, this.archiveDisk, this);
 		} else {
-			ClanSettings.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
+			class269.requestNetFile(this, this.index, var1, super.groupCrcs[var1], (byte)2, true);
 		}
 
 	}
 
-	@ObfuscatedName("k")
+	@ObfuscatedName("t")
+	@ObfuscatedSignature(
+		descriptor = "(III)V",
+		garbageValue = "-877437608"
+	)
+	@Export("loadIndex")
+	void loadIndex(int var1, int var2) {
+		this.indexCrc = var1;
+		this.indexVersion = var2;
+		if (this.masterDisk != null) {
+			class10.method122(this.index, this.masterDisk, this);
+		} else {
+			class269.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
+		}
+
+	}
+
+	@ObfuscatedName("s")
 	@ObfuscatedSignature(
 		descriptor = "(I[BZZI)V",
-		garbageValue = "-657787925"
+		garbageValue = "388189625"
 	)
 	@Export("write")
-	public void write(int var1, byte[] var2, boolean var3, boolean var4) {
+	void write(int var1, byte[] var2, boolean var3, boolean var4) {
 		if (var3) {
-			if (this.field3686) {
+			if (this.field3821) {
 				throw new RuntimeException();
 			}
 
 			if (this.masterDisk != null) {
-				class150.method2873(this.index, var2, this.masterDisk);
+				NPCComposition.method3321(this.index, var2, this.masterDisk);
 			}
 
 			this.decodeIndex(var2);
@@ -200,32 +177,44 @@ public class Archive extends AbstractArchive {
 			var2[var2.length - 2] = (byte)(super.groupVersions[var1] >> 8);
 			var2[var2.length - 1] = (byte)super.groupVersions[var1];
 			if (this.archiveDisk != null) {
-				class150.method2873(var1, var2, this.archiveDisk);
+				NPCComposition.method3321(var1, var2, this.archiveDisk);
 				this.validGroups[var1] = true;
 			}
 
 			if (var4) {
-				super.groups[var1] = DevicePcmPlayerProvider.method372(var2, false);
+				Object[] var5 = super.groups;
+				Object var7;
+				if (var2 == null) {
+					var7 = null;
+				} else if (var2.length > 136) {
+					DirectByteArrayCopier var8 = new DirectByteArrayCopier();
+					var8.set(var2);
+					var7 = var8;
+				} else {
+					var7 = var2;
+				}
+
+				var5[var1] = var7;
 			}
 		}
 
 	}
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("j")
 	@ObfuscatedSignature(
-		descriptor = "(Lmm;I[BZB)V",
-		garbageValue = "68"
+		descriptor = "(Lmy;I[BZB)V",
+		garbageValue = "1"
 	)
 	@Export("load")
 	public void load(ArchiveDisk var1, int var2, byte[] var3, boolean var4) {
 		int var5;
 		if (var1 == this.masterDisk) {
-			if (this.field3686) {
+			if (this.field3821) {
 				throw new RuntimeException();
 			}
 
 			if (var3 == null) {
-				ClanSettings.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
+				class269.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
 				return;
 			}
 
@@ -233,11 +222,11 @@ public class Archive extends AbstractArchive {
 			Archive_crc.update(var3, 0, var3.length);
 			var5 = (int)Archive_crc.getValue();
 			if (var5 != this.indexCrc) {
-				ClanSettings.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
+				class269.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
 				return;
 			}
 
-			Buffer var11 = new Buffer(class12.decompressBytes(var3));
+			Buffer var11 = new Buffer(ViewportMouse.decompressBytes(var3));
 			int var12 = var11.readUnsignedByte();
 			if (var12 != 5 && var12 != 6) {
 				throw new RuntimeException(var12 + "," + this.index + "," + var2);
@@ -249,21 +238,21 @@ public class Archive extends AbstractArchive {
 			}
 
 			if (var8 != this.indexVersion) {
-				ClanSettings.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
+				class269.requestNetFile(this, 255, this.index, this.indexCrc, (byte)0, true);
 				return;
 			}
 
 			this.decodeIndex(var3);
 			this.loadAllLocal();
 		} else {
-			if (!var4 && var2 == this.field3676) {
-				this.field3686 = true;
+			if (!var4 && var2 == this.field3816) {
+				this.field3821 = true;
 			}
 
 			if (var3 == null || var3.length <= 2) {
 				this.validGroups[var2] = false;
-				if (this.field3683 || var4) {
-					ClanSettings.requestNetFile(this, this.index, var2, super.groupCrcs[var2], (byte)2, var4);
+				if (this.field3822 || var4) {
+					class269.requestNetFile(this, this.index, var2, super.groupCrcs[var2], (byte)2, var4);
 				}
 
 				return;
@@ -275,8 +264,8 @@ public class Archive extends AbstractArchive {
 			int var6 = ((var3[var3.length - 2] & 255) << 8) + (var3[var3.length - 1] & 255);
 			if (var5 != super.groupCrcs[var2] || var6 != super.groupVersions[var2]) {
 				this.validGroups[var2] = false;
-				if (this.field3683 || var4) {
-					ClanSettings.requestNetFile(this, this.index, var2, super.groupCrcs[var2], (byte)2, var4);
+				if (this.field3822 || var4) {
+					class269.requestNetFile(this, this.index, var2, super.groupCrcs[var2], (byte)2, var4);
 				}
 
 				return;
@@ -302,10 +291,10 @@ public class Archive extends AbstractArchive {
 
 	}
 
-	@ObfuscatedName("a")
+	@ObfuscatedName("w")
 	@ObfuscatedSignature(
 		descriptor = "(I)V",
-		garbageValue = "-2097641089"
+		garbageValue = "955312949"
 	)
 	@Export("loadAllLocal")
 	void loadAllLocal() {
@@ -317,60 +306,70 @@ public class Archive extends AbstractArchive {
 		}
 
 		if (this.archiveDisk == null) {
-			this.field3686 = true;
+			this.field3821 = true;
 		} else {
-			this.field3676 = -1;
+			this.field3816 = -1;
 
 			for (var1 = 0; var1 < this.validGroups.length; ++var1) {
 				if (super.fileCounts[var1] > 0) {
-					class133.method2707(var1, this.archiveDisk, this);
-					this.field3676 = var1;
+					ArchiveDisk var2 = this.archiveDisk;
+					ArchiveDiskAction var4 = new ArchiveDiskAction();
+					var4.type = 1;
+					var4.key = (long)var1;
+					var4.archiveDisk = var2;
+					var4.archive = this;
+					synchronized(ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue) {
+						ArchiveDiskActionHandler.ArchiveDiskActionHandler_requestQueue.addFirst(var4);
+					}
+
+					class174.method3383();
+					this.field3816 = var1;
 				}
 			}
 
-			if (this.field3676 == -1) {
-				this.field3686 = true;
+			if (this.field3816 == -1) {
+				this.field3821 = true;
 			}
 
 		}
 	}
 
-	@ObfuscatedName("e")
+	@ObfuscatedName("n")
 	@ObfuscatedSignature(
 		descriptor = "(IB)I",
-		garbageValue = "0"
+		garbageValue = "35"
 	)
 	@Export("groupLoadPercent")
 	int groupLoadPercent(int var1) {
 		if (super.groups[var1] != null) {
 			return 100;
 		} else {
-			return this.validGroups[var1] ? 100 : ArchiveDiskActionHandler.method5168(this.index, var1);
+			return this.validGroups[var1] ? 100 : IsaacCipher.method7886(this.index, var1);
 		}
 	}
 
-	@ObfuscatedName("i")
+	@ObfuscatedName("r")
 	@ObfuscatedSignature(
 		descriptor = "(II)Z",
-		garbageValue = "-700098712"
+		garbageValue = "-1796808817"
 	)
-	public boolean method5179(int var1) {
+	public boolean method5570(int var1) {
 		return this.validGroups[var1];
 	}
 
-	@ObfuscatedName("y")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "(IB)Z",
-		garbageValue = "36"
+		descriptor = "(II)Z",
+		garbageValue = "832467152"
 	)
-	public boolean method5180(int var1) {
+	public boolean method5584(int var1) {
 		return this.getGroupFileIds(var1) != null;
 	}
 
-	@ObfuscatedName("w")
+	@ObfuscatedName("v")
 	@ObfuscatedSignature(
 		descriptor = "(I)I",
-		garbageValue = "1632636897"
+		garbageValue = "838378005"
 	)
 	@Export("loadPercent")
 	public int loadPercent() {
@@ -393,13 +392,263 @@ public class Archive extends AbstractArchive {
 		}
 	}
 
-	@ObfuscatedName("kg")
+	@ObfuscatedName("hi")
 	@ObfuscatedSignature(
-		descriptor = "(S)V",
-		garbageValue = "255"
+		descriptor = "(Lck;IILgj;B)V",
+		garbageValue = "95"
 	)
-	static final void method5187() {
-		Client.field686 = Client.cycleCntr;
-		WorldMapSectionType.ClanChat_inClanChat = true;
+	static final void method5586(Player var0, int var1, int var2, class185 var3) {
+		int var4 = var0.pathX[0];
+		int var5 = var0.pathY[0];
+		int var6 = var0.transformedSize();
+		if (var4 >= var6 && var4 < 104 - var6 && var5 >= var6 && var5 < 104 - var6) {
+			if (var1 >= var6 && var1 < 104 - var6 && var2 >= var6 && var2 < 104 - var6) {
+				int var8 = var0.transformedSize();
+				Client.field754.approxDestinationX = var1;
+				Client.field754.approxDestinationY = var2;
+				Client.field754.approxDestinationSizeX = 1;
+				Client.field754.approxDestinationSizeY = 1;
+				ApproximateRouteStrategy var9 = Client.field754;
+				ApproximateRouteStrategy var10 = var9;
+				CollisionMap var11 = Client.collisionMaps[var0.plane];
+				int[] var12 = Client.field755;
+				int[] var13 = Client.field756;
+
+				int var14;
+				int var15;
+				for (var14 = 0; var14 < 128; ++var14) {
+					for (var15 = 0; var15 < 128; ++var15) {
+						class186.directions[var14][var15] = 0;
+						class186.distances[var14][var15] = 99999999;
+					}
+				}
+
+				int var16;
+				int var17;
+				byte var19;
+				int var20;
+				int var21;
+				int var23;
+				int var25;
+				int var26;
+				int var27;
+				boolean var34;
+				int var36;
+				int var37;
+				int var39;
+				if (var8 == 1) {
+					var16 = var4;
+					var17 = var5;
+					byte var18 = 64;
+					var19 = 64;
+					var20 = var4 - var18;
+					var21 = var5 - var19;
+					class186.directions[var18][var19] = 99;
+					class186.distances[var18][var19] = 0;
+					byte var22 = 0;
+					var23 = 0;
+					class186.bufferX[var22] = var4;
+					var39 = var22 + 1;
+					class186.bufferY[var22] = var5;
+					int[][] var24 = var11.flags;
+
+					boolean var35;
+					while (true) {
+						if (var39 == var23) {
+							class186.field2129 = var16;
+							class186.field2130 = var17;
+							var35 = false;
+							break;
+						}
+
+						var16 = class186.bufferX[var23];
+						var17 = class186.bufferY[var23];
+						var23 = var23 + 1 & 4095;
+						var36 = var16 - var20;
+						var37 = var17 - var21;
+						var25 = var16 - var11.xInset;
+						var26 = var17 - var11.yInset;
+						if (var10.hasArrived(1, var16, var17, var11)) {
+							class186.field2129 = var16;
+							class186.field2130 = var17;
+							var35 = true;
+							break;
+						}
+
+						var27 = class186.distances[var36][var37] + 1;
+						if (var36 > 0 && class186.directions[var36 - 1][var37] == 0 && (var24[var25 - 1][var26] & 19136776) == 0) {
+							class186.bufferX[var39] = var16 - 1;
+							class186.bufferY[var39] = var17;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36 - 1][var37] = 2;
+							class186.distances[var36 - 1][var37] = var27;
+						}
+
+						if (var36 < 127 && class186.directions[var36 + 1][var37] == 0 && (var24[var25 + 1][var26] & 19136896) == 0) {
+							class186.bufferX[var39] = var16 + 1;
+							class186.bufferY[var39] = var17;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36 + 1][var37] = 8;
+							class186.distances[var36 + 1][var37] = var27;
+						}
+
+						if (var37 > 0 && class186.directions[var36][var37 - 1] == 0 && (var24[var25][var26 - 1] & 19136770) == 0) {
+							class186.bufferX[var39] = var16;
+							class186.bufferY[var39] = var17 - 1;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36][var37 - 1] = 1;
+							class186.distances[var36][var37 - 1] = var27;
+						}
+
+						if (var37 < 127 && class186.directions[var36][var37 + 1] == 0 && (var24[var25][var26 + 1] & 19136800) == 0) {
+							class186.bufferX[var39] = var16;
+							class186.bufferY[var39] = var17 + 1;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36][var37 + 1] = 4;
+							class186.distances[var36][var37 + 1] = var27;
+						}
+
+						if (var36 > 0 && var37 > 0 && class186.directions[var36 - 1][var37 - 1] == 0 && (var24[var25 - 1][var26 - 1] & 19136782) == 0 && (var24[var25 - 1][var26] & 19136776) == 0 && (var24[var25][var26 - 1] & 19136770) == 0) {
+							class186.bufferX[var39] = var16 - 1;
+							class186.bufferY[var39] = var17 - 1;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36 - 1][var37 - 1] = 3;
+							class186.distances[var36 - 1][var37 - 1] = var27;
+						}
+
+						if (var36 < 127 && var37 > 0 && class186.directions[var36 + 1][var37 - 1] == 0 && (var24[var25 + 1][var26 - 1] & 19136899) == 0 && (var24[var25 + 1][var26] & 19136896) == 0 && (var24[var25][var26 - 1] & 19136770) == 0) {
+							class186.bufferX[var39] = var16 + 1;
+							class186.bufferY[var39] = var17 - 1;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36 + 1][var37 - 1] = 9;
+							class186.distances[var36 + 1][var37 - 1] = var27;
+						}
+
+						if (var36 > 0 && var37 < 127 && class186.directions[var36 - 1][var37 + 1] == 0 && (var24[var25 - 1][var26 + 1] & 19136824) == 0 && (var24[var25 - 1][var26] & 19136776) == 0 && (var24[var25][var26 + 1] & 19136800) == 0) {
+							class186.bufferX[var39] = var16 - 1;
+							class186.bufferY[var39] = var17 + 1;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36 - 1][var37 + 1] = 6;
+							class186.distances[var36 - 1][var37 + 1] = var27;
+						}
+
+						if (var36 < 127 && var37 < 127 && class186.directions[var36 + 1][var37 + 1] == 0 && (var24[var25 + 1][var26 + 1] & 19136992) == 0 && (var24[var25 + 1][var26] & 19136896) == 0 && (var24[var25][var26 + 1] & 19136800) == 0) {
+							class186.bufferX[var39] = var16 + 1;
+							class186.bufferY[var39] = var17 + 1;
+							var39 = var39 + 1 & 4095;
+							class186.directions[var36 + 1][var37 + 1] = 12;
+							class186.distances[var36 + 1][var37 + 1] = var27;
+						}
+					}
+
+					var34 = var35;
+				} else if (var8 == 2) {
+					var34 = Clock.method3132(var4, var5, var9, var11);
+				} else {
+					var34 = UserComparator2.method7617(var4, var5, var8, var9, var11);
+				}
+
+				int var7;
+				label346: {
+					var15 = var4 - 64;
+					var16 = var5 - 64;
+					var17 = class186.field2129;
+					var36 = class186.field2130;
+					if (!var34) {
+						var37 = Integer.MAX_VALUE;
+						var20 = Integer.MAX_VALUE;
+						byte var38 = 10;
+						var39 = var10.approxDestinationX;
+						var23 = var10.approxDestinationY;
+						int var33 = var10.approxDestinationSizeX;
+						var25 = var10.approxDestinationSizeY;
+
+						for (var26 = var39 - var38; var26 <= var38 + var39; ++var26) {
+							for (var27 = var23 - var38; var27 <= var23 + var38; ++var27) {
+								int var28 = var26 - var15;
+								int var29 = var27 - var16;
+								if (var28 >= 0 && var29 >= 0 && var28 < 128 && var29 < 128 && class186.distances[var28][var29] < 100) {
+									int var30 = 0;
+									if (var26 < var39) {
+										var30 = var39 - var26;
+									} else if (var26 > var39 + var33 - 1) {
+										var30 = var26 - (var39 + var33 - 1);
+									}
+
+									int var31 = 0;
+									if (var27 < var23) {
+										var31 = var23 - var27;
+									} else if (var27 > var25 + var23 - 1) {
+										var31 = var27 - (var23 + var25 - 1);
+									}
+
+									int var32 = var30 * var30 + var31 * var31;
+									if (var32 < var37 || var32 == var37 && class186.distances[var28][var29] < var20) {
+										var37 = var32;
+										var20 = class186.distances[var28][var29];
+										var17 = var26;
+										var36 = var27;
+									}
+								}
+							}
+						}
+
+						if (var37 == Integer.MAX_VALUE) {
+							var7 = -1;
+							break label346;
+						}
+					}
+
+					if (var4 == var17 && var36 == var5) {
+						var7 = 0;
+					} else {
+						var19 = 0;
+						class186.bufferX[var19] = var17;
+						var37 = var19 + 1;
+						class186.bufferY[var19] = var36;
+
+						for (var20 = var21 = class186.directions[var17 - var15][var36 - var16]; var17 != var4 || var36 != var5; var20 = class186.directions[var17 - var15][var36 - var16]) {
+							if (var20 != var21) {
+								var21 = var20;
+								class186.bufferX[var37] = var17;
+								class186.bufferY[var37++] = var36;
+							}
+
+							if ((var20 & 2) != 0) {
+								++var17;
+							} else if ((var20 & 8) != 0) {
+								--var17;
+							}
+
+							if ((var20 & 1) != 0) {
+								++var36;
+							} else if ((var20 & 4) != 0) {
+								--var36;
+							}
+						}
+
+						var39 = 0;
+
+						while (var37-- > 0) {
+							var12[var39] = class186.bufferX[var37];
+							var13[var39++] = class186.bufferY[var37];
+							if (var39 >= var12.length) {
+								break;
+							}
+						}
+
+						var7 = var39;
+					}
+				}
+
+				var14 = var7;
+				if (var7 >= 1) {
+					for (var15 = 0; var15 < var14 - 1; ++var15) {
+						var0.method2177(Client.field755[var15], Client.field756[var15], var3);
+					}
+
+				}
+			}
+		}
 	}
 }

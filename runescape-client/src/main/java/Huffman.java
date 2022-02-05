@@ -1,30 +1,28 @@
+import java.io.File;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("jn")
+@ObfuscatedName("jv")
 @Implements("Huffman")
 public class Huffman {
 	@ObfuscatedName("m")
-	@Export("ArchiveDiskActionHandler_thread")
-	static Thread ArchiveDiskActionHandler_thread;
-	@ObfuscatedName("s")
-	static int[][][] field3203;
-	@ObfuscatedName("n")
+	@Export("JagexCache_locationFile")
+	public static File JagexCache_locationFile;
+	@ObfuscatedName("bl")
 	@ObfuscatedGetter(
-		intValue = 720432763
+		intValue = 1568185021
 	)
-	@Export("canvasWidth")
-	public static int canvasWidth;
-	@ObfuscatedName("l")
+	static int field3152;
+	@ObfuscatedName("c")
 	@Export("masks")
 	int[] masks;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@Export("bits")
 	byte[] bits;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@Export("keys")
 	int[] keys;
 
@@ -53,7 +51,7 @@ public class Huffman {
 
 					for (var10 = var6 - 1; var10 >= 1; --var10) {
 						var11 = var3[var10];
-						if (var11 != var8) {
+						if (var8 != var11) {
 							break;
 						}
 
@@ -111,10 +109,10 @@ public class Huffman {
 
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
 		descriptor = "([BII[BII)I",
-		garbageValue = "-1770389833"
+		garbageValue = "1986002175"
 	)
 	@Export("compress")
 	int compress(byte[] var1, int var2, int var3, byte[] var4, int var5) {
@@ -162,10 +160,10 @@ public class Huffman {
 		return (var7 + 7 >> 3) - var5;
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "([BI[BIII)I",
-		garbageValue = "1079719543"
+		descriptor = "([BI[BIIB)I",
+		garbageValue = "67"
 	)
 	@Export("decompress")
 	int decompress(byte[] var1, int var2, byte[] var3, int var4, int var5) {

@@ -1,61 +1,54 @@
-import java.io.IOException;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("hb")
+@ObfuscatedName("gr")
 @Implements("TextureProvider")
 public class TextureProvider implements TextureLoader {
-	@ObfuscatedName("ei")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "Lky;"
-	)
-	@Export("archive18")
-	static Archive archive18;
-	@ObfuscatedName("l")
-	@ObfuscatedSignature(
-		descriptor = "[Lgc;"
+		descriptor = "[Lgs;"
 	)
 	@Export("textures")
 	Texture[] textures;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "Lkf;"
+		descriptor = "Llh;"
 	)
 	@Export("deque")
 	NodeDeque deque;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedGetter(
-		intValue = 289326279
+		intValue = -966807461
 	)
 	@Export("capacity")
 	int capacity;
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedGetter(
-		intValue = 1388522429
+		intValue = 1967307723
 	)
 	@Export("remaining")
 	int remaining;
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@Export("brightness")
 	double brightness;
-	@ObfuscatedName("k")
+	@ObfuscatedName("s")
 	@ObfuscatedGetter(
-		intValue = -1416724581
+		intValue = -603237325
 	)
 	@Export("textureSize")
 	int textureSize;
-	@ObfuscatedName("t")
+	@ObfuscatedName("j")
 	@ObfuscatedSignature(
-		descriptor = "Lkl;"
+		descriptor = "Lku;"
 	)
 	@Export("archive")
 	AbstractArchive archive;
 
 	@ObfuscatedSignature(
-		descriptor = "(Lkl;Lkl;IDI)V"
+		descriptor = "(Lku;Lku;IDI)V"
 	)
 	public TextureProvider(AbstractArchive var1, AbstractArchive var2, int var3, double var4, int var6) {
 		this.deque = new NodeDeque();
@@ -78,10 +71,10 @@ public class TextureProvider implements TextureLoader {
 
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(I)I",
-		garbageValue = "436377420"
+		descriptor = "(B)I",
+		garbageValue = "-48"
 	)
 	@Export("getLoadedPercentage")
 	public int getLoadedPercentage() {
@@ -97,7 +90,7 @@ public class TextureProvider implements TextureLoader {
 
 				for (int var7 = 0; var7 < var6.length; ++var7) {
 					int var8 = var6[var7];
-					if (this.archive.method5223(var8)) {
+					if (this.archive.method5595(var8)) {
 						++var2;
 					}
 				}
@@ -111,17 +104,17 @@ public class TextureProvider implements TextureLoader {
 		}
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@Export("setBrightness")
 	public void setBrightness(double var1) {
 		this.brightness = var1;
 		this.clear();
 	}
 
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "(II)[I",
-		garbageValue = "-1743192270"
+		descriptor = "(IB)[I",
+		garbageValue = "38"
 	)
 	@Export("getTexturePixels")
 	public int[] getTexturePixels(int var1) {
@@ -151,39 +144,39 @@ public class TextureProvider implements TextureLoader {
 		return null;
 	}
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "(IB)I",
-		garbageValue = "-100"
+		descriptor = "(II)I",
+		garbageValue = "-1608258076"
 	)
 	@Export("getAverageTextureRGB")
 	public int getAverageTextureRGB(int var1) {
 		return this.textures[var1] != null ? this.textures[var1].averageRGB : 0;
 	}
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedSignature(
 		descriptor = "(II)Z",
-		garbageValue = "172178592"
+		garbageValue = "-1579340371"
 	)
-	public boolean vmethod4565(int var1) {
-		return this.textures[var1].field2295;
+	public boolean vmethod4324(int var1) {
+		return this.textures[var1].field2206;
 	}
 
-	@ObfuscatedName("k")
+	@ObfuscatedName("s")
 	@ObfuscatedSignature(
 		descriptor = "(II)Z",
-		garbageValue = "894427577"
+		garbageValue = "-1722756795"
 	)
 	@Export("isLowDetail")
 	public boolean isLowDetail(int var1) {
 		return this.textureSize == 64;
 	}
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("j")
 	@ObfuscatedSignature(
 		descriptor = "(B)V",
-		garbageValue = "73"
+		garbageValue = "-37"
 	)
 	@Export("clear")
 	public void clear() {
@@ -197,10 +190,10 @@ public class TextureProvider implements TextureLoader {
 		this.remaining = this.capacity;
 	}
 
-	@ObfuscatedName("a")
+	@ObfuscatedName("w")
 	@ObfuscatedSignature(
 		descriptor = "(II)V",
-		garbageValue = "1075488432"
+		garbageValue = "1204074801"
 	)
 	@Export("animate")
 	public void animate(int var1) {
@@ -214,112 +207,17 @@ public class TextureProvider implements TextureLoader {
 
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("lk")
 	@ObfuscatedSignature(
-		descriptor = "(Lkl;Lkl;ZIB)V",
-		garbageValue = "0"
+		descriptor = "(IB)V",
+		garbageValue = "-28"
 	)
-	static void method4433(AbstractArchive var0, AbstractArchive var1, boolean var2, int var3) {
-		if (Login.clearLoginScreen) {
-			if (var3 == 4) {
-				class112.method2474(4);
+	static void method4185(int var0) {
+		for (IntegerNode var1 = (IntegerNode)Client.widgetFlags.first(); var1 != null; var1 = (IntegerNode)Client.widgetFlags.next()) {
+			if ((var1.key >> 48 & 65535L) == (long)var0) {
+				var1.remove();
 			}
-
-		} else {
-			if (var3 == 0) {
-				byte var4;
-				if (class21.client.method1338()) {
-					var4 = 10;
-				} else {
-					var4 = 0;
-				}
-
-				class112.method2474(var4);
-				if (var2) {
-					Login.Login_username = "";
-					Login.Login_password = "";
-					MouseHandler.field236 = 0;
-					Ignored.otp = "";
-				}
-
-				Login.method1930();
-				class14.method175();
-			} else {
-				class112.method2474(var3);
-			}
-
-			Rasterizer2D.Rasterizer2D_clear();
-			byte[] var10 = var0.takeFileByNames("title.jpg", "");
-			Login.leftTitleSprite = class135.convertJpgToSprite(var10);
-			Login.rightTitleSprite = Login.leftTitleSprite.mirrorHorizontally();
-			int var5 = Client.worldProperties;
-			if ((var5 & 536870912) != 0) {
-				ClanChannelMember.logoSprite = class131.SpriteBuffer_getIndexedSpriteByName(var1, "logo_deadman_mode", "");
-			} else if ((var5 & 1073741824) != 0) {
-				ClanChannelMember.logoSprite = class131.SpriteBuffer_getIndexedSpriteByName(var1, "logo_seasonal_mode", "");
-			} else {
-				ClanChannelMember.logoSprite = class131.SpriteBuffer_getIndexedSpriteByName(var1, "logo", "");
-			}
-
-			SoundCache.titleboxSprite = class131.SpriteBuffer_getIndexedSpriteByName(var1, "titlebox", "");
-			class132.titlebuttonSprite = class131.SpriteBuffer_getIndexedSpriteByName(var1, "titlebutton", "");
-			Login.field873 = class131.SpriteBuffer_getIndexedSpriteByName(var1, "titlebutton_large", "");
-			class4.field8 = class131.SpriteBuffer_getIndexedSpriteByName(var1, "play_now_text", "");
-			class131.SpriteBuffer_getIndexedSpriteByName(var1, "titlebutton_wide42,1", "");
-			int var7 = var1.getGroupId("runes");
-			int var8 = var1.getFileId(var7, "");
-			IndexedSprite[] var6 = KitDefinition.method2934(var1, var7, var8);
-			Login.runesSprite = var6;
-			var8 = var1.getGroupId("title_mute");
-			int var9 = var1.getFileId(var8, "");
-			IndexedSprite[] var11 = KitDefinition.method2934(var1, var8, var9);
-			class16.title_muteSprite = var11;
-			class397.options_buttons_0Sprite = class131.SpriteBuffer_getIndexedSpriteByName(var1, "options_radio_buttons,0", "");
-			Login.field876 = class131.SpriteBuffer_getIndexedSpriteByName(var1, "options_radio_buttons,4", "");
-			FileSystem.options_buttons_2Sprite = class131.SpriteBuffer_getIndexedSpriteByName(var1, "options_radio_buttons,2", "");
-			Login.field877 = class131.SpriteBuffer_getIndexedSpriteByName(var1, "options_radio_buttons,6", "");
-			GrandExchangeOfferTotalQuantityComparator.field3741 = class397.options_buttons_0Sprite.subWidth;
-			class20.field103 = class397.options_buttons_0Sprite.subHeight;
-			Login.loginScreenRunesAnimation = new LoginScreenAnimation(Login.runesSprite);
-			if (var2) {
-				Login.Login_username = "";
-				Login.Login_password = "";
-			}
-
-			MouseHandler.field236 = 0;
-			Ignored.otp = "";
-			Login.field900 = true;
-			Login.worldSelectOpen = false;
-			if (!WorldMapDecorationType.clientPreferences.titleMusicDisabled) {
-				WorldMapManager.method3727(2, Tiles.archive6, "scape main", "", 255, false);
-			} else {
-				CollisionMap.method3417(2);
-			}
-
-			if (NetCache.NetCache_socket != null) {
-				try {
-					Buffer var12 = new Buffer(4);
-					var12.writeByte(3);
-					var12.writeMedium(0);
-					NetCache.NetCache_socket.write(var12.array, 0, 4);
-				} catch (IOException var15) {
-					try {
-						NetCache.NetCache_socket.close();
-					} catch (Exception var14) {
-					}
-
-					++NetCache.NetCache_ioExceptions;
-					NetCache.NetCache_socket = null;
-				}
-			}
-
-			Login.clearLoginScreen = true;
-			Login.xPadding = (Huffman.canvasWidth - 765) / 2;
-			Login.loginBoxX = Login.xPadding + 202;
-			class78.loginBoxCenter = Login.loginBoxX + 180;
-			Login.leftTitleSprite.drawAt(Login.xPadding, 0);
-			Login.rightTitleSprite.drawAt(Login.xPadding + 382, 0);
-			ClanChannelMember.logoSprite.drawAt(Login.xPadding + 382 - ClanChannelMember.logoSprite.subWidth / 2, 18);
 		}
+
 	}
 }

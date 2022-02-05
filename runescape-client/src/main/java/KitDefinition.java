@@ -1,76 +1,61 @@
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.ObjectInputStream;
-import java.io.OptionalDataException;
-import java.io.StreamCorruptedException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.rs.Reflection;
 
-@ObfuscatedName("em")
+@ObfuscatedName("fh")
 @Implements("KitDefinition")
 public class KitDefinition extends DualNode {
-	@ObfuscatedName("rh")
-	static boolean field1665;
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "Lkl;"
+		descriptor = "Lku;"
 	)
 	@Export("KitDefinition_archive")
-	public static AbstractArchive KitDefinition_archive;
-	@ObfuscatedName("q")
+	static AbstractArchive KitDefinition_archive;
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "Lkl;"
+		descriptor = "Lku;"
 	)
 	@Export("KitDefinition_modelsArchive")
-	public static AbstractArchive KitDefinition_modelsArchive;
-	@ObfuscatedName("f")
+	static AbstractArchive KitDefinition_modelsArchive;
+	@ObfuscatedName("p")
 	@ObfuscatedGetter(
-		intValue = -1748939167
+		intValue = 448904447
 	)
 	@Export("KitDefinition_fileCount")
 	public static int KitDefinition_fileCount;
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "Lii;"
+		descriptor = "Liq;"
 	)
 	@Export("KitDefinition_cached")
 	static EvictingDualNodeHashTable KitDefinition_cached;
-	@ObfuscatedName("aj")
-	@Export("hasFocus")
-	protected static boolean hasFocus;
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedGetter(
-		intValue = 908165149
+		intValue = 1176017283
 	)
 	@Export("bodypartID")
 	public int bodypartID;
-	@ObfuscatedName("k")
+	@ObfuscatedName("s")
 	@Export("models2")
 	int[] models2;
-	@ObfuscatedName("t")
+	@ObfuscatedName("j")
 	@Export("recolorFrom")
 	short[] recolorFrom;
-	@ObfuscatedName("a")
+	@ObfuscatedName("w")
 	@Export("recolorTo")
 	short[] recolorTo;
-	@ObfuscatedName("e")
+	@ObfuscatedName("n")
 	@Export("retextureFrom")
 	short[] retextureFrom;
-	@ObfuscatedName("i")
+	@ObfuscatedName("r")
 	@Export("retextureTo")
 	short[] retextureTo;
-	@ObfuscatedName("y")
+	@ObfuscatedName("o")
 	@Export("models")
 	int[] models;
-	@ObfuscatedName("w")
+	@ObfuscatedName("v")
 	@Export("nonSelectable")
 	public boolean nonSelectable;
 
@@ -84,10 +69,10 @@ public class KitDefinition extends DualNode {
 		this.nonSelectable = false;
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "(Lot;B)V",
-		garbageValue = "45"
+		descriptor = "(Lpi;B)V",
+		garbageValue = "-70"
 	)
 	@Export("decode")
 	void decode(Buffer var1) {
@@ -101,10 +86,10 @@ public class KitDefinition extends DualNode {
 		}
 	}
 
-	@ObfuscatedName("f")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "(Lot;II)V",
-		garbageValue = "-1239600886"
+		descriptor = "(Lpi;II)V",
+		garbageValue = "1440995166"
 	)
 	@Export("decodeNext")
 	void decodeNext(Buffer var1, int var2) {
@@ -147,10 +132,10 @@ public class KitDefinition extends DualNode {
 
 	}
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("t")
 	@ObfuscatedSignature(
-		descriptor = "(I)Z",
-		garbageValue = "-1160783210"
+		descriptor = "(B)Z",
+		garbageValue = "-29"
 	)
 	@Export("ready")
 	public boolean ready() {
@@ -169,10 +154,10 @@ public class KitDefinition extends DualNode {
 		}
 	}
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("s")
 	@ObfuscatedSignature(
-		descriptor = "(I)Lgi;",
-		garbageValue = "-1830587271"
+		descriptor = "(I)Lge;",
+		garbageValue = "1561860079"
 	)
 	@Export("getModelData")
 	public ModelData getModelData() {
@@ -209,12 +194,12 @@ public class KitDefinition extends DualNode {
 		}
 	}
 
-	@ObfuscatedName("k")
+	@ObfuscatedName("j")
 	@ObfuscatedSignature(
 		descriptor = "(I)Z",
-		garbageValue = "-1307534976"
+		garbageValue = "1736416150"
 	)
-	public boolean method2939() {
+	public boolean method3210() {
 		boolean var1 = true;
 
 		for (int var2 = 0; var2 < 5; ++var2) {
@@ -226,10 +211,10 @@ public class KitDefinition extends DualNode {
 		return var1;
 	}
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("w")
 	@ObfuscatedSignature(
-		descriptor = "(B)Lgi;",
-		garbageValue = "-45"
+		descriptor = "(B)Lge;",
+		garbageValue = "49"
 	)
 	@Export("getKitDefinitionModels")
 	public ModelData getKitDefinitionModels() {
@@ -259,206 +244,66 @@ public class KitDefinition extends DualNode {
 		return var5;
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(II)Lfe;",
-		garbageValue = "-411855821"
+		descriptor = "(Lj;B)Lm;",
+		garbageValue = "-59"
 	)
-	@Export("SequenceDefinition_get")
-	public static SequenceDefinition SequenceDefinition_get(int var0) {
-		SequenceDefinition var1 = (SequenceDefinition)SequenceDefinition.SequenceDefinition_cached.get((long)var0);
-		if (var1 != null) {
-			return var1;
+	public static class3 method3238(class6 var0) {
+		switch(var0.field16) {
+		case 0:
+			return new class0();
+		default:
+			throw new IllegalArgumentException();
+		}
+	}
+
+	@ObfuscatedName("ay")
+	@ObfuscatedSignature(
+		descriptor = "(ILbn;ZI)I",
+		garbageValue = "445518606"
+	)
+	static int method3237(int var0, Script var1, boolean var2) {
+		if (var0 == 7400) {
+			--IsaacCipher.Interpreter_intStackSize;
+			--class13.Interpreter_stringStackSize;
+			return 1;
+		} else if (var0 == 7401) {
+			--IsaacCipher.Interpreter_intStackSize;
+			--class13.Interpreter_stringStackSize;
+			return 1;
+		} else if (var0 == 7402) {
+			IsaacCipher.Interpreter_intStackSize -= 2;
+			--class13.Interpreter_stringStackSize;
+			return 1;
+		} else if (var0 == 7403) {
+			IsaacCipher.Interpreter_intStackSize -= 2;
+			--class13.Interpreter_stringStackSize;
+			return 1;
+		} else if (var0 == 7404) {
+			--IsaacCipher.Interpreter_intStackSize;
+			--class13.Interpreter_stringStackSize;
+			return 1;
+		} else if (var0 == 7405) {
+			IsaacCipher.Interpreter_intStackSize -= 2;
+			return 1;
+		} else if (var0 == 7406) {
+			--IsaacCipher.Interpreter_intStackSize;
+			Interpreter.Interpreter_stringStack[++class13.Interpreter_stringStackSize - 1] = "";
+			return 1;
+		} else if (var0 == 7407) {
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = 0;
+			return 1;
+		} else if (var0 == 7408) {
+			IsaacCipher.Interpreter_intStackSize -= 2;
+			--class13.Interpreter_stringStackSize;
+			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = 0;
+			return 1;
+		} else if (var0 == 7409) {
+			--IsaacCipher.Interpreter_intStackSize;
+			return 1;
 		} else {
-			byte[] var2 = class395.SequenceDefinition_archive.takeFile(12, var0);
-			var1 = new SequenceDefinition();
-			if (var2 != null) {
-				var1.decode(new Buffer(var2));
-			}
-
-			var1.postDecode();
-			SequenceDefinition.SequenceDefinition_cached.put(var1, (long)var0);
-			return var1;
+			return 2;
 		}
-	}
-
-	@ObfuscatedName("l")
-	@ObfuscatedSignature(
-		descriptor = "(Lkl;III)[Loz;",
-		garbageValue = "1507951938"
-	)
-	public static IndexedSprite[] method2934(AbstractArchive var0, int var1, int var2) {
-		if (!VarbitComposition.method3102(var0, var1, var2)) {
-			return null;
-		} else {
-			IndexedSprite[] var4 = new IndexedSprite[class414.SpriteBuffer_spriteCount];
-
-			for (int var5 = 0; var5 < class414.SpriteBuffer_spriteCount; ++var5) {
-				IndexedSprite var6 = var4[var5] = new IndexedSprite();
-				var6.width = class414.SpriteBuffer_spriteWidth;
-				var6.height = class408.SpriteBuffer_spriteHeight;
-				var6.xOffset = class135.SpriteBuffer_xOffsets[var5];
-				var6.yOffset = class131.SpriteBuffer_yOffsets[var5];
-				var6.subWidth = class414.SpriteBuffer_spriteWidths[var5];
-				var6.subHeight = class16.SpriteBuffer_spriteHeights[var5];
-				var6.palette = class351.SpriteBuffer_spritePalette;
-				var6.pixels = class414.SpriteBuffer_pixels[var5];
-			}
-
-			StudioGame.method5130();
-			return var4;
-		}
-	}
-
-	@ObfuscatedName("q")
-	@ObfuscatedSignature(
-		descriptor = "(Loy;B)V",
-		garbageValue = "-40"
-	)
-	@Export("performReflectionCheck")
-	public static void performReflectionCheck(PacketBuffer var0) {
-		ReflectionCheck var1 = (ReflectionCheck)class54.reflectionChecks.last();
-		if (var1 != null) {
-			int var2 = var0.offset;
-			var0.writeInt(var1.id);
-
-			for (int var3 = 0; var3 < var1.size; ++var3) {
-				if (var1.creationErrors[var3] != 0) {
-					var0.writeByte(var1.creationErrors[var3]);
-				} else {
-					try {
-						int var4 = var1.operations[var3];
-						Field var5;
-						int var6;
-						if (var4 == 0) {
-							var5 = var1.fields[var3];
-							var6 = Reflection.getInt(var5, (Object)null);
-							var0.writeByte(0);
-							var0.writeInt(var6);
-						} else if (var4 == 1) {
-							var5 = var1.fields[var3];
-							Reflection.setInt(var5, (Object)null, var1.intReplaceValues[var3]);
-							var0.writeByte(0);
-						} else if (var4 == 2) {
-							var5 = var1.fields[var3];
-							var6 = var5.getModifiers();
-							var0.writeByte(0);
-							var0.writeInt(var6);
-						}
-
-						Method var25;
-						if (var4 != 3) {
-							if (var4 == 4) {
-								var25 = var1.methods[var3];
-								var6 = var25.getModifiers();
-								var0.writeByte(0);
-								var0.writeInt(var6);
-							}
-						} else {
-							var25 = var1.methods[var3];
-							byte[][] var10 = var1.arguments[var3];
-							Object[] var7 = new Object[var10.length];
-
-							for (int var8 = 0; var8 < var10.length; ++var8) {
-								ObjectInputStream var9 = new ObjectInputStream(new ByteArrayInputStream(var10[var8]));
-								var7[var8] = var9.readObject();
-							}
-
-							Object var11 = Reflection.invoke(var25, (Object)null, var7);
-							if (var11 == null) {
-								var0.writeByte(0);
-							} else if (var11 instanceof Number) {
-								var0.writeByte(1);
-								var0.writeLong(((Number)var11).longValue());
-							} else if (var11 instanceof String) {
-								var0.writeByte(2);
-								var0.writeStringCp1252NullTerminated((String)var11);
-							} else {
-								var0.writeByte(4);
-							}
-						}
-					} catch (ClassNotFoundException var13) {
-						var0.writeByte(-10);
-					} catch (InvalidClassException var14) {
-						var0.writeByte(-11);
-					} catch (StreamCorruptedException var15) {
-						var0.writeByte(-12);
-					} catch (OptionalDataException var16) {
-						var0.writeByte(-13);
-					} catch (IllegalAccessException var17) {
-						var0.writeByte(-14);
-					} catch (IllegalArgumentException var18) {
-						var0.writeByte(-15);
-					} catch (InvocationTargetException var19) {
-						var0.writeByte(-16);
-					} catch (SecurityException var20) {
-						var0.writeByte(-17);
-					} catch (IOException var21) {
-						var0.writeByte(-18);
-					} catch (NullPointerException var22) {
-						var0.writeByte(-19);
-					} catch (Exception var23) {
-						var0.writeByte(-20);
-					} catch (Throwable var24) {
-						var0.writeByte(-21);
-					}
-				}
-			}
-
-			var0.writeCrc(var2);
-			var1.remove();
-		}
-	}
-
-	@ObfuscatedName("f")
-	@ObfuscatedSignature(
-		descriptor = "(BI)C",
-		garbageValue = "395470841"
-	)
-	public static char method2959(byte var0) {
-		int var1 = var0 & 255;
-		if (var1 == 0) {
-			throw new IllegalArgumentException("" + Integer.toString(var1, 16));
-		} else {
-			if (var1 >= 128 && var1 < 160) {
-				char var2 = class316.cp1252AsciiExtension[var1 - 128];
-				if (var2 == 0) {
-					var2 = '?';
-				}
-
-				var1 = var2;
-			}
-
-			return (char)var1;
-		}
-	}
-
-	@ObfuscatedName("gr")
-	@ObfuscatedSignature(
-		descriptor = "(B)Z",
-		garbageValue = "-110"
-	)
-	static boolean method2954() {
-		return (Client.drawPlayerNames & 4) != 0;
-	}
-
-	@ObfuscatedName("kt")
-	@ObfuscatedSignature(
-		descriptor = "(I)V",
-		garbageValue = "-736812823"
-	)
-	static void method2956() {
-		Client.packetWriter.addNode(LoginScreenAnimation.getPacketBufferNode(ClientPacket.field2697, Client.packetWriter.isaacCipher));
-		Client.oculusOrbState = 0;
-	}
-
-	@ObfuscatedName("ly")
-	@ObfuscatedSignature(
-		descriptor = "(B)V",
-		garbageValue = "82"
-	)
-	static void method2953() {
-		WorldMapDecorationType.clientPreferences.field1209 = Client.field524;
-		ScriptFrame.savePreferences();
 	}
 }

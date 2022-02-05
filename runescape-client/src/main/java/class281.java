@@ -1,72 +1,155 @@
 import net.runelite.mapping.Export;
-import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("js")
+@ObfuscatedName("je")
 public class class281 {
-	@ObfuscatedName("sd")
-	@ObfuscatedGetter(
-		intValue = -1543804789
-	)
-	static int field3324;
-	@ObfuscatedName("a")
-	static byte[][][] field3323;
-
-	static {
-		int var0 = 0;
-		int var1 = 0;
-		class276[] var2 = new class276[]{class276.field3288, class276.field3289};
-		class276[] var3 = var2;
-
-		for (int var4 = 0; var4 < var3.length; ++var4) {
-			class276 var5 = var3[var4];
-			if (var5.field3287 > var0) {
-				var0 = var5.field3287;
-			}
-
-			if (var5.field3290 > var1) {
-				var1 = var5.field3290;
-			}
-		}
-
-	}
-
-	@ObfuscatedName("l")
+	@ObfuscatedName("rq")
 	@ObfuscatedSignature(
-		descriptor = "([Ljava/lang/String;[SIIB)V",
-		garbageValue = "-97"
+		descriptor = "Lap;"
 	)
-	@Export("sortItemsByName")
-	public static void sortItemsByName(String[] var0, short[] var1, int var2, int var3) {
-		if (var2 < var3) {
-			int var4 = (var3 + var2) / 2;
-			int var5 = var2;
-			String var6 = var0[var4];
-			var0[var4] = var0[var3];
-			var0[var3] = var6;
-			short var7 = var1[var4];
-			var1[var4] = var1[var3];
-			var1[var3] = var7;
+	@Export("pcmStreamMixer")
+	static PcmStreamMixer pcmStreamMixer;
+	@ObfuscatedName("mj")
+	@ObfuscatedSignature(
+		descriptor = "Ljm;"
+	)
+	static Widget field3375;
 
-			for (int var8 = var2; var8 < var3; ++var8) {
-				if (var6 == null || var0[var8] != null && var0[var8].compareTo(var6) < (var8 & 1)) {
-					String var9 = var0[var8];
-					var0[var8] = var0[var5];
-					var0[var5] = var9;
-					short var10 = var1[var8];
-					var1[var8] = var1[var5];
-					var1[var5++] = var10;
+	@ObfuscatedName("kx")
+	@ObfuscatedSignature(
+		descriptor = "(II)V",
+		garbageValue = "1649545590"
+	)
+	@Export("changeGameOptions")
+	static final void changeGameOptions(int var0) {
+		UserComparator6.method2551();
+		ObjectComposition.method3540();
+		int var1 = SecureRandomCallable.VarpDefinition_get(var0).type;
+		if (var1 != 0) {
+			int var2 = Varps.Varps_main[var0];
+			if (var1 == 1) {
+				if (var2 == 1) {
+					InterfaceParent.method2142(0.9D);
+				}
+
+				if (var2 == 2) {
+					InterfaceParent.method2142(0.8D);
+				}
+
+				if (var2 == 3) {
+					InterfaceParent.method2142(0.7D);
+				}
+
+				if (var2 == 4) {
+					InterfaceParent.method2142(0.6D);
 				}
 			}
 
-			var0[var3] = var0[var5];
-			var0[var5] = var6;
-			var1[var3] = var1[var5];
-			var1[var5] = var7;
-			sortItemsByName(var0, var1, var2, var5 - 1);
-			sortItemsByName(var0, var1, var5 + 1, var3);
-		}
+			if (var1 == 3) {
+				if (var2 == 0) {
+					Varcs.method2426(255);
+				}
 
+				if (var2 == 1) {
+					Varcs.method2426(192);
+				}
+
+				if (var2 == 2) {
+					Varcs.method2426(128);
+				}
+
+				if (var2 == 3) {
+					Varcs.method2426(64);
+				}
+
+				if (var2 == 4) {
+					Varcs.method2426(0);
+				}
+			}
+
+			if (var1 == 4) {
+				if (var2 == 0) {
+					class20.updateSoundEffectVolume(127);
+				}
+
+				if (var2 == 1) {
+					class20.updateSoundEffectVolume(96);
+				}
+
+				if (var2 == 2) {
+					class20.updateSoundEffectVolume(64);
+				}
+
+				if (var2 == 3) {
+					class20.updateSoundEffectVolume(32);
+				}
+
+				if (var2 == 4) {
+					class20.updateSoundEffectVolume(0);
+				}
+			}
+
+			if (var1 == 5) {
+				Client.leftClickOpensMenu = var2;
+			}
+
+			if (var1 == 6) {
+				Client.chatEffects = var2;
+			}
+
+			if (var1 == 9) {
+				Client.field641 = var2;
+			}
+
+			if (var1 == 10) {
+				if (var2 == 0) {
+					Players.method2383(127);
+				}
+
+				if (var2 == 1) {
+					Players.method2383(96);
+				}
+
+				if (var2 == 2) {
+					Players.method2383(64);
+				}
+
+				if (var2 == 3) {
+					Players.method2383(32);
+				}
+
+				if (var2 == 4) {
+					Players.method2383(0);
+				}
+			}
+
+			if (var1 == 17) {
+				Client.followerIndex = var2 & 65535;
+			}
+
+			if (var1 == 18) {
+				Client.playerAttackOption = (AttackOption)class130.findEnumerated(FloorUnderlayDefinition.method3376(), var2);
+				if (Client.playerAttackOption == null) {
+					Client.playerAttackOption = AttackOption.AttackOption_dependsOnCombatLevels;
+				}
+			}
+
+			if (var1 == 19) {
+				if (var2 == -1) {
+					Client.combatTargetPlayerIndex = -1;
+				} else {
+					Client.combatTargetPlayerIndex = var2 & 2047;
+				}
+			}
+
+			if (var1 == 22) {
+				Client.npcAttackOption = (AttackOption)class130.findEnumerated(FloorUnderlayDefinition.method3376(), var2);
+				if (Client.npcAttackOption == null) {
+					Client.npcAttackOption = AttackOption.AttackOption_dependsOnCombatLevels;
+				}
+			}
+
+		}
 	}
 }

@@ -5,26 +5,26 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("mn")
+@ObfuscatedName("mg")
 @Implements("BufferedNetSocket")
 public class BufferedNetSocket extends AbstractSocket {
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@Export("socket")
 	Socket socket;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "Lmf;"
+		descriptor = "Lmr;"
 	)
 	@Export("source")
 	BufferedSource source;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "Lmz;"
+		descriptor = "Lmb;"
 	)
 	@Export("sink")
 	BufferedSink sink;
 
-	public BufferedNetSocket(Socket var1, int var2, int var3) throws IOException {
+	BufferedNetSocket(Socket var1, int var2, int var3) throws IOException {
 		this.socket = var1;
 		this.socket.setSoTimeout(30000);
 		this.socket.setTcpNoDelay(true);
@@ -34,10 +34,10 @@ public class BufferedNetSocket extends AbstractSocket {
 		this.sink = new BufferedSink(this.socket.getOutputStream(), var3);
 	}
 
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(B)V",
-		garbageValue = "82"
+		descriptor = "(I)V",
+		garbageValue = "-2099219864"
 	)
 	@Export("close")
 	public void close() {
@@ -51,50 +51,50 @@ public class BufferedNetSocket extends AbstractSocket {
 		this.source.close();
 	}
 
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "(I)I",
-		garbageValue = "1780579727"
+		descriptor = "(B)I",
+		garbageValue = "-44"
 	)
 	@Export("readUnsignedByte")
 	public int readUnsignedByte() throws IOException {
 		return this.source.readUnsignedByte();
 	}
 
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
 		descriptor = "(I)I",
-		garbageValue = "-973037380"
+		garbageValue = "-1579083707"
 	)
 	@Export("available")
 	public int available() throws IOException {
 		return this.source.available();
 	}
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
 		descriptor = "(II)Z",
-		garbageValue = "1444896063"
+		garbageValue = "1654551476"
 	)
 	@Export("isAvailable")
 	public boolean isAvailable(int var1) throws IOException {
 		return this.source.isAvailable(var1);
 	}
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedSignature(
-		descriptor = "([BIIB)I",
-		garbageValue = "-95"
+		descriptor = "([BIIS)I",
+		garbageValue = "909"
 	)
 	@Export("read")
 	public int read(byte[] var1, int var2, int var3) throws IOException {
 		return this.source.read(var1, var2, var3);
 	}
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("j")
 	@ObfuscatedSignature(
 		descriptor = "([BIII)V",
-		garbageValue = "34744814"
+		garbageValue = "-1320460000"
 	)
 	@Export("write")
 	public void write(byte[] var1, int var2, int var3) throws IOException {
@@ -105,37 +105,30 @@ public class BufferedNetSocket extends AbstractSocket {
 		this.close();
 	}
 
-	@ObfuscatedName("ix")
-	@ObfuscatedSignature(
-		descriptor = "(Ljt;I)Z",
-		garbageValue = "217783620"
-	)
-	@Export("runCs1")
-	static final boolean runCs1(Widget var0) {
-		if (var0.cs1Comparisons == null) {
-			return false;
-		} else {
-			for (int var1 = 0; var1 < var0.cs1Comparisons.length; ++var1) {
-				int var2 = FriendsChat.method5992(var0, var1);
-				int var3 = var0.cs1ComparisonValues[var1];
-				if (var0.cs1Comparisons[var1] == 2) {
-					if (var2 >= var3) {
-						return false;
-					}
-				} else if (var0.cs1Comparisons[var1] == 3) {
-					if (var2 <= var3) {
-						return false;
-					}
-				} else if (var0.cs1Comparisons[var1] == 4) {
-					if (var2 == var3) {
-						return false;
-					}
-				} else if (var3 != var2) {
-					return false;
-				}
-			}
+	@ObfuscatedName("b")
+	public static String method6496(long var0) {
+		if (var0 > 0L && var0 < 6582952005840035281L) {
+			if (0L == var0 % 37L) {
+				return null;
+			} else {
+				int var2 = 0;
 
-			return true;
+				for (long var3 = var0; var3 != 0L; var3 /= 37L) {
+					++var2;
+				}
+
+				StringBuilder var5 = new StringBuilder(var2);
+
+				while (var0 != 0L) {
+					long var6 = var0;
+					var0 /= 37L;
+					var5.append(class332.base37Table[(int)(var6 - var0 * 37L)]);
+				}
+
+				return var5.reverse().toString();
+			}
+		} else {
+			return null;
 		}
 	}
 }

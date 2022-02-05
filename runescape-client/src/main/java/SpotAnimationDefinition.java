@@ -4,90 +4,90 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("fh")
+@ObfuscatedName("fo")
 @Implements("SpotAnimationDefinition")
 public class SpotAnimationDefinition extends DualNode {
-	@ObfuscatedName("l")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "Lkl;"
+		descriptor = "Lku;"
 	)
 	@Export("SpotAnimationDefinition_archive")
 	static AbstractArchive SpotAnimationDefinition_archive;
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@ObfuscatedSignature(
-		descriptor = "Lkl;"
+		descriptor = "Lku;"
 	)
 	@Export("SpotAnimationDefinition_modelArchive")
 	static AbstractArchive SpotAnimationDefinition_modelArchive;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "Lii;"
+		descriptor = "Liq;"
 	)
 	@Export("SpotAnimationDefinition_cached")
 	static EvictingDualNodeHashTable SpotAnimationDefinition_cached;
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "Lii;"
+		descriptor = "Liq;"
 	)
 	@Export("SpotAnimationDefinition_cachedModels")
 	static EvictingDualNodeHashTable SpotAnimationDefinition_cachedModels;
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedGetter(
-		intValue = 1100100919
+		intValue = 1041298401
 	)
 	@Export("id")
 	int id;
-	@ObfuscatedName("k")
+	@ObfuscatedName("s")
 	@ObfuscatedGetter(
-		intValue = -738164853
+		intValue = -15968409
 	)
 	@Export("archive")
 	int archive;
-	@ObfuscatedName("t")
+	@ObfuscatedName("j")
 	@ObfuscatedGetter(
-		intValue = -1853945339
+		intValue = -373650937
 	)
 	@Export("sequence")
 	public int sequence;
-	@ObfuscatedName("a")
+	@ObfuscatedName("w")
 	@Export("recolorFrom")
 	short[] recolorFrom;
-	@ObfuscatedName("e")
+	@ObfuscatedName("n")
 	@Export("recolorTo")
 	short[] recolorTo;
-	@ObfuscatedName("i")
+	@ObfuscatedName("r")
 	@Export("retextureFrom")
 	short[] retextureFrom;
-	@ObfuscatedName("y")
+	@ObfuscatedName("o")
 	@Export("retextureTo")
 	short[] retextureTo;
-	@ObfuscatedName("w")
+	@ObfuscatedName("v")
 	@ObfuscatedGetter(
-		intValue = -123212011
+		intValue = -2106085717
 	)
 	@Export("widthScale")
 	int widthScale;
-	@ObfuscatedName("g")
+	@ObfuscatedName("d")
 	@ObfuscatedGetter(
-		intValue = -1193470623
+		intValue = 153752537
 	)
 	@Export("heightScale")
 	int heightScale;
-	@ObfuscatedName("v")
+	@ObfuscatedName("h")
 	@ObfuscatedGetter(
-		intValue = 909503517
+		intValue = -1577811829
 	)
 	@Export("orientation")
 	int orientation;
-	@ObfuscatedName("s")
+	@ObfuscatedName("g")
 	@ObfuscatedGetter(
-		intValue = -2019294905
+		intValue = -695708245
 	)
 	@Export("ambient")
 	int ambient;
-	@ObfuscatedName("c")
+	@ObfuscatedName("e")
 	@ObfuscatedGetter(
-		intValue = 194112589
+		intValue = 176094243
 	)
 	@Export("contrast")
 	int contrast;
@@ -106,10 +106,10 @@ public class SpotAnimationDefinition extends DualNode {
 		this.contrast = 0;
 	}
 
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "(Lot;I)V",
-		garbageValue = "-704579839"
+		descriptor = "(Lpi;B)V",
+		garbageValue = "9"
 	)
 	@Export("decode")
 	void decode(Buffer var1) {
@@ -123,10 +123,10 @@ public class SpotAnimationDefinition extends DualNode {
 		}
 	}
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
-		descriptor = "(Lot;II)V",
-		garbageValue = "-105831087"
+		descriptor = "(Lpi;IB)V",
+		garbageValue = "99"
 	)
 	@Export("decodeNext")
 	void decodeNext(Buffer var1, int var2) {
@@ -170,10 +170,10 @@ public class SpotAnimationDefinition extends DualNode {
 
 	}
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("t")
 	@ObfuscatedSignature(
-		descriptor = "(II)Lhl;",
-		garbageValue = "1268722645"
+		descriptor = "(IB)Lgo;",
+		garbageValue = "15"
 	)
 	@Export("getModel")
 	public final Model getModel(int var1) {
@@ -203,7 +203,7 @@ public class SpotAnimationDefinition extends DualNode {
 
 		Model var5;
 		if (this.sequence != -1 && var1 != -1) {
-			var5 = KitDefinition.SequenceDefinition_get(this.sequence).transformSpotAnimationModel(var2, var1);
+			var5 = UserComparator5.SequenceDefinition_get(this.sequence).transformSpotAnimationModel(var2, var1);
 		} else {
 			var5 = var2.toSharedSpotAnimationModel(true);
 		}
@@ -232,33 +232,49 @@ public class SpotAnimationDefinition extends DualNode {
 		return var5;
 	}
 
-	@ObfuscatedName("fc")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "(Lci;III)V",
-		garbageValue = "-839414713"
+		descriptor = "(I)[Lkw;",
+		garbageValue = "672996916"
 	)
-	@Export("performPlayerAnimation")
-	static void performPlayerAnimation(Player var0, int var1, int var2) {
-		if (var0.sequence == var1 && var1 != -1) {
-			int var3 = KitDefinition.SequenceDefinition_get(var1).field1961;
-			if (var3 == 1) {
-				var0.sequenceFrame = 0;
-				var0.sequenceFrameCycle = 0;
-				var0.sequenceDelay = var2;
-				var0.field1142 = 0;
+	@Export("PlayerType_values")
+	public static PlayerType[] PlayerType_values() {
+		return new PlayerType[]{PlayerType.PlayerType_hardcoreIronman, PlayerType.PlayerType_jagexModerator, PlayerType.field3795, PlayerType.PlayerType_ultimateIronman, PlayerType.PlayerType_normal, PlayerType.field3802, PlayerType.field3801, PlayerType.PlayerType_playerModerator, PlayerType.PlayerType_ironman};
+	}
+
+	@ObfuscatedName("s")
+	@ObfuscatedSignature(
+		descriptor = "(IB)I",
+		garbageValue = "84"
+	)
+	public static int method3362(int var0) {
+		--var0;
+		var0 |= var0 >>> 1;
+		var0 |= var0 >>> 2;
+		var0 |= var0 >>> 4;
+		var0 |= var0 >>> 8;
+		var0 |= var0 >>> 16;
+		return var0 + 1;
+	}
+
+	@ObfuscatedName("lc")
+	@ObfuscatedSignature(
+		descriptor = "(Ljm;I)Ljm;",
+		garbageValue = "-123837697"
+	)
+	static Widget method3340(Widget var0) {
+		int var1 = Frames.method4149(class363.getWidgetFlags(var0));
+		if (var1 == 0) {
+			return null;
+		} else {
+			for (int var2 = 0; var2 < var1; ++var2) {
+				var0 = ChatChannel.getWidget(var0.parentId);
+				if (var0 == null) {
+					return null;
+				}
 			}
 
-			if (var3 == 2) {
-				var0.field1142 = 0;
-			}
-		} else if (var1 == -1 || var0.sequence == -1 || KitDefinition.SequenceDefinition_get(var1).field1955 >= KitDefinition.SequenceDefinition_get(var0.sequence).field1955) {
-			var0.sequence = var1;
-			var0.sequenceFrame = 0;
-			var0.sequenceFrameCycle = 0;
-			var0.sequenceDelay = var2;
-			var0.field1142 = 0;
-			var0.field1129 = var0.pathLength;
+			return var0;
 		}
-
 	}
 }

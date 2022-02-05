@@ -1,24 +1,17 @@
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
-import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("jb")
+@ObfuscatedName("ji")
 @Implements("Skills")
 public class Skills {
-	@ObfuscatedName("q")
+	@ObfuscatedName("b")
 	@Export("Skills_enabled")
 	public static final boolean[] Skills_enabled;
-	@ObfuscatedName("f")
+	@ObfuscatedName("p")
 	@Export("Skills_experienceTable")
 	public static int[] Skills_experienceTable;
-	@ObfuscatedName("t")
-	@ObfuscatedGetter(
-		intValue = -83485713
-	)
-	@Export("musicTrackGroupId")
-	public static int musicTrackGroupId;
 
 	static {
 		Skills_enabled = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, false};
@@ -34,21 +27,31 @@ public class Skills {
 
 	}
 
-	@ObfuscatedName("jd")
+	@ObfuscatedName("j")
 	@ObfuscatedSignature(
-		descriptor = "(Ljt;IIII)V",
-		garbageValue = "-618613054"
+		descriptor = "(Ljava/lang/CharSequence;I)I",
+		garbageValue = "-2099525491"
 	)
-	@Export("drawCompass")
-	static final void drawCompass(Widget var0, int var1, int var2, int var3) {
-		SpriteMask var4 = var0.getSpriteMask(false);
-		if (var4 != null) {
-			if (Client.minimapState < 3) {
-				class4.compass.drawRotatedMaskedCenteredAround(var1, var2, var4.width, var4.height, 25, 25, Client.camAngleY, 256, var4.xStarts, var4.xWidths);
-			} else {
-				Rasterizer2D.Rasterizer2D_fillMaskedRectangle(var1, var2, 0, var4.xStarts, var4.xWidths);
-			}
+	@Export("hashString")
+	public static int hashString(CharSequence var0) {
+		int var1 = var0.length();
+		int var2 = 0;
 
+		for (int var3 = 0; var3 < var1; ++var3) {
+			var2 = (var2 << 5) - var2 + class372.charToByteCp1252(var0.charAt(var3));
 		}
+
+		return var2;
+	}
+
+	@ObfuscatedName("h")
+	@ObfuscatedSignature(
+		descriptor = "(I)V",
+		garbageValue = "708045213"
+	)
+	static final void method5487() {
+		Object var10000 = null;
+		String var0 = "You can't add yourself to your own ignore list";
+		class194.addGameMessage(30, "", var0);
 	}
 }

@@ -1,42 +1,44 @@
-import java.io.File;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("eg")
+@ObfuscatedName("ey")
 @Implements("JagexCache")
 public class JagexCache {
-	@ObfuscatedName("j")
-	@Export("JagexCache_locationFile")
-	static File JagexCache_locationFile;
-	@ObfuscatedName("m")
-	@Export("cacheDir")
-	static File cacheDir;
-	@ObfuscatedName("w")
+	@ObfuscatedName("rd")
 	@ObfuscatedSignature(
-		descriptor = "Lnq;"
+		descriptor = "Lar;"
+	)
+	@Export("pcmPlayer0")
+	static PcmPlayer pcmPlayer0;
+	@ObfuscatedName("v")
+	@ObfuscatedSignature(
+		descriptor = "Lof;"
 	)
 	@Export("JagexCache_randomDat")
 	public static BufferedFile JagexCache_randomDat;
-	@ObfuscatedName("g")
+	@ObfuscatedName("d")
 	@ObfuscatedSignature(
-		descriptor = "Lnq;"
+		descriptor = "Lof;"
 	)
 	@Export("JagexCache_dat2File")
 	public static BufferedFile JagexCache_dat2File;
-	@ObfuscatedName("v")
+	@ObfuscatedName("h")
 	@ObfuscatedSignature(
-		descriptor = "Lnq;"
+		descriptor = "Lof;"
 	)
 	@Export("JagexCache_idx255File")
 	public static BufferedFile JagexCache_idx255File;
-	@ObfuscatedName("s")
+	@ObfuscatedName("g")
 	@ObfuscatedSignature(
-		descriptor = "[Lnq;"
+		descriptor = "[Lof;"
 	)
 	@Export("JagexCache_idxFiles")
 	public static BufferedFile[] JagexCache_idxFiles;
+	@ObfuscatedName("l")
+	@Export("formattedOperatingSystemName")
+	public static String formattedOperatingSystemName;
 
 	static {
 		JagexCache_randomDat = null;
@@ -44,12 +46,22 @@ public class JagexCache {
 		JagexCache_idx255File = null;
 	}
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("g")
 	@ObfuscatedSignature(
-		descriptor = "(I)I",
-		garbageValue = "-1155193506"
+		descriptor = "(II)Ldb;",
+		garbageValue = "2123818799"
 	)
-	public static int method2815() {
-		return KeyHandler.KeyHandler_idleCycles;
+	static class120 method3064(int var0) {
+		class120 var1 = (class120)SequenceDefinition.SequenceDefinition_cachedModel.get((long)var0);
+		if (var1 != null) {
+			return var1;
+		} else {
+			var1 = class112.method2571(SequenceDefinition.SequenceDefinition_animationsArchive, class118.SequenceDefinition_skeletonsArchive, var0, false);
+			if (var1 != null) {
+				SequenceDefinition.SequenceDefinition_cachedModel.put(var1, (long)var0);
+			}
+
+			return var1;
+		}
 	}
 }
