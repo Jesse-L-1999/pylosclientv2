@@ -297,7 +297,7 @@ public class RuneLite
 
 			PROFILES_DIR.mkdirs();
 
-			log.info("Pylos V2 {} (RuneLite version {}, launcher version {}) starting up, args: {}",
+			log.info("OpenOSRS {} (RuneLite version {}, launcher version {}) starting up, args: {}",
 				OpenOSRS.SYSTEM_VERSION, RuneLiteProperties.getVersion() == null ? "unknown" : RuneLiteProperties.getVersion(),
 				RuneLiteProperties.getLauncherVersion(), args.length == 0 ? "none" : String.join(" ", args));
 
@@ -322,7 +322,7 @@ public class RuneLite
 		{
 			log.error("Failure during startup", e);
 			SwingUtilities.invokeLater(() ->
-				new FatalErrorDialog("Pylos V2 has encountered an unexpected error during startup.")
+				new FatalErrorDialog("OpenOSRS has encountered an unexpected error during startup.")
 					.open());
 		}
 		finally

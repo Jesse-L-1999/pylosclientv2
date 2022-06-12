@@ -132,7 +132,7 @@ class WidgetInspector extends DevToolsFrame
 
 		eventBus.register(this);
 
-		setTitle("Pylos V2 Widget Inspector");
+		setTitle("OpenOSRS Widget Inspector");
 
 		setLayout(new BorderLayout());
 

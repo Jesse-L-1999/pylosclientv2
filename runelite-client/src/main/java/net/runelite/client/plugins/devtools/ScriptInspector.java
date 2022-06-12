@@ -141,7 +141,7 @@ public class ScriptInspector extends DevToolsFrame
 		this.client = client;
 		this.configManager = configManager;
 
-		setTitle("Pylos V2 Script Inspector");
+		setTitle("OpenOSRS Script Inspector");
 
 		setLayout(new BorderLayout());
 

@@ -48,7 +48,7 @@ public class OpenOSRSSplashScreen extends JFrame
 
 	private OpenOSRSSplashScreen()
 	{
-		this.setTitle("Pylos V2");
+		this.setTitle("OpenOSRS");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(FRAME_SIZE);
 		this.setLayout(new BorderLayout());

@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-rootProject.name = "Pylos V2"
+rootProject.name = "OpenOSRS"
 
 plugins {
     id("com.gradle.enterprise").version("3.0")

@@ -106,7 +106,7 @@ class VarInspector extends DevToolsFrame
 		this.clientThread = clientThread;
 		this.eventBus = eventBus;
 
-		setTitle("Pylos V2 Var Inspector");
+		setTitle("OpenOSRS Var Inspector");
 
 		setLayout(new BorderLayout());
 
