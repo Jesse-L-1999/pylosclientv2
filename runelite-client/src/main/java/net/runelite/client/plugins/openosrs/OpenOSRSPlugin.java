@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
 @PluginDescriptor(
 	loadWhenOutdated = true, // prevent users from disabling
 	hidden = true, // prevent users from disabling
-	name = "OpenOSRS"
+	name = "Pylos V2"
 )
 @Singleton
 @Slf4j
