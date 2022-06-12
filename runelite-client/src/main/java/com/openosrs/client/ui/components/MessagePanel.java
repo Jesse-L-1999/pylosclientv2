@@ -81,8 +81,7 @@ public class MessagePanel extends JPanel
 		c.gridy++;
 
 		// alternate message action
-		messageArea = new JLabel("<html><div style='text-align:center;'>An Oldschool Runescape remake version of Pylos RSPS. Emulates the content from OSRS as much as possible.</div></html>")
-		{
+		messageArea = new JLabel("<html><div style='text-align:center;'>Open-source client for Old School RuneScape with more functionality and less restrictions.</div></html>")		{
 			@Override
 			public Dimension getPreferredSize()
 			{
