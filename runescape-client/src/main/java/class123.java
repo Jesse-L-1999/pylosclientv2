@@ -1,102 +1,93 @@
+import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("du")
-public class class123 extends class126 {
-	@ObfuscatedName("c")
-	@ObfuscatedGetter(
-		intValue = -601293693
+@ObfuscatedName("dt")
+public enum class123 implements MouseWheel {
+	@ObfuscatedName("o")
+	@ObfuscatedSignature(
+		descriptor = "Ldt;"
 	)
-	int field1481;
-	@ObfuscatedName("b")
-	@ObfuscatedGetter(
-		intValue = -1319645239
+	field1550(0, 0),
+	@ObfuscatedName("q")
+	@ObfuscatedSignature(
+		descriptor = "Ldt;"
 	)
-	int field1479;
+	field1545(1, 1),
+	@ObfuscatedName("l")
+	@ObfuscatedSignature(
+		descriptor = "Ldt;"
+	)
+	field1540(2, 2),
+	@ObfuscatedName("k")
+	@ObfuscatedSignature(
+		descriptor = "Ldt;"
+	)
+	field1542(3, 3),
+	@ObfuscatedName("a")
+	@ObfuscatedSignature(
+		descriptor = "Ldt;"
+	)
+	field1543(4, 4),
+	@ObfuscatedName("m")
+	@ObfuscatedSignature(
+		descriptor = "Ldt;"
+	)
+	field1539(5, 5),
 	@ObfuscatedName("p")
-	@ObfuscatedGetter(
-		intValue = 6552211
-	)
-	int field1480;
-	@ObfuscatedName("m")
-	@ObfuscatedGetter(
-		intValue = -223756011
-	)
-	int field1482;
-	// $FF: synthetic field
 	@ObfuscatedSignature(
-		descriptor = "Lda;"
+		descriptor = "Ldt;"
 	)
-	final class129 this$0;
-
-	@ObfuscatedSignature(
-		descriptor = "(Lda;)V"
-	)
-	class123(class129 var1) {
-		this.this$0 = var1;
-		this.field1481 = -1;
-	}
-
-	@ObfuscatedName("c")
-	@ObfuscatedSignature(
-		descriptor = "(Lpi;I)V",
-		garbageValue = "1416770155"
-	)
-	void vmethod3029(Buffer var1) {
-		this.field1481 = var1.readUnsignedShort();
-		this.field1479 = var1.readInt();
-		this.field1480 = var1.readUnsignedByte();
-		this.field1482 = var1.readUnsignedByte();
-	}
-
-	@ObfuscatedName("b")
-	@ObfuscatedSignature(
-		descriptor = "(Lej;I)V",
-		garbageValue = "-1531735008"
-	)
-	void vmethod3028(ClanSettings var1) {
-		var1.method2858(this.field1481, this.field1479, this.field1480, this.field1482);
-	}
-
-	@ObfuscatedName("b")
-	@ObfuscatedSignature(
-		descriptor = "(IIB)I",
-		garbageValue = "-84"
-	)
-	public static int method2744(int var0, int var1) {
-		return (int)Math.round(Math.atan2((double)var0, (double)var1) * 2607.5945876176133D) & 16383;
-	}
-
-	@ObfuscatedName("m")
-	@ObfuscatedSignature(
-		descriptor = "(IIII)I",
-		garbageValue = "-1895069117"
-	)
-	public static int method2737(int var0, int var1, int var2) {
-		int var3 = WorldMapEvent.method4942(var2 - var1 + 1);
-		var3 <<= var1;
-		return var0 & ~var3;
-	}
-
-	@ObfuscatedName("t")
-	@ObfuscatedSignature(
-		descriptor = "(IB)V",
-		garbageValue = "1"
-	)
-	public static void method2746(int var0) {
-		MouseHandler.MouseHandler_idleCycles = var0;
-	}
-
+	field1541(6, 6),
 	@ObfuscatedName("s")
 	@ObfuscatedSignature(
-		descriptor = "(I)V",
-		garbageValue = "-1478303214"
+		descriptor = "Ldt;"
 	)
-	static void method2745() {
-		Messages.Messages_channels.clear();
-		Messages.Messages_hashTable.clear();
-		Messages.Messages_queue.clear();
-		Messages.Messages_count = 0;
+	field1546(7, 7),
+	@ObfuscatedName("r")
+	@ObfuscatedSignature(
+		descriptor = "Ldt;"
+	)
+	field1547(8, 8);
+
+	@ObfuscatedName("v")
+	@ObfuscatedGetter(
+		intValue = -1024399329
+	)
+	final int field1548;
+	@ObfuscatedName("y")
+	@ObfuscatedGetter(
+		intValue = -44674933
+	)
+	final int field1549;
+
+	class123(int var3, int var4) {
+		this.field1548 = var3; // L: 107
+		this.field1549 = var4; // L: 108
+	} // L: 109
+
+	@ObfuscatedName("o")
+	@ObfuscatedSignature(
+		descriptor = "(B)I",
+		garbageValue = "30"
+	)
+	@Export("rsOrdinal")
+	public int rsOrdinal() {
+		return this.field1549; // L: 112
 	}
+
+	@ObfuscatedName("lh")
+	@ObfuscatedSignature(
+		descriptor = "(IIIZB)V",
+		garbageValue = "16"
+	)
+	public static void method2781(int var0, int var1, int var2, boolean var3) {
+		PacketBufferNode var4 = WallDecoration.getPacketBufferNode(ClientPacket.field2955, Client.packetWriter.isaacCipher); // L: 12656
+		var4.packetBuffer.method7551(var1); // L: 12657
+		var4.packetBuffer.method7550(var0); // L: 12658
+		var4.packetBuffer.method7596(var2); // L: 12659
+		var4.packetBuffer.writeIntME(var3 ? Client.field482 * -1673751255 * 1079039769 : 0); // L: 12660
+		Client.packetWriter.addNode(var4); // L: 12661
+	} // L: 12662
 }

@@ -3,43 +3,120 @@ import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("bc")
+@ObfuscatedName("bt")
 public class class67 {
-	@ObfuscatedName("c")
-	static final BigInteger field856;
-	@ObfuscatedName("b")
-	static final BigInteger field857;
+	@ObfuscatedName("o")
+	static final BigInteger field875;
+	@ObfuscatedName("q")
+	static final BigInteger field871;
+	@ObfuscatedName("w")
+	@ObfuscatedSignature(
+		descriptor = "Lqd;"
+	)
+	@Export("options_buttons_0Sprite")
+	static IndexedSprite options_buttons_0Sprite;
 
 	static {
-		field856 = new BigInteger("10001", 16);
-		field857 = new BigInteger("959194ea8a966b960e862427e497e246718ecc7e76f242845673d52b62df19f52fa6fb93c8d9c5129b95747f8ca61fb059fa44297c08c6f5cc6cca99e8d39fc8f0faa58e58d1ca99e861439d01158c14880260b09ace07d25862f6d14e2db785c3016567101e927e4b2513e0b8a0f275ccf60c6a689af387a64b2b82a313d8dd", 16);
+		field875 = new BigInteger("10001", 16); // L: 6
+		field871 = new BigInteger("b53e1d1321015e2b89b11477ee53d8352f43919de31343ff871ec92cae904da943010aeeb8026f3499c5850107833d2068992bf58921ee3a16ead4ac3f5b0aba763660bd6e68e45b863c2d6364b1d6faa581596c56c1117caf3f637c8dd223d6272654c304d3de1c13c47ef929a582788a1f9058b01e13082fbe05d69591d05d", 16); // L: 7
 	}
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "(ZI)V",
-		garbageValue = "1654088160"
+		descriptor = "(Lpx;IIIIIIB)V",
+		garbageValue = "109"
 	)
-	@Export("Login_promptCredentials")
-	static void Login_promptCredentials(boolean var0) {
-		Login.Login_response1 = "";
-		Login.Login_response2 = "Enter your username/email & password.";
-		Login.Login_response3 = "";
-		PlayerType.method5521(2);
-		if (var0) {
-			Login.Login_password = "";
+	@Export("loadTerrain")
+	static final void loadTerrain(Buffer var0, int var1, int var2, int var3, int var4, int var5, int var6) {
+		int var7;
+		if (var2 >= 0 && var2 < 104 && var3 >= 0 && var3 < 104) { // L: 168
+			Tiles.Tiles_renderFlags[var1][var2][var3] = 0; // L: 169
+
+			while (true) {
+				var7 = var0.readUnsignedByte(); // L: 171
+				if (var7 == 0) { // L: 172
+					if (var1 == 0) {
+						Tiles.Tiles_heights[0][var2][var3] = -GrandExchangeOfferUnitPriceComparator.method5846(var4 + var2 + 932731, 556238 + var3 + var5) * 8; // L: 173
+					} else {
+						Tiles.Tiles_heights[var1][var2][var3] = Tiles.Tiles_heights[var1 - 1][var2][var3] - 240; // L: 174
+					}
+					break;
+				}
+
+				if (var7 == 1) { // L: 177
+					int var8 = var0.readUnsignedByte(); // L: 178
+					if (var8 == 1) { // L: 179
+						var8 = 0;
+					}
+
+					if (var1 == 0) { // L: 180
+						Tiles.Tiles_heights[0][var2][var3] = -var8 * 8;
+					} else {
+						Tiles.Tiles_heights[var1][var2][var3] = Tiles.Tiles_heights[var1 - 1][var2][var3] - var8 * 8; // L: 181
+					}
+					break;
+				}
+
+				if (var7 <= 49) { // L: 184
+					Tiles.Tiles_overlays[var1][var2][var3] = var0.readByte(); // L: 185
+					Tiles.Tiles_shapes[var1][var2][var3] = (byte)((var7 - 2) / 4); // L: 186
+					RunException.field4812[var1][var2][var3] = (byte)(var7 - 2 + var6 & 3); // L: 187
+				} else if (var7 <= 81) { // L: 190
+					Tiles.Tiles_renderFlags[var1][var2][var3] = (byte)(var7 - 49); // L: 191
+				} else {
+					Tiles.Tiles_underlays[var1][var2][var3] = (byte)(var7 - 81); // L: 194
+				}
+			}
+		} else {
+			while (true) {
+				var7 = var0.readUnsignedByte(); // L: 199
+				if (var7 == 0) { // L: 200
+					break;
+				}
+
+				if (var7 == 1) { // L: 201
+					var0.readUnsignedByte(); // L: 202
+					break;
+				}
+
+				if (var7 <= 49) { // L: 205
+					var0.readUnsignedByte();
+				}
+			}
 		}
 
-		HealthBar.method2311();
-		WorldMapID.method4805();
+	} // L: 208
+
+	@ObfuscatedName("s")
+	@ObfuscatedSignature(
+		descriptor = "(Llp;IB)Lqd;",
+		garbageValue = "69"
+	)
+	public static IndexedSprite method1883(AbstractArchive var0, int var1) {
+		if (!class28.method374(var0, var1)) { // L: 130
+			return null;
+		} else {
+			IndexedSprite var3 = new IndexedSprite(); // L: 133
+			var3.width = class453.SpriteBuffer_spriteWidth; // L: 134
+			var3.height = class453.SpriteBuffer_spriteHeight; // L: 135
+			var3.xOffset = class453.SpriteBuffer_xOffsets[0]; // L: 136
+			var3.yOffset = class453.SpriteBuffer_yOffsets[0]; // L: 137
+			var3.subWidth = ScriptFrame.SpriteBuffer_spriteWidths[0]; // L: 138
+			var3.subHeight = class453.SpriteBuffer_spriteHeights[0]; // L: 139
+			var3.palette = Decimator.SpriteBuffer_spritePalette; // L: 140
+			var3.pixels = class127.SpriteBuffer_pixels[0]; // L: 141
+			VarcInt.method3325(); // L: 142
+			return var3; // L: 145
+		}
 	}
 
-	@ObfuscatedName("af")
+	@ObfuscatedName("ki")
 	@ObfuscatedSignature(
-		descriptor = "(IB)I",
-		garbageValue = "-67"
+		descriptor = "(II)V",
+		garbageValue = "1989518897"
 	)
-	static int method1962(int var0) {
-		return (int)((Math.log((double)var0) / Interpreter.field814 - 7.0D) * 256.0D);
-	}
+	static final void method1881(int var0) {
+		var0 = Math.min(Math.max(var0, 0), 127); // L: 12073
+		class12.clientPreferences.updateSoundEffectVolume(var0); // L: 12074
+	} // L: 12075
 }

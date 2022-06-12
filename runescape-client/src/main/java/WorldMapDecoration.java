@@ -3,129 +3,135 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
+import net.runelite.rs.ScriptOpcodes;
 
-@ObfuscatedName("hb")
+@ObfuscatedName("iy")
 @Implements("WorldMapDecoration")
 public class WorldMapDecoration {
-	@ObfuscatedName("kr")
-	@ObfuscatedSignature(
-		descriptor = "Ljm;"
-	)
-	static Widget field2722;
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedGetter(
-		intValue = -534188833
+		intValue = -170825093
 	)
 	@Export("objectDefinitionId")
 	final int objectDefinitionId;
-	@ObfuscatedName("b")
+	@ObfuscatedName("q")
 	@ObfuscatedGetter(
-		intValue = -1834904579
+		intValue = -727750889
 	)
 	@Export("decoration")
 	final int decoration;
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedGetter(
-		intValue = 556880363
+		intValue = -1798867267
 	)
 	@Export("rotation")
 	final int rotation;
 
 	WorldMapDecoration(int var1, int var2, int var3) {
-		this.objectDefinitionId = var1;
-		this.decoration = var2;
-		this.rotation = var3;
+		this.objectDefinitionId = var1; // L: 9
+		this.decoration = var2; // L: 10
+		this.rotation = var3; // L: 11
+	} // L: 12
+
+	@ObfuscatedName("k")
+	@ObfuscatedSignature(
+		descriptor = "(II)Z",
+		garbageValue = "2105271367"
+	)
+	@Export("loadInterface")
+	public static boolean loadInterface(int var0) {
+		if (class120.Widget_loadedInterfaces[var0]) { // L: 246
+			return true;
+		} else if (!class134.Widget_archive.tryLoadGroup(var0)) { // L: 247
+			return false;
+		} else {
+			int var1 = class134.Widget_archive.getGroupFileCount(var0); // L: 248
+			if (var1 == 0) { // L: 249
+				class120.Widget_loadedInterfaces[var0] = true; // L: 250
+				return true; // L: 251
+			} else {
+				if (NetSocket.Widget_interfaceComponents[var0] == null) { // L: 253
+					NetSocket.Widget_interfaceComponents[var0] = new Widget[var1];
+				}
+
+				for (int var2 = 0; var2 < var1; ++var2) { // L: 254
+					if (NetSocket.Widget_interfaceComponents[var0][var2] == null) { // L: 255
+						byte[] var3 = class134.Widget_archive.takeFile(var0, var2); // L: 256
+						if (var3 != null) { // L: 257
+							NetSocket.Widget_interfaceComponents[var0][var2] = new Widget(); // L: 258
+							NetSocket.Widget_interfaceComponents[var0][var2].id = var2 + (var0 << 16); // L: 259
+							if (var3[0] == -1) { // L: 260
+								NetSocket.Widget_interfaceComponents[var0][var2].decode(new Buffer(var3));
+							} else {
+								NetSocket.Widget_interfaceComponents[var0][var2].decodeLegacy(new Buffer(var3)); // L: 261
+							}
+						}
+					}
+				}
+
+				class120.Widget_loadedInterfaces[var0] = true; // L: 265
+				return true; // L: 266
+			}
+		}
 	}
 
-	@ObfuscatedName("gc")
+	@ObfuscatedName("f")
 	@ObfuscatedSignature(
-		descriptor = "(IIIIZI)V",
-		garbageValue = "2097152469"
+		descriptor = "(ILbb;ZI)I",
+		garbageValue = "1988799748"
 	)
-	@Export("setViewportShape")
-	static final void setViewportShape(int var0, int var1, int var2, int var3, boolean var4) {
-		if (var2 < 1) {
-			var2 = 1;
-		}
-
-		if (var3 < 1) {
-			var3 = 1;
-		}
-
-		int var5 = var3 - 334;
-		int var6;
-		if (var5 < 0) {
-			var6 = Client.field690;
-		} else if (var5 >= 100) {
-			var6 = Client.field707;
+	static int method4804(int var0, Script var1, boolean var2) {
+		Widget var3 = class92.getWidget(Interpreter.Interpreter_intStack[--class12.Interpreter_intStackSize]); // L: 1341
+		if (var0 == ScriptOpcodes.IF_GETSCROLLX) { // L: 1342
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.scrollX; // L: 1343
+			return 1; // L: 1344
+		} else if (var0 == ScriptOpcodes.IF_GETSCROLLY) { // L: 1346
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.scrollY; // L: 1347
+			return 1; // L: 1348
+		} else if (var0 == ScriptOpcodes.IF_GETTEXT) { // L: 1350
+			Interpreter.Interpreter_stringStack[++class9.Interpreter_stringStackSize - 1] = var3.text; // L: 1351
+			return 1; // L: 1352
+		} else if (var0 == ScriptOpcodes.IF_GETSCROLLWIDTH) { // L: 1354
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.scrollWidth; // L: 1355
+			return 1; // L: 1356
+		} else if (var0 == ScriptOpcodes.IF_GETSCROLLHEIGHT) { // L: 1358
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.scrollHeight; // L: 1359
+			return 1; // L: 1360
+		} else if (var0 == ScriptOpcodes.IF_GETMODELZOOM) { // L: 1362
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.modelZoom; // L: 1363
+			return 1; // L: 1364
+		} else if (var0 == ScriptOpcodes.IF_GETMODELANGLE_X) { // L: 1366
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.modelAngleX; // L: 1367
+			return 1; // L: 1368
+		} else if (var0 == ScriptOpcodes.IF_GETMODELANGLE_Z) { // L: 1370
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.modelAngleZ; // L: 1371
+			return 1; // L: 1372
+		} else if (var0 == ScriptOpcodes.IF_GETMODELANGLE_Y) { // L: 1374
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.modelAngleY; // L: 1375
+			return 1; // L: 1376
+		} else if (var0 == ScriptOpcodes.IF_GETTRANS) { // L: 1378
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.transparencyTop; // L: 1379
+			return 1; // L: 1380
+		} else if (var0 == 2610) { // L: 1382
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.transparencyBot; // L: 1383
+			return 1; // L: 1384
+		} else if (var0 == ScriptOpcodes.IF_GETCOLOUR) { // L: 1386
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.color; // L: 1387
+			return 1; // L: 1388
+		} else if (var0 == ScriptOpcodes.IF_GETFILLCOLOUR) { // L: 1390
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.color2; // L: 1391
+			return 1; // L: 1392
+		} else if (var0 == 2613) { // L: 1394
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.fillMode.rsOrdinal(); // L: 1395
+			return 1; // L: 1396
+		} else if (var0 == ScriptOpcodes.IF_GETMODELTRANSPARENT) { // L: 1398
+			Interpreter.Interpreter_intStack[++class12.Interpreter_intStackSize - 1] = var3.modelTransparency ? 1 : 0; // L: 1399
+			return 1; // L: 1400
+		} else if (var0 != 2615 && var0 != 2616) { // L: 1402
+			return 2; // L: 1406
 		} else {
-			var6 = (Client.field707 - Client.field690) * var5 / 100 + Client.field690;
+			++class12.Interpreter_intStackSize; // L: 1403
+			return 1; // L: 1404
 		}
-
-		int var7 = var3 * var6 * 512 / (var2 * 334);
-		int var8;
-		int var9;
-		short var17;
-		if (var7 < Client.field736) {
-			var17 = Client.field736;
-			var6 = var17 * var2 * 334 / (var3 * 512);
-			if (var6 > Client.field735) {
-				var6 = Client.field735;
-				var8 = var3 * var6 * 512 / (var17 * 334);
-				var9 = (var2 - var8) / 2;
-				if (var4) {
-					Rasterizer2D.Rasterizer2D_resetClip();
-					Rasterizer2D.Rasterizer2D_fillRectangle(var0, var1, var9, var3, -16777216);
-					Rasterizer2D.Rasterizer2D_fillRectangle(var0 + var2 - var9, var1, var9, var3, -16777216);
-				}
-
-				var0 += var9;
-				var2 -= var9 * 2;
-			}
-		} else if (var7 > Client.field737) {
-			var17 = Client.field737;
-			var6 = var17 * var2 * 334 / (var3 * 512);
-			if (var6 < Client.field619) {
-				var6 = Client.field619;
-				var8 = var17 * var2 * 334 / (var6 * 512);
-				var9 = (var3 - var8) / 2;
-				if (var4) {
-					Rasterizer2D.Rasterizer2D_resetClip();
-					Rasterizer2D.Rasterizer2D_fillRectangle(var0, var1, var2, var9, -16777216);
-					Rasterizer2D.Rasterizer2D_fillRectangle(var0, var3 + var1 - var9, var2, var9, -16777216);
-				}
-
-				var1 += var9;
-				var3 -= var9 * 2;
-			}
-		}
-
-		Client.viewportZoom = var3 * var6 / 334;
-		if (var2 != Client.viewportWidth || var3 != Client.viewportHeight) {
-			int[] var16 = new int[9];
-
-			for (var9 = 0; var9 < var16.length; ++var9) {
-				int var10 = var9 * 32 + 15 + 128;
-				int var11 = class142.method2958(var10);
-				int var12 = Rasterizer3D.Rasterizer3D_sine[var10];
-				int var14 = var3 - 334;
-				if (var14 < 0) {
-					var14 = 0;
-				} else if (var14 > 100) {
-					var14 = 100;
-				}
-
-				int var15 = (Client.zoomWidth - Client.zoomHeight) * var14 / 100 + Client.zoomHeight;
-				int var13 = var15 * var11 / 256;
-				var16[var9] = var13 * var12 >> 16;
-			}
-
-			Scene.Scene_buildVisiblityMap(var16, 500, 800, var2 * 334 / var3, 334);
-		}
-
-		Client.viewportOffsetX = var0;
-		Client.viewportOffsetY = var1;
-		Client.viewportWidth = var2;
-		Client.viewportHeight = var3;
 	}
 }

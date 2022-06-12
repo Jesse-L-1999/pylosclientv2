@@ -4,65 +4,97 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("ca")
+@ObfuscatedName("cq")
 @Implements("AttackOption")
 public enum AttackOption implements MouseWheel {
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "Lca;"
+		descriptor = "Lcq;"
 	)
 	@Export("AttackOption_dependsOnCombatLevels")
 	AttackOption_dependsOnCombatLevels(0),
-	@ObfuscatedName("b")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "Lca;"
+		descriptor = "Lcq;"
 	)
 	@Export("AttackOption_alwaysRightClick")
 	AttackOption_alwaysRightClick(1),
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
-		descriptor = "Lca;"
+		descriptor = "Lcq;"
 	)
-	field1232(2),
-	@ObfuscatedName("m")
+	field1285(2),
+	@ObfuscatedName("k")
 	@ObfuscatedSignature(
-		descriptor = "Lca;"
+		descriptor = "Lcq;"
 	)
 	@Export("AttackOption_hidden")
 	AttackOption_hidden(3),
-	@ObfuscatedName("t")
+	@ObfuscatedName("a")
 	@ObfuscatedSignature(
-		descriptor = "Lca;"
+		descriptor = "Lcq;"
 	)
-	field1234(4);
+	field1283(4);
 
-	@ObfuscatedName("s")
+	@ObfuscatedName("fn")
 	@ObfuscatedGetter(
-		intValue = -268107797
+		intValue = 1045451155
+	)
+	static int field1290;
+	@ObfuscatedName("m")
+	@ObfuscatedGetter(
+		intValue = 1694685345
 	)
 	@Export("id")
 	final int id;
 
 	AttackOption(int var3) {
-		this.id = var3;
-	}
+		this.id = var3; // L: 12733
+	} // L: 12734
 
-	@ObfuscatedName("b")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
 		descriptor = "(B)I",
-		garbageValue = "48"
+		garbageValue = "30"
 	)
 	@Export("rsOrdinal")
 	public int rsOrdinal() {
-		return this.id;
+		return this.id; // L: 12738
 	}
 
-	@ObfuscatedName("lg")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "(I)Z",
-		garbageValue = "-379261507"
+		descriptor = "(IIB)I",
+		garbageValue = "-59"
 	)
-	static boolean method2356() {
-		return SecureRandomFuture.clientPreferences.field1197 >= Client.field473;
+	public static int method2401(int var0, int var1) {
+		int var2;
+		for (var2 = 1; var1 > 1; var1 >>= 1) { // L: 24 25 28
+			if ((var1 & 1) != 0) { // L: 26
+				var2 = var0 * var2;
+			}
+
+			var0 *= var0; // L: 27
+		}
+
+		if (var1 == 1) { // L: 30
+			return var0 * var2;
+		} else {
+			return var2; // L: 31
+		}
+	}
+
+	@ObfuscatedName("l")
+	@ObfuscatedSignature(
+		descriptor = "(Lpt;ILjava/lang/String;I)Ljava/lang/String;",
+		garbageValue = "-1761568873"
+	)
+	static String method2393(IterableNodeHashTable var0, int var1, String var2) {
+		if (var0 == null) { // L: 41
+			return var2;
+		} else {
+			ObjectNode var3 = (ObjectNode)var0.get((long)var1); // L: 42
+			return var3 == null ? var2 : (String)var3.obj; // L: 43 44
+		}
 	}
 }

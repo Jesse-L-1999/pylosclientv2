@@ -4,88 +4,111 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("bn")
+@ObfuscatedName("bb")
 @Implements("Script")
 public class Script extends DualNode {
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "Liq;"
+		descriptor = "Lir;"
 	)
 	@Export("Script_cached")
 	static EvictingDualNodeHashTable Script_cached;
-	@ObfuscatedName("b")
-	String field937;
-	@ObfuscatedName("p")
+	@ObfuscatedName("q")
+	String field949;
+	@ObfuscatedName("l")
 	@Export("opcodes")
 	int[] opcodes;
-	@ObfuscatedName("m")
+	@ObfuscatedName("k")
 	@Export("intOperands")
 	int[] intOperands;
-	@ObfuscatedName("t")
+	@ObfuscatedName("a")
 	@Export("stringOperands")
 	String[] stringOperands;
-	@ObfuscatedName("s")
+	@ObfuscatedName("m")
 	@ObfuscatedGetter(
-		intValue = 1986002175
+		intValue = -1638738709
 	)
 	@Export("localIntCount")
 	int localIntCount;
-	@ObfuscatedName("j")
+	@ObfuscatedName("p")
 	@ObfuscatedGetter(
-		intValue = 140084379
+		intValue = 2011225427
 	)
 	@Export("localStringCount")
 	int localStringCount;
-	@ObfuscatedName("w")
+	@ObfuscatedName("s")
 	@ObfuscatedGetter(
-		intValue = 773546685
+		intValue = -1425203371
 	)
 	@Export("intArgumentCount")
 	int intArgumentCount;
-	@ObfuscatedName("n")
+	@ObfuscatedName("r")
 	@ObfuscatedGetter(
-		intValue = -2027696431
+		intValue = 2038288745
 	)
 	@Export("stringArgumentCount")
 	int stringArgumentCount;
-	@ObfuscatedName("r")
+	@ObfuscatedName("v")
 	@ObfuscatedSignature(
-		descriptor = "[Loz;"
+		descriptor = "[Lpt;"
 	)
 	@Export("switches")
 	IterableNodeHashTable[] switches;
 
 	static {
-		Script_cached = new EvictingDualNodeHashTable(128);
+		Script_cached = new EvictingDualNodeHashTable(128); // L: 12
 	}
 
 	Script() {
-	}
+	} // L: 23
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("k")
 	@ObfuscatedSignature(
-		descriptor = "(II)[Loz;",
-		garbageValue = "-1725303821"
+		descriptor = "(IB)[Lpt;",
+		garbageValue = "0"
 	)
 	@Export("newIterableNodeHashTable")
 	IterableNodeHashTable[] newIterableNodeHashTable(int var1) {
-		return new IterableNodeHashTable[var1];
+		return new IterableNodeHashTable[var1]; // L: 155
 	}
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "(ILku;Ljava/lang/String;Ljava/lang/String;IZB)V",
-		garbageValue = "62"
+		descriptor = "(II)Lfb;",
+		garbageValue = "16711680"
 	)
-	public static void method2040(int var0, AbstractArchive var1, String var2, String var3, int var4, boolean var5) {
-		int var6 = var1.getGroupId(var2);
-		int var7 = var1.getFileId(var6, var3);
-		class260.musicPlayerStatus = 1;
-		class124.musicTrackArchive = var1;
-		VarcInt.musicTrackGroupId = var6;
-		class260.musicTrackFileId = var7;
-		ChatChannel.musicTrackVolume = var4;
-		DynamicObject.musicTrackBoolean = var5;
-		class260.pcmSampleLength = var0;
+	@Export("KitDefinition_get")
+	public static KitDefinition KitDefinition_get(int var0) {
+		KitDefinition var1 = (KitDefinition)KitDefinition.KitDefinition_cached.get((long)var0); // L: 33
+		if (var1 != null) { // L: 34
+			return var1;
+		} else {
+			byte[] var2 = class18.KitDefinition_archive.takeFile(3, var0); // L: 35
+			var1 = new KitDefinition(); // L: 36
+			if (var2 != null) { // L: 37
+				var1.decode(new Buffer(var2));
+			}
+
+			KitDefinition.KitDefinition_cached.put(var1, (long)var0); // L: 38
+			return var1; // L: 39
+		}
 	}
+
+	@ObfuscatedName("y")
+	@ObfuscatedSignature(
+		descriptor = "(Lki;IB)V",
+		garbageValue = "11"
+	)
+	@Export("Widget_setKeyIgnoreHeld")
+	static final void Widget_setKeyIgnoreHeld(Widget var0, int var1) {
+		if (var0.field3474 == null) { // L: 1020
+			throw new RuntimeException(); // L: 1021
+		} else {
+			if (var0.field3527 == null) { // L: 1023
+				var0.field3527 = new int[var0.field3474.length]; // L: 1024
+			}
+
+			var0.field3527[var1] = Integer.MAX_VALUE; // L: 1026
+		}
+	} // L: 1027
 }

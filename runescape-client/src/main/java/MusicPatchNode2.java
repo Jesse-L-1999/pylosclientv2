@@ -1,94 +1,74 @@
-import java.io.File;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("il")
+@ObfuscatedName("jp")
 @Implements("MusicPatchNode2")
 public class MusicPatchNode2 {
-	@ObfuscatedName("c")
-	byte[] field3056;
-	@ObfuscatedName("b")
-	byte[] field3054;
-	@ObfuscatedName("p")
+	@ObfuscatedName("o")
+	byte[] field3232;
+	@ObfuscatedName("q")
+	byte[] field3223;
+	@ObfuscatedName("l")
 	@ObfuscatedGetter(
-		intValue = 1373142443
+		intValue = 706358109
 	)
-	int field3052;
+	int field3226;
+	@ObfuscatedName("k")
+	@ObfuscatedGetter(
+		intValue = 2100894531
+	)
+	int field3225;
+	@ObfuscatedName("a")
+	@ObfuscatedGetter(
+		intValue = 2080800417
+	)
+	int field3224;
 	@ObfuscatedName("m")
 	@ObfuscatedGetter(
-		intValue = 354734067
+		intValue = 1431898739
 	)
-	int field3055;
-	@ObfuscatedName("t")
+	int field3227;
+	@ObfuscatedName("p")
 	@ObfuscatedGetter(
-		intValue = -488769373
+		intValue = -1294985269
 	)
-	int field3053;
+	int field3228;
 	@ObfuscatedName("s")
 	@ObfuscatedGetter(
-		intValue = -1877607089
+		intValue = -1586241363
 	)
-	int field3057;
-	@ObfuscatedName("j")
+	int field3229;
+	@ObfuscatedName("r")
 	@ObfuscatedGetter(
-		intValue = 843760969
+		intValue = 1620713125
 	)
-	int field3058;
-	@ObfuscatedName("w")
-	@ObfuscatedGetter(
-		intValue = 1302289953
-	)
-	int field3059;
-	@ObfuscatedName("n")
-	@ObfuscatedGetter(
-		intValue = -579671659
-	)
-	int field3060;
+	int field3222;
 
 	MusicPatchNode2() {
-	}
+	} // L: 14
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("if")
 	@ObfuscatedSignature(
-		descriptor = "(Ljava/io/File;B)V",
-		garbageValue = "-1"
+		descriptor = "(I)V",
+		garbageValue = "-1059182079"
 	)
-	public static void method5048(File var0) {
-		class125.FileSystem_cacheDir = var0;
-		if (!class125.FileSystem_cacheDir.exists()) {
-			throw new RuntimeException("");
-		} else {
-			FileSystem.FileSystem_hasPermissions = true;
-		}
-	}
+	@Export("Widget_runOnTargetLeave")
+	static void Widget_runOnTargetLeave() {
+		if (Client.isSpellSelected) { // L: 9786
+			Widget var0 = ApproximateRouteStrategy.getWidgetChild(ArchiveDiskActionHandler.selectedSpellWidget, Client.selectedSpellChildIndex); // L: 9787
+			if (var0 != null && var0.onTargetLeave != null) { // L: 9788
+				ScriptEvent var1 = new ScriptEvent(); // L: 9789
+				var1.widget = var0; // L: 9790
+				var1.args = var0.onTargetLeave; // L: 9791
+				class144.runScriptEvent(var1); // L: 9792
+			}
 
-	@ObfuscatedName("g")
-	@ObfuscatedSignature(
-		descriptor = "(IIIS)I",
-		garbageValue = "3121"
-	)
-	@Export("hslToRgb")
-	static final int hslToRgb(int var0, int var1, int var2) {
-		if (var2 > 179) {
-			var1 /= 2;
+			Client.selectedSpellItemId = -1; // L: 9794
+			Client.isSpellSelected = false; // L: 9795
+			GrandExchangeOfferTotalQuantityComparator.invalidateWidget(var0); // L: 9796
 		}
-
-		if (var2 > 192) {
-			var1 /= 2;
-		}
-
-		if (var2 > 217) {
-			var1 /= 2;
-		}
-
-		if (var2 > 243) {
-			var1 /= 2;
-		}
-
-		int var3 = (var1 / 32 << 7) + (var0 / 4 << 10) + var2 / 2;
-		return var3;
-	}
+	} // L: 9797
 }

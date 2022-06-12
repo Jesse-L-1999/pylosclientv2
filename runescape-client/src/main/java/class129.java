@@ -3,143 +3,116 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("da")
-public class class129 {
-	@ObfuscatedName("fe")
+@ObfuscatedName("du")
+public class class129 extends class128 {
+	@ObfuscatedName("o")
 	@ObfuscatedGetter(
-		intValue = -1804512365
+		intValue = -847833425
 	)
-	@Export("currentPort")
-	static int currentPort;
-	@ObfuscatedName("c")
-	@ObfuscatedGetter(
-		longValue = 6548803859152250067L
-	)
-	long field1513;
-	@ObfuscatedName("b")
-	@ObfuscatedGetter(
-		intValue = -2135269879
-	)
-	int field1511;
-	@ObfuscatedName("p")
+	int field1579;
+	@ObfuscatedName("q")
+	boolean field1577;
+	// $FF: synthetic field
 	@ObfuscatedSignature(
-		descriptor = "Llr;"
+		descriptor = "Leh;"
 	)
-	IterableNodeDeque field1512;
+	final class131 this$0;
 
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;)V"
+		descriptor = "(Leh;)V"
 	)
-	public class129(Buffer var1) {
-		this.field1511 = -1;
-		this.field1512 = new IterableNodeDeque();
-		this.method2780(var1);
+	class129(class131 var1) {
+		this.this$0 = var1;
+		this.field1579 = -1; // L: 178
+	} // L: 181
+
+	@ObfuscatedName("o")
+	@ObfuscatedSignature(
+		descriptor = "(Lpx;I)V",
+		garbageValue = "-611912046"
+	)
+	void vmethod3040(Buffer var1) {
+		this.field1579 = var1.readUnsignedShort(); // L: 184
+		this.field1577 = var1.readUnsignedByte() == 1; // L: 185
+	} // L: 186
+
+	@ObfuscatedName("q")
+	@ObfuscatedSignature(
+		descriptor = "(Lek;B)V",
+		garbageValue = "-73"
+	)
+	void vmethod3041(ClanSettings var1) {
+		var1.method2895(this.field1579, this.field1577); // L: 189
+	} // L: 190
+
+	@ObfuscatedName("v")
+	static boolean method2816(long var0) {
+		return (int)(var0 >>> 16 & 1L) == 1; // L: 80
 	}
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("fr")
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;B)V",
-		garbageValue = "-65"
+		descriptor = "(B)V",
+		garbageValue = "49"
 	)
-	void method2780(Buffer var1) {
-		this.field1513 = var1.readLong();
-		this.field1511 = var1.readInt();
+	static final void method2812() {
+		if (Client.logoutTimer > 0) { // L: 3053
+			SecureRandomCallable.logOut(); // L: 3054
+		} else {
+			Client.timer.method6375(); // L: 3057
+			PendingSpawn.updateGameState(40); // L: 3058
+			DirectByteArrayCopier.field3337 = Client.packetWriter.getSocket(); // L: 3059
+			Client.packetWriter.removeSocket(); // L: 3060
+		}
+	} // L: 3055 3061
 
-		for (int var2 = var1.readUnsignedByte(); var2 != 0; var2 = var1.readUnsignedByte()) {
-			Object var3;
-			if (var2 == 3) {
-				var3 = new class148(this);
-			} else if (var2 == 1) {
-				var3 = new class124(this);
-			} else if (var2 == 13) {
-				var3 = new class141(this);
-			} else if (var2 == 4) {
-				var3 = new class133(this);
-			} else if (var2 == 6) {
-				var3 = new class140(this);
-			} else if (var2 == 5) {
-				var3 = new class125(this);
-			} else if (var2 == 2) {
-				var3 = new class130(this);
-			} else if (var2 == 7) {
-				var3 = new class123(this);
-			} else if (var2 == 14) {
-				var3 = new class127(this);
-			} else if (var2 == 8) {
-				var3 = new class144(this);
-			} else if (var2 == 9) {
-				var3 = new class150(this);
-			} else if (var2 == 10) {
-				var3 = new class136(this);
-			} else if (var2 == 11) {
-				var3 = new class131(this);
-			} else if (var2 == 12) {
-				var3 = new class135(this);
-			} else {
-				if (var2 != 15) {
-					throw new RuntimeException("");
+	@ObfuscatedName("gk")
+	@ObfuscatedSignature(
+		descriptor = "(Lki;III)V",
+		garbageValue = "1747874161"
+	)
+	@Export("checkIfMinimapClicked")
+	static final void checkIfMinimapClicked(Widget var0, int var1, int var2) {
+		if (Client.minimapState == 0 || Client.minimapState == 3) { // L: 3854
+			if (!Client.isMenuOpen && (MouseHandler.MouseHandler_lastButton == 1 || !Login.mouseCam && MouseHandler.MouseHandler_lastButton == 4)) { // L: 3855
+				SpriteMask var3 = var0.getSpriteMask(true); // L: 3856
+				if (var3 == null) { // L: 3857
+					return;
 				}
 
-				var3 = new class145(this);
+				int var4 = MouseHandler.MouseHandler_lastPressedX - var1; // L: 3858
+				int var5 = MouseHandler.MouseHandler_lastPressedY - var2; // L: 3859
+				if (var3.contains(var4, var5)) { // L: 3860
+					var4 -= var3.width / 2; // L: 3861
+					var5 -= var3.height / 2; // L: 3862
+					int var6 = Client.camAngleY & 2047; // L: 3863
+					int var7 = Rasterizer3D.Rasterizer3D_sine[var6]; // L: 3864
+					int var8 = Rasterizer3D.Rasterizer3D_cosine[var6]; // L: 3865
+					int var9 = var8 * var4 + var5 * var7 >> 11; // L: 3866
+					int var10 = var5 * var8 - var7 * var4 >> 11; // L: 3867
+					int var11 = var9 + ModelData0.localPlayer.x >> 7; // L: 3868
+					int var12 = ModelData0.localPlayer.y - var10 >> 7; // L: 3869
+					PacketBufferNode var13 = WallDecoration.getPacketBufferNode(ClientPacket.field3023, Client.packetWriter.isaacCipher); // L: 3871
+					var13.packetBuffer.writeByte(18); // L: 3872
+					var13.packetBuffer.method7596(KeyHandler.KeyHandler_pressedKeys[82] ? (KeyHandler.KeyHandler_pressedKeys[81] ? 2 : 1) : 0); // L: 3873
+					var13.packetBuffer.method7641(var12 + GrandExchangeOfferOwnWorldComparator.baseY); // L: 3874
+					var13.packetBuffer.writeShort(var11 + SecureRandomCallable.baseX); // L: 3875
+					var13.packetBuffer.writeByte(var4); // L: 3876
+					var13.packetBuffer.writeByte(var5); // L: 3877
+					var13.packetBuffer.writeShort(Client.camAngleY); // L: 3878
+					var13.packetBuffer.writeByte(57); // L: 3879
+					var13.packetBuffer.writeByte(0); // L: 3880
+					var13.packetBuffer.writeByte(0); // L: 3881
+					var13.packetBuffer.writeByte(89); // L: 3882
+					var13.packetBuffer.writeShort(ModelData0.localPlayer.x); // L: 3883
+					var13.packetBuffer.writeShort(ModelData0.localPlayer.y); // L: 3884
+					var13.packetBuffer.writeByte(63); // L: 3885
+					Client.packetWriter.addNode(var13); // L: 3886
+					Client.destinationX = var11; // L: 3887
+					Client.destinationY = var12; // L: 3888
+				}
 			}
 
-			((class126)var3).vmethod3029(var1);
-			this.field1512.addFirst((Node)var3);
 		}
-
-	}
-
-	@ObfuscatedName("b")
-	@ObfuscatedSignature(
-		descriptor = "(Lej;I)V",
-		garbageValue = "1939011884"
-	)
-	public void method2781(ClanSettings var1) {
-		if (this.field1513 == var1.field1562 && this.field1511 == var1.field1563) {
-			for (class126 var2 = (class126)this.field1512.last(); var2 != null; var2 = (class126)this.field1512.previous()) {
-				var2.vmethod3028(var1);
-			}
-
-			++var1.field1563;
-		} else {
-			throw new RuntimeException("");
-		}
-	}
-
-	@ObfuscatedName("c")
-	@ObfuscatedSignature(
-		descriptor = "(I)[Lix;",
-		garbageValue = "828857412"
-	)
-	@Export("ServerPacket_values")
-	public static ServerPacket[] ServerPacket_values() {
-		return new ServerPacket[]{ServerPacket.field3013, ServerPacket.field2931, ServerPacket.field2983, ServerPacket.field2933, ServerPacket.field2934, ServerPacket.field2930, ServerPacket.field2936, ServerPacket.field2937, ServerPacket.field3000, ServerPacket.field3003, ServerPacket.field2940, ServerPacket.field2941, ServerPacket.field2942, ServerPacket.field3006, ServerPacket.field2944, ServerPacket.field2945, ServerPacket.field2946, ServerPacket.field3008, ServerPacket.field2948, ServerPacket.field2949, ServerPacket.field2950, ServerPacket.field2951, ServerPacket.field2961, ServerPacket.field2982, ServerPacket.field2954, ServerPacket.field2955, ServerPacket.field2956, ServerPacket.field2978, ServerPacket.field2958, ServerPacket.field2959, ServerPacket.field3029, ServerPacket.field2938, ServerPacket.field2962, ServerPacket.field2963, ServerPacket.field2964, ServerPacket.field2965, ServerPacket.field3014, ServerPacket.field2986, ServerPacket.field2968, ServerPacket.field3005, ServerPacket.field2997, ServerPacket.field2971, ServerPacket.field2972, ServerPacket.field2932, ServerPacket.field2974, ServerPacket.field2975, ServerPacket.field2976, ServerPacket.field2987, ServerPacket.field2947, ServerPacket.field2979, ServerPacket.field2980, ServerPacket.field2981, ServerPacket.field2957, ServerPacket.field2939, ServerPacket.field2984, ServerPacket.field2985, ServerPacket.field3016, ServerPacket.field3017, ServerPacket.field2943, ServerPacket.field2989, ServerPacket.field2990, ServerPacket.field2991, ServerPacket.field2992, ServerPacket.field2993, ServerPacket.field2994, ServerPacket.field2995, ServerPacket.field2996, ServerPacket.field2952, ServerPacket.field2998, ServerPacket.field2999, ServerPacket.field2953, ServerPacket.field3001, ServerPacket.field3002, ServerPacket.field2960, ServerPacket.field3004, ServerPacket.field2966, ServerPacket.field2988, ServerPacket.field3007, ServerPacket.field2967, ServerPacket.field3009, ServerPacket.field3010, ServerPacket.field3011, ServerPacket.field3012, ServerPacket.field2969, ServerPacket.field2970, ServerPacket.field3015, ServerPacket.field2935, ServerPacket.field3025, ServerPacket.field3018, ServerPacket.field3019, ServerPacket.field3020, ServerPacket.field3021, ServerPacket.field3022, ServerPacket.field3023, ServerPacket.field3024, ServerPacket.field2973, ServerPacket.field3026, ServerPacket.field3027};
-	}
-
-	@ObfuscatedName("jr")
-	@ObfuscatedSignature(
-		descriptor = "(IIIIII)V",
-		garbageValue = "604899148"
-	)
-	@Export("drawScrollBar")
-	static final void drawScrollBar(int var0, int var1, int var2, int var3, int var4) {
-		AbstractWorldMapData.scrollBarSprites[0].drawAt(var0, var1);
-		AbstractWorldMapData.scrollBarSprites[1].drawAt(var0, var3 + var1 - 16);
-		Rasterizer2D.Rasterizer2D_fillRectangle(var0, var1 + 16, 16, var3 - 32, Client.field693);
-		int var5 = var3 * (var3 - 32) / var4;
-		if (var5 < 8) {
-			var5 = 8;
-		}
-
-		int var6 = (var3 - 32 - var5) * var2 / (var4 - var3);
-		Rasterizer2D.Rasterizer2D_fillRectangle(var0, var6 + var1 + 16, 16, var5, Client.field716);
-		Rasterizer2D.Rasterizer2D_drawVerticalLine(var0, var6 + var1 + 16, var5, Client.field544);
-		Rasterizer2D.Rasterizer2D_drawVerticalLine(var0 + 1, var6 + var1 + 16, var5, Client.field544);
-		Rasterizer2D.Rasterizer2D_drawHorizontalLine(var0, var6 + var1 + 16, 16, Client.field544);
-		Rasterizer2D.Rasterizer2D_drawHorizontalLine(var0, var6 + var1 + 17, 16, Client.field544);
-		Rasterizer2D.Rasterizer2D_drawVerticalLine(var0 + 15, var6 + var1 + 16, var5, Client.field509);
-		Rasterizer2D.Rasterizer2D_drawVerticalLine(var0 + 14, var6 + var1 + 17, var5 - 1, Client.field509);
-		Rasterizer2D.Rasterizer2D_drawHorizontalLine(var0, var6 + var5 + var1 + 15, 16, Client.field509);
-		Rasterizer2D.Rasterizer2D_drawHorizontalLine(var0 + 1, var6 + var5 + var1 + 14, 15, Client.field509);
-	}
+	} // L: 3891
 }

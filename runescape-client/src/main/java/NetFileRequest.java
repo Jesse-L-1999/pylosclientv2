@@ -3,68 +3,36 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.rs.ScriptOpcodes;
 
-@ObfuscatedName("kx")
+@ObfuscatedName("li")
 @Implements("NetFileRequest")
 public class NetFileRequest extends DualNode {
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "Lkz;"
+		descriptor = "Lle;"
 	)
 	@Export("archive")
-	Archive archive;
-	@ObfuscatedName("b")
+	public Archive archive;
+	@ObfuscatedName("q")
 	@ObfuscatedGetter(
-		intValue = -341474055
+		intValue = 211628067
 	)
 	@Export("crc")
-	int crc;
-	@ObfuscatedName("p")
+	public int crc;
+	@ObfuscatedName("l")
 	@Export("padding")
-	byte padding;
+	public byte padding;
 
 	NetFileRequest() {
-	}
+	} // L: 10
 
-	@ObfuscatedName("d")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "(ILbn;ZB)I",
-		garbageValue = "-77"
+		descriptor = "(Ljava/lang/CharSequence;B)Z",
+		garbageValue = "112"
 	)
-	static int method5588(int var0, Script var1, boolean var2) {
-		Widget var3 = var2 ? WorldMapArea.scriptDotWidget : Messages.scriptActiveWidget;
-		if (var0 == ScriptOpcodes.CC_GETX) {
-			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.x;
-			return 1;
-		} else if (var0 == ScriptOpcodes.CC_GETY) {
-			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.y;
-			return 1;
-		} else if (var0 == ScriptOpcodes.CC_GETWIDTH) {
-			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.width;
-			return 1;
-		} else if (var0 == ScriptOpcodes.CC_GETHEIGHT) {
-			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.height;
-			return 1;
-		} else if (var0 == ScriptOpcodes.CC_GETHIDE) {
-			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.isHidden ? 1 : 0;
-			return 1;
-		} else if (var0 == ScriptOpcodes.CC_GETLAYER) {
-			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var3.parentId;
-			return 1;
-		} else {
-			return 2;
-		}
-	}
-
-	@ObfuscatedName("fv")
-	@ObfuscatedSignature(
-		descriptor = "(Lkz;Ljava/lang/String;I)V",
-		garbageValue = "-1653414496"
-	)
-	static void method5587(Archive var0, String var1) {
-		ArchiveLoader var2 = new ArchiveLoader(var0, var1);
-		Client.archiveLoaders.add(var2);
-		Client.field753 += var2.groupCount;
+	@Export("isNumber")
+	public static boolean isNumber(CharSequence var0) {
+		return class162.method3207(var0, 10, true); // L: 35
 	}
 }

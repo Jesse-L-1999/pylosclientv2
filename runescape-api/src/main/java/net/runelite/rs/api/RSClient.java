@@ -194,6 +194,10 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	void setDraggedOnWidget(Widget widget);
 
+	@Import("widgetDragDuration")
+	@Override
+	int getDragTime();
+
 	@Import("Widget_interfaceComponents")
 	RSWidget[][] getWidgets();
 
@@ -283,6 +287,9 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	void setOtp(String otp);
 
+	@Import("xPadding")
+	int getLoginScreenXPadding();
+
 	@Import("currentLoginField")
 	@Override
 	int getCurrentLoginField();
@@ -328,6 +335,9 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("menuOptionsCount")
 	@Override
 	void setMenuOptionCount(int menuOptionCount);
+
+	@Import("tempMenuAction")
+	RSMenuAction getTempMenuAction();
 
 	@Import("menuActions")
 	String[] getMenuOptions();
@@ -633,6 +643,18 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	void setMouseIdleTicks(int cycles);
 
+	@Import("MouseHandler_lastPressedX")
+	int getMouseLastPressedX();
+
+	@Import("MouseHandler_lastPressedX")
+	void setMouseLastPressedX(int x);
+
+	@Import("MouseHandler_lastPressedY")
+	int getMouseLastPressedY();
+
+	@Import("MouseHandler_lastPressedY")
+	void setMouseLastPressedY(int y);
+
 	@Import("MouseHandler_lastPressedTimeMillis")
 	@Override
 	long getMouseLastPressedMillis();
@@ -648,6 +670,9 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("KeyHandler_pressedKeys")
 	@Override
 	boolean[] getPressedKeys();
+
+	@Import("isLowDetail")
+	boolean isLowMemory();
 
 	@Import("isLowDetail")
 	void setLowMemory(boolean lowMemory);
@@ -960,6 +985,9 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("Scene_plane")
 	void setScenePlane(int scenePlane);
 
+	@Import("Scene_plane")
+	int getScenePlane();
+
 	@Import("Scene_cameraXTileMin")
 	void setMinTileX(int i);
 
@@ -1101,6 +1129,10 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("selectedSpellFlags")
 	int getSelectedSpellFlags();
 
+	@Override
+	@Import("selectedSpellFlags")
+	void setSelectedSpellFlags(int var0);
+
 	@Import("isSpellSelected")
 	boolean getSpellSelected();
 
@@ -1160,6 +1192,10 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	void setSelectedItemSlot(int index);
 
+	@Import("selectedItemSlot")
+	@Override
+	int getSelectedItemIndex();
+
 	@Import("selectedItemWidget")
 	@Override
 	int getSelectedItemWidget();
@@ -1176,13 +1212,21 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	int getSelectedSpellChildIndex();
 
-	@Import("selectedSpellWidget")
-	@Override
-	void setSelectedSpellWidget(int widgetID);
-
 	@Import("selectedSpellChildIndex")
 	@Override
 	void setSelectedSpellChildIndex(int index);
+
+	@Import("selectedSpellItemId")
+	@Override
+	int getSelectedSpellItemId();
+
+	@Import("selectedSpellItemId")
+	@Override
+	void setSelectedSpellItemId(int itemId);
+
+	@Import("selectedSpellWidget")
+	@Override
+	void setSelectedSpellWidget(int widgetID);
 
 	@Import("Sprite_drawScaled")
 	@Override
@@ -1196,6 +1240,9 @@ public interface RSClient extends RSGameEngine, Client
 
 	@Import("VarpDefinition_get")
 	RSVarpDefinition getVarpDefinition(int id);
+
+	@Construct
+	RSFloorOverlayDefinition newFloorOverlayDefinition();
 
 	@Construct
 	RSTileItem newTileItem();
@@ -1309,11 +1356,21 @@ public interface RSClient extends RSGameEngine, Client
 	int isItemSelected();
 
 	@Override
+	@Import("isItemSelected")
+	int getSelectedItem();
+
+	@Override
 	@Import("selectedItemName")
 	String getSelectedItemName();
 
 	@Import("meslayerContinueWidget")
 	Widget getMessageContinueWidget();
+
+	@Import("playingJingle")
+	boolean isPlayingJingle();
+
+	@Import("musicTrackGroupId")
+	int getMusicCurrentTrackId();
 
 	@Import("musicPlayerStatus")
 	void setMusicPlayerStatus(int var0);
@@ -1492,6 +1549,9 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("FloorUnderlayDefinition_cached")
 	RSEvictingDualNodeHashTable getFloorUnderlayDefinitionCache();
 
+	@Import("FloorOverlayDefinition_archive")
+	RSAbstractArchive getFloorOverlayDefinitionArchive();
+
 	@Import("FloorOverlayDefinition_cached")
 	RSEvictingDualNodeHashTable getFloorOverlayDefinitionCache();
 
@@ -1524,6 +1584,9 @@ public interface RSClient extends RSGameEngine, Client
 
 	@Import("ObjectDefinition_cached")
 	RSEvictingDualNodeHashTable getObjectDefinitionCache();
+
+	@Import("ObjectDefinition_cached")
+	RSEvictingDualNodeHashTable getObjectCompositionCache();
 
 	@Import("ObjectDefinition_cachedModelData")
 	RSEvictingDualNodeHashTable getObjectDefinitionModelDataCache();

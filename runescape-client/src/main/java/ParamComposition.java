@@ -3,191 +3,142 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.rs.ScriptOpcodes;
 
-@ObfuscatedName("fr")
+@ObfuscatedName("gv")
 @Implements("ParamComposition")
 public class ParamComposition extends DualNode {
-	@ObfuscatedName("ur")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "Lmy;"
-	)
-	@Export("masterDisk")
-	static ArchiveDisk masterDisk;
-	@ObfuscatedName("c")
-	@ObfuscatedSignature(
-		descriptor = "Lku;"
+		descriptor = "Llp;"
 	)
 	@Export("ParamDefinition_archive")
 	static AbstractArchive ParamDefinition_archive;
-	@ObfuscatedName("b")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "Liq;"
+		descriptor = "Lir;"
 	)
 	@Export("ParamDefinition_cached")
 	public static EvictingDualNodeHashTable ParamDefinition_cached;
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@Export("type")
 	char type;
-	@ObfuscatedName("m")
+	@ObfuscatedName("k")
 	@ObfuscatedGetter(
-		intValue = -871462947
+		intValue = 498498589
 	)
 	@Export("defaultInt")
 	public int defaultInt;
-	@ObfuscatedName("t")
+	@ObfuscatedName("a")
 	@Export("defaultStr")
 	public String defaultStr;
-	@ObfuscatedName("s")
+	@ObfuscatedName("m")
 	@Export("autoDisable")
 	boolean autoDisable;
 
 	static {
-		ParamDefinition_cached = new EvictingDualNodeHashTable(64);
+		ParamDefinition_cached = new EvictingDualNodeHashTable(64); // L: 12
 	}
 
 	ParamComposition() {
-		this.autoDisable = true;
-	}
+		this.autoDisable = true; // L: 16
+	} // L: 18
 
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
-		descriptor = "(I)V",
-		garbageValue = "630650762"
+		descriptor = "(B)V",
+		garbageValue = "20"
 	)
 	@Export("postDecode")
 	void postDecode() {
-	}
+	} // L: 35
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("k")
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;B)V",
-		garbageValue = "-46"
+		descriptor = "(Lpx;I)V",
+		garbageValue = "892504749"
 	)
 	@Export("decode")
 	void decode(Buffer var1) {
 		while (true) {
-			int var2 = var1.readUnsignedByte();
-			if (var2 == 0) {
-				return;
+			int var2 = var1.readUnsignedByte(); // L: 39
+			if (var2 == 0) { // L: 40
+				return; // L: 43
 			}
 
-			this.decodeNext(var1, var2);
+			this.decodeNext(var1, var2); // L: 41
 		}
 	}
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("a")
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;II)V",
-		garbageValue = "-1961413058"
+		descriptor = "(Lpx;IS)V",
+		garbageValue = "-13"
 	)
 	@Export("decodeNext")
 	void decodeNext(Buffer var1, int var2) {
-		if (var2 == 1) {
-			this.type = class279.method5406(var1.readByte());
-		} else if (var2 == 2) {
+		if (var2 == 1) { // L: 46
+			byte var4 = var1.readByte(); // L: 48
+			int var5 = var4 & 255; // L: 50
+			if (var5 == 0) { // L: 51
+				throw new IllegalArgumentException("" + Integer.toString(var5, 16));
+			}
+
+			if (var5 >= 128 && var5 < 160) { // L: 52
+				char var6 = class341.cp1252AsciiExtension[var5 - 128]; // L: 53
+				if (var6 == 0) { // L: 54
+					var6 = '?';
+				}
+
+				var5 = var6; // L: 55
+			}
+
+			char var3 = (char)var5; // L: 57
+			this.type = var3; // L: 59
+		} else if (var2 == 2) { // L: 61
 			this.defaultInt = var1.readInt();
-		} else if (var2 == 4) {
+		} else if (var2 == 4) { // L: 62
 			this.autoDisable = false;
-		} else if (var2 == 5) {
+		} else if (var2 == 5) { // L: 63
 			this.defaultStr = var1.readStringCp1252NullTerminated();
 		}
 
-	}
+	} // L: 65
 
-	@ObfuscatedName("s")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
 		descriptor = "(I)Z",
-		garbageValue = "404236453"
+		garbageValue = "-1184003682"
 	)
 	@Export("isString")
 	public boolean isString() {
-		return this.type == 's';
+		return this.type == 's'; // L: 68
 	}
 
-	@ObfuscatedName("x")
+	@ObfuscatedName("e")
 	@ObfuscatedSignature(
-		descriptor = "(ILbn;ZI)I",
-		garbageValue = "-893226045"
+		descriptor = "(III)I",
+		garbageValue = "-1438279365"
 	)
-	static int method3397(int var0, Script var1, boolean var2) {
-		if (var0 == ScriptOpcodes.SOUND_SYNTH) {
-			IsaacCipher.Interpreter_intStackSize -= 3;
-			LoginScreenAnimation.queueSoundEffect(Interpreter.Interpreter_intStack[IsaacCipher.Interpreter_intStackSize], Interpreter.Interpreter_intStack[IsaacCipher.Interpreter_intStackSize + 1], Interpreter.Interpreter_intStack[IsaacCipher.Interpreter_intStackSize + 2]);
-			return 1;
-		} else if (var0 == ScriptOpcodes.SOUND_SONG) {
-			class18.playSong(Interpreter.Interpreter_intStack[--IsaacCipher.Interpreter_intStackSize]);
-			return 1;
-		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) {
-			IsaacCipher.Interpreter_intStackSize -= 2;
-			class315.method5822(Interpreter.Interpreter_intStack[IsaacCipher.Interpreter_intStackSize], Interpreter.Interpreter_intStack[IsaacCipher.Interpreter_intStackSize + 1]);
-			return 1;
-		} else {
-			int var3;
-			int var4;
-			if (var0 != 3209 && var0 != 3181 && var0 != 3203 && var0 != 3205 && var0 != 3207) {
-				if (var0 != 3210 && var0 != 3182 && var0 != 3204 && var0 != 3206 && var0 != 3208) {
-					return var0 == 3211 ? 1 : 2;
-				} else {
-					var3 = 0;
-					var4 = 0;
-					if (var0 == 3210) {
-						var3 = Interpreter.Interpreter_intStack[--IsaacCipher.Interpreter_intStackSize];
-					} else if (var0 == 3182) {
-						var3 = 6;
-					} else if (var0 == 3204) {
-						var3 = 7;
-					} else if (var0 == 3206) {
-						var3 = 8;
-					} else if (var0 == 3208) {
-						var3 = 9;
-					}
-
-					if (var3 == 6) {
-						float var5 = 200.0F * ((float)SecureRandomFuture.clientPreferences.brightness - 0.5F);
-						var4 = 100 - Math.round(var5);
-					} else if (var3 == 7) {
-						var4 = Math.round((float)SecureRandomFuture.clientPreferences.musicVolume / 2.55F);
-					} else if (var3 == 8) {
-						var4 = Math.round((float)SecureRandomFuture.clientPreferences.soundEffectsVolume / 1.27F);
-					} else if (var3 == 9) {
-						var4 = Math.round((float)SecureRandomFuture.clientPreferences.areaSoundEffectsVolume / 1.27F);
-					}
-
-					Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = var4;
-					return 1;
-				}
-			} else {
-				var3 = 0;
-				var4 = Interpreter.Interpreter_intStack[--IsaacCipher.Interpreter_intStackSize];
-				if (var0 == 3209) {
-					var3 = Interpreter.Interpreter_intStack[--IsaacCipher.Interpreter_intStackSize];
-				} else if (var0 == 3181) {
-					var3 = 6;
-				} else if (var0 == 3203) {
-					var3 = 7;
-				} else if (var0 == 3205) {
-					var3 = 8;
-				} else if (var0 == 3207) {
-					var3 = 9;
-				}
-
-				if (var3 == 6) {
-					var4 = 100 - Math.min(Math.max(var4, 0), 100);
-					InterfaceParent.method2142((double)(0.5F + (float)var4 / 200.0F));
-				} else if (var3 == 7) {
-					var4 = Math.min(Math.max(var4, 0), 100);
-					Varcs.method2426(Math.round((float)var4 * 2.55F));
-				} else if (var3 == 8) {
-					var4 = Math.min(Math.max(var4, 0), 100);
-					class20.updateSoundEffectVolume(Math.round((float)var4 * 1.27F));
-				} else if (var3 == 9) {
-					var4 = Math.min(Math.max(var4, 0), 100);
-					Players.method2383(Math.round(1.27F * (float)var4));
-				}
-
-				return 1;
+	static final int method3505(int var0, int var1) {
+		if (var0 == -2) { // L: 977
+			return 12345678;
+		} else if (var0 == -1) { // L: 978
+			if (var1 < 2) { // L: 979
+				var1 = 2;
+			} else if (var1 > 126) { // L: 980
+				var1 = 126;
 			}
+
+			return var1; // L: 981
+		} else {
+			var1 = (var0 & 127) * var1 / 128; // L: 983
+			if (var1 < 2) { // L: 984
+				var1 = 2;
+			} else if (var1 > 126) { // L: 985
+				var1 = 126;
+			}
+
+			return (var0 & 65408) + var1; // L: 986
 		}
 	}
 }
