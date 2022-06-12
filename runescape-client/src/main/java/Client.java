@@ -5342,6 +5342,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 				}
 
 				if (ServerPacket.field2961 == var1.serverPacket) {
+					System.out.println("DOSHIT");
 					for (var17 = 0; var17 < class433.VarpDefinition_fileCount; ++var17) {
 						VarpDefinition var64 = SecureRandomCallable.VarpDefinition_get(var17);
 						if (var64 != null) {
