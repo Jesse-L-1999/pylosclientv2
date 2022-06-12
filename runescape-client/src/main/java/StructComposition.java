@@ -1,20 +1,33 @@
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
+import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("fp")
+@ObfuscatedName("gp")
 @Implements("StructComposition")
 public class StructComposition extends DualNode {
-	@ObfuscatedName("b")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "Liq;"
+		descriptor = "Llp;"
+	)
+	@Export("StructDefinition_archive")
+	static AbstractArchive StructDefinition_archive;
+	@ObfuscatedName("q")
+	@ObfuscatedSignature(
+		descriptor = "Lir;"
 	)
 	@Export("StructDefinition_cached")
 	static EvictingDualNodeHashTable StructDefinition_cached;
 	@ObfuscatedName("p")
+	@ObfuscatedGetter(
+		intValue = -232799299
+	)
+	@Export("musicTrackGroupId")
+	public static int musicTrackGroupId;
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
-		descriptor = "Loz;"
+		descriptor = "Lpt;"
 	)
 	@Export("params")
 	IterableNodeHashTable params;
@@ -26,128 +39,111 @@ public class StructComposition extends DualNode {
 	StructComposition() {
 	}
 
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
 		descriptor = "(I)V",
-		garbageValue = "-1697114474"
+		garbageValue = "-2016417159"
 	)
 	@Export("postDecode")
 	void postDecode() {
-	}
+	} // L: 33
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("k")
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;I)V",
-		garbageValue = "260928351"
+		descriptor = "(Lpx;I)V",
+		garbageValue = "-1920119994"
 	)
 	@Export("decode")
 	void decode(Buffer var1) {
 		while (true) {
-			int var2 = var1.readUnsignedByte();
-			if (var2 == 0) {
-				return;
+			int var2 = var1.readUnsignedByte(); // L: 37
+			if (var2 == 0) { // L: 38
+				return; // L: 41
 			}
 
-			this.decodeNext(var1, var2);
+			this.decodeNext(var1, var2); // L: 39
 		}
 	}
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("a")
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;IB)V",
-		garbageValue = "76"
+		descriptor = "(Lpx;II)V",
+		garbageValue = "-1132236208"
 	)
 	@Export("decodeNext")
 	void decodeNext(Buffer var1, int var2) {
 		if (var2 == 249) {
-			this.params = Canvas.readStringIntParameters(var1, this.params);
+			this.params = JagexCache.readStringIntParameters(var1, this.params); // L: 44
 		}
 
-	}
+	} // L: 46
 
-	@ObfuscatedName("s")
+	@ObfuscatedName("m")
 	@ObfuscatedSignature(
 		descriptor = "(III)I",
-		garbageValue = "-1808649424"
+		garbageValue = "668273905"
 	)
 	@Export("getIntParam")
 	public int getIntParam(int var1, int var2) {
-		return class12.method158(this.params, var1, var2);
-	}
-
-	@ObfuscatedName("j")
-	@ObfuscatedSignature(
-		descriptor = "(ILjava/lang/String;I)Ljava/lang/String;",
-		garbageValue = "-1725182955"
-	)
-	@Export("getStringParam")
-	public String getStringParam(int var1, String var2) {
-		return Skeleton.method3948(this.params, var1, var2);
+		return class154.method3061(this.params, var1, var2); // L: 49
 	}
 
 	@ObfuscatedName("p")
 	@ObfuscatedSignature(
-		descriptor = "(B)V",
-		garbageValue = "-64"
+		descriptor = "(ILjava/lang/String;I)Ljava/lang/String;",
+		garbageValue = "-1640856664"
 	)
-	public static void method3444() {
-		class260.midiPcmStream.clear();
-		class260.musicPlayerStatus = 1;
-		class124.musicTrackArchive = null;
+	@Export("getStringParam")
+	public String getStringParam(int var1, String var2) {
+		return AttackOption.method2393(this.params, var1, var2); // L: 53
 	}
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "(IB)Z",
-		garbageValue = "2"
+		descriptor = "([Ljava/lang/CharSequence;III)Ljava/lang/String;",
+		garbageValue = "1341755485"
 	)
-	public static boolean method3424(int var0) {
-		return var0 >= 0 && var0 < 112 ? KeyHandler.field132[var0] : false;
-	}
+	public static String method3524(CharSequence[] var0, int var1, int var2) {
+		if (var2 == 0) { // L: 12
+			return "";
+		} else if (var2 == 1) { // L: 13
+			CharSequence var10 = var0[var1]; // L: 14
+			return var10 == null ? "null" : var10.toString(); // L: 15 16
+		} else {
+			int var3 = var2 + var1; // L: 18
+			int var4 = 0; // L: 19
 
-	@ObfuscatedName("lv")
-	@ObfuscatedSignature(
-		descriptor = "(Ljava/lang/String;ZI)V",
-		garbageValue = "488868822"
-	)
-	@Export("findItemDefinitions")
-	static void findItemDefinitions(String var0, boolean var1) {
-		var0 = var0.toLowerCase();
-		short[] var2 = new short[16];
-		int var3 = 0;
-
-		for (int var4 = 0; var4 < WorldMapLabelSize.ItemDefinition_fileCount; ++var4) {
-			ItemComposition var9 = UserComparator6.ItemDefinition_get(var4);
-			if ((!var1 || var9.isTradable) && var9.noteTemplate == -1 && var9.name.toLowerCase().indexOf(var0) != -1) {
-				if (var3 >= 250) {
-					GraphicsDefaults.foundItemIdCount = -1;
-					class113.foundItemIds = null;
-					return;
+			for (int var5 = var1; var5 < var3; ++var5) { // L: 20
+				CharSequence var9 = var0[var5]; // L: 21
+				if (var9 == null) { // L: 22
+					var4 += 4;
+				} else {
+					var4 += var9.length(); // L: 23
 				}
-
-				if (var3 >= var2.length) {
-					short[] var6 = new short[var2.length * 2];
-
-					for (int var7 = 0; var7 < var3; ++var7) {
-						var6[var7] = var2[var7];
-					}
-
-					var2 = var6;
-				}
-
-				var2[var3++] = (short)var4;
 			}
+
+			StringBuilder var8 = new StringBuilder(var4); // L: 25
+
+			for (int var6 = var1; var6 < var3; ++var6) { // L: 26
+				CharSequence var7 = var0[var6]; // L: 27
+				if (var7 == null) { // L: 28
+					var8.append("null");
+				} else {
+					var8.append(var7); // L: 29
+				}
+			}
+
+			return var8.toString(); // L: 31
 		}
+	}
 
-		class113.foundItemIds = var2;
-		class336.foundItemIndex = 0;
-		GraphicsDefaults.foundItemIdCount = var3;
-		String[] var8 = new String[GraphicsDefaults.foundItemIdCount];
-
-		for (int var5 = 0; var5 < GraphicsDefaults.foundItemIdCount; ++var5) {
-			var8[var5] = UserComparator6.ItemDefinition_get(var2[var5]).name;
-		}
-
-		KeyHandler.method390(var8, class113.foundItemIds);
+	@ObfuscatedName("l")
+	@ObfuscatedSignature(
+		descriptor = "(Llp;IIB)Lqr;",
+		garbageValue = "73"
+	)
+	@Export("SpriteBuffer_getSprite")
+	public static SpritePixels SpriteBuffer_getSprite(AbstractArchive var0, int var1, int var2) {
+		return !User.method6514(var0, var1, var2) ? null : ByteArrayPool.method6365(); // L: 64 65
 	}
 }

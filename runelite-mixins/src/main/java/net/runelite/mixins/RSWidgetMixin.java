@@ -24,6 +24,10 @@
  */
 package net.runelite.mixins;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import net.runelite.api.HashTable;
 import net.runelite.api.Node;
 import net.runelite.api.Point;
@@ -37,7 +41,10 @@ import net.runelite.api.mixins.Mixin;
 import net.runelite.api.mixins.Replace;
 import net.runelite.api.mixins.Shadow;
 import net.runelite.api.widgets.Widget;
+import static net.runelite.api.widgets.WidgetInfo.TO_CHILD;
+import static net.runelite.api.widgets.WidgetInfo.TO_GROUP;
 import net.runelite.api.widgets.WidgetItem;
+import net.runelite.api.widgets.WidgetPositionMode;
 import net.runelite.rs.api.RSClient;
 import net.runelite.rs.api.RSModel;
 import net.runelite.rs.api.RSNode;
@@ -45,12 +52,6 @@ import net.runelite.rs.api.RSNodeHashTable;
 import net.runelite.rs.api.RSPlayerComposition;
 import net.runelite.rs.api.RSSequenceDefinition;
 import net.runelite.rs.api.RSWidget;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import static net.runelite.api.widgets.WidgetInfo.TO_CHILD;
-import static net.runelite.api.widgets.WidgetInfo.TO_GROUP;
 
 @Mixin(RSWidget.class)
 public abstract class RSWidgetMixin implements RSWidget
@@ -66,6 +67,10 @@ public abstract class RSWidgetMixin implements RSWidget
 	private int rl$x;
 	@Inject
 	private int rl$y;
+	@Inject
+	private short forcedX;
+	@Inject
+	private short forcedY;
 
 	@Inject
 	RSWidgetMixin()
@@ -73,6 +78,8 @@ public abstract class RSWidgetMixin implements RSWidget
 		rl$parentId = -1;
 		rl$x = -1;
 		rl$y = -1;
+		forcedX = -1;
+		forcedY = -1;
 	}
 
 	@Inject
@@ -240,9 +247,11 @@ public abstract class RSWidgetMixin implements RSWidget
 
 	@Inject
 	@Override
-	public void setName(String name)
+	public Widget setName(String name)
 	{
 		setRSName(name.replace(' ', '\u00A0'));
+
+		return this;
 	}
 
 	@Inject
@@ -452,6 +461,50 @@ public abstract class RSWidgetMixin implements RSWidget
 		return bounds != null && bounds.contains(new java.awt.Point(point.getX(), point.getY()));
 	}
 
+	@Inject
+	@Override
+	public Widget setPos(int x, int y)
+	{
+		setOriginalX(x);
+		setOriginalY(y);
+
+		return this;
+	}
+
+	@Inject
+	@Override
+	public Widget setPos(int x, int y, int xMode, int yMode)
+	{
+		setOriginalX(x);
+		setOriginalY(y);
+		setXPositionMode(xMode);
+		setYPositionMode(yMode);
+
+		return this;
+	}
+
+	@Inject
+	@Override
+	public Widget setSize(int width, int height)
+	{
+		setOriginalWidth(width);
+		setOriginalHeight(height);
+
+		return this;
+	}
+
+	@Inject
+	@Override
+	public Widget setSize(int width, int height, int widthMode, int heightMode)
+	{
+		setOriginalWidth(width);
+		setOriginalHeight(height);
+		setWidthMode(widthMode);
+		setHeightMode(heightMode);
+
+		return this;
+	}
+
 	@FieldHook("y")
 	@Inject
 	public void onPositionChanged(int idx)
@@ -595,5 +648,100 @@ public abstract class RSWidgetMixin implements RSWidget
 		}
 
 		return new Point(dragOffsetX, dragOffsetY);
+	}
+
+	@Inject
+	public void setForcedX()
+	{
+		if (this.forcedX > -1)
+		{
+			this.setRelativeX(this.forcedX);
+		}
+	}
+
+	@Inject
+	public void setForcedY()
+	{
+		if (this.forcedY > -1)
+		{
+			this.setRelativeY(this.forcedY);
+		}
+	}
+
+	@Inject
+	@Override
+	public void setForcedPosition(int x, int y)
+	{
+		this.forcedX = (short) x;
+		this.forcedY = (short) y;
+		this.setRelativeX(x);
+		this.setRelativeY(y);
+	}
+
+	@Copy("alignWidgetPosition")
+	@Replace("alignWidgetPosition")
+	public static void alignWidgetPosition(Widget widget, int x, int y)
+	{
+		if (widget.getXPositionMode() == WidgetPositionMode.ABSOLUTE_LEFT)
+		{
+			widget.setRelativeX(widget.getOriginalX());
+			widget.setForcedX();
+		}
+		else if (widget.getXPositionMode() == WidgetPositionMode.ABSOLUTE_CENTER)
+		{
+			widget.setRelativeX(widget.getOriginalX() + (x - widget.getWidth()) / 2);
+			widget.setForcedX();
+		}
+		else if (widget.getXPositionMode() == WidgetPositionMode.ABSOLUTE_RIGHT)
+		{
+			widget.setRelativeX(x - widget.getWidth() - widget.getOriginalX());
+			widget.setForcedX();
+		}
+		else if (widget.getXPositionMode() == WidgetPositionMode.LEFT_16384THS)
+		{
+			widget.setRelativeX(widget.getOriginalX() * x >> 14);
+			widget.setForcedX();
+		}
+		else if (widget.getXPositionMode() == WidgetPositionMode.CENTER_16384THS)
+		{
+			widget.setRelativeX((widget.getOriginalX() * x >> 14) + (x - widget.getWidth()) / 2);
+			widget.setForcedX();
+		}
+		else
+		{
+			widget.setRelativeX(x - widget.getWidth() - (widget.getOriginalX() * x >> 14));
+			widget.setForcedX();
+		}
+
+		if (widget.getYPositionMode() == WidgetPositionMode.ABSOLUTE_TOP)
+		{
+			widget.setRelativeY(widget.getOriginalY());
+			widget.setForcedY();
+		}
+		else if (widget.getYPositionMode() == WidgetPositionMode.ABSOLUTE_CENTER)
+		{
+			widget.setRelativeY((y - widget.getHeight()) / 2 + widget.getOriginalY());
+			widget.setForcedY();
+		}
+		else if (widget.getYPositionMode() == WidgetPositionMode.ABSOLUTE_BOTTOM)
+		{
+			widget.setRelativeY(y - widget.getHeight() - widget.getOriginalY());
+			widget.setForcedY();
+		}
+		else if (widget.getYPositionMode() == WidgetPositionMode.TOP_16384THS)
+		{
+			widget.setRelativeY(y * widget.getOriginalY() >> 14);
+			widget.setForcedY();
+		}
+		else if (widget.getYPositionMode() == WidgetPositionMode.CENTER_16384THS)
+		{
+			widget.setRelativeY((y - widget.getHeight()) / 2 + (y * widget.getOriginalY() >> 14));
+			widget.setForcedY();
+		}
+		else
+		{
+			widget.setRelativeY(y - widget.getHeight() - (y * widget.getOriginalY() >> 14));
+			widget.setForcedY();
+		}
 	}
 }

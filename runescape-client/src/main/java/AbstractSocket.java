@@ -4,63 +4,56 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("md")
+@ObfuscatedName("nf")
 @Implements("AbstractSocket")
 public abstract class AbstractSocket {
-	@ObfuscatedName("pq")
-	@ObfuscatedSignature(
-		descriptor = "Loo;"
-	)
-	@Export("HitSplatDefinition_cachedSprites")
-	static class404 HitSplatDefinition_cachedSprites;
-
 	protected AbstractSocket() {
-	}
+	} // L: 7
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
 		descriptor = "(I)V",
-		garbageValue = "-2099219864"
+		garbageValue = "731891927"
 	)
 	@Export("close")
 	public abstract void close();
 
-	@ObfuscatedName("b")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
 		descriptor = "(B)I",
-		garbageValue = "-44"
+		garbageValue = "18"
 	)
 	@Export("readUnsignedByte")
 	public abstract int readUnsignedByte() throws IOException;
 
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
 		descriptor = "(I)I",
-		garbageValue = "-1579083707"
+		garbageValue = "-1429957580"
 	)
 	@Export("available")
 	public abstract int available() throws IOException;
 
-	@ObfuscatedName("m")
+	@ObfuscatedName("k")
 	@ObfuscatedSignature(
 		descriptor = "(II)Z",
-		garbageValue = "1654551476"
+		garbageValue = "-15219997"
 	)
 	@Export("isAvailable")
 	public abstract boolean isAvailable(int var1) throws IOException;
 
-	@ObfuscatedName("t")
+	@ObfuscatedName("a")
 	@ObfuscatedSignature(
-		descriptor = "([BIIS)I",
-		garbageValue = "909"
+		descriptor = "([BIII)I",
+		garbageValue = "-642682113"
 	)
 	@Export("read")
 	public abstract int read(byte[] var1, int var2, int var3) throws IOException;
 
-	@ObfuscatedName("j")
+	@ObfuscatedName("p")
 	@ObfuscatedSignature(
 		descriptor = "([BIII)V",
-		garbageValue = "-1320460000"
+		garbageValue = "257086671"
 	)
 	@Export("write")
 	public abstract void write(byte[] var1, int var2, int var3) throws IOException;

@@ -33,6 +33,7 @@ dependencies {
 
     compileOnly(group = "org.projectlombok", name = "lombok", version = ProjectVersions.lombokVersion)
 
+    implementation(group = "org.apache.commons", name = "commons-text", version = "1.9")
     implementation(group = "com.google.code.gson", name = "gson", version = "2.8.5")
     implementation(group = "com.google.guava", name = "guava", version = "30.1.1-jre")
     implementation(group = "com.github.petitparser", name = "java-petitparser", version = "2.3.1")
@@ -48,7 +49,7 @@ tasks {
         group = "openosrs"
 
         classpath = project.sourceSets.main.get().runtimeClasspath
-        main = "net.runelite.data.App"
+        mainClass.set("net.runelite.data.App")
         args(listOf("npcStats", rootProject.file("./runelite-client/src/main/resources/").absolutePath))
     }
 
@@ -56,7 +57,7 @@ tasks {
         group = "openosrs"
 
         classpath = project.sourceSets.main.get().runtimeClasspath
-        main = "net.runelite.data.App"
+        mainClass.set("net.runelite.data.App")
         args(listOf("itemStats", rootProject.file("./runelite-client/src/main/resources/").absolutePath))
     }
 
@@ -64,7 +65,7 @@ tasks {
         group = "openosrs"
 
         classpath = project.sourceSets.main.get().runtimeClasspath
-        main = "net.runelite.data.App"
+        mainClass.set("net.runelite.data.App")
         args(listOf("itemLimits", rootProject.file("./runelite-client/src/main/resources/").absolutePath))
     }
 }

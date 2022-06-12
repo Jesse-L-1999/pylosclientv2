@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 plugins {
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
     java
 }
 
@@ -63,11 +63,10 @@ dependencies {
         exclude(group = "org.codehaus.mojo", module = "animal-sniffer-annotations")
     }
     implementation(group = "com.google.inject", name = "guice", version = "5.0.1")
-    implementation(group = "com.h2database", name = "h2", version = "1.4.200")
     implementation(group = "com.jakewharton.rxrelay3", name = "rxrelay", version = "3.0.1")
     implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.9.1")
     implementation(group = "io.reactivex.rxjava3", name = "rxjava", version = "3.1.2")
-    implementation(group = "org.jgroups", name = "jgroups", version = "5.1.9.Final")
+    implementation(group = "org.jgroups", name = "jgroups", version = "5.2.2.Final")
     implementation(group = "net.java.dev.jna", name = "jna", version = "5.9.0")
     implementation(group = "net.java.dev.jna", name = "jna-platform", version = "5.9.0")
     implementation(group = "net.runelite", name = "discord", version = "1.4")
@@ -85,20 +84,21 @@ dependencies {
     }
     implementation(group = "org.pf4j", name = "pf4j-update", version = "2.3.0")
     // implementation(group = "com.google.archivepatcher", name = "archive-patch-applier", version= "1.0.4")
-    implementation(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20200429")
-    implementation(group = "net.runelite.jogl", name = "jogl-all", version = "2.4.0-rc-20200429")
+    implementation(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20220318")
+    implementation(group = "net.runelite.jogl", name = "jogl-rl", version = "2.4.0-rc-20220318")
+    implementation(group = "net.runelite.jogl", name = "jogl-gldesktop-dbg", version = "2.4.0-rc-20220318")
     implementation(group = "net.runelite.jocl", name = "jocl", version = "1.0")
 
     runtimeOnly(project(":runescape-api"))
     runtimeOnly(group = "net.runelite.pushingpixels", name = "trident", version = "1.5.00")
-    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20200429", classifier = "natives-linux-amd64")
-    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20200429", classifier = "natives-windows-amd64")
-    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20200429", classifier = "natives-windows-i586")
-    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt-natives-macosx", version = "2.4.0-rc-20210117")
-    runtimeOnly(group = "net.runelite.jogl", name = "jogl-all", version = "2.4.0-rc-20200429", classifier = "natives-linux-amd64")
-    runtimeOnly(group = "net.runelite.jogl", name = "jogl-all", version = "2.4.0-rc-20200429", classifier = "natives-windows-amd64")
-    runtimeOnly(group = "net.runelite.jogl", name = "jogl-all", version = "2.4.0-rc-20200429", classifier = "natives-windows-i586")
-    runtimeOnly(group = "net.runelite.jogl", name = "jogl-all-natives-macosx", version = "2.4.0-rc-20210117")
+    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20220318", classifier = "natives-linux-amd64")
+    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20220318", classifier = "natives-windows-amd64")
+    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20220318", classifier = "natives-windows-i586")
+    runtimeOnly(group = "net.runelite.gluegen", name = "gluegen-rt", version = "2.4.0-rc-20220318", classifier = "natives-macosx-universal")
+    runtimeOnly(group = "net.runelite.jogl", name = "jogl-rl", version = "2.4.0-rc-20220318", classifier = "natives-linux-amd64")
+    runtimeOnly(group = "net.runelite.jogl", name = "jogl-rl", version = "2.4.0-rc-20220318", classifier = "natives-windows-amd64")
+    runtimeOnly(group = "net.runelite.jogl", name = "jogl-rl", version = "2.4.0-rc-20220318", classifier = "natives-windows-i586")
+    runtimeOnly(group = "net.runelite.jogl", name = "jogl-rl", version = "2.4.0-rc-20220318", classifier = "natives-macosx-universal")
     runtimeOnly(group = "net.runelite.jocl", name = "jocl", version = "1.0", classifier = "macos-x64")
     runtimeOnly(group = "net.runelite.jocl", name = "jocl", version = "1.0", classifier = "macos-arm64")
 
@@ -137,10 +137,6 @@ tasks {
     }
 
     processResources {
-        finalizedBy("filterResources")
-    }
-
-    register<Copy>("filterResources") {
         val tokens = mapOf(
                 "project.version" to ProjectVersions.rlVersion,
                 "rs.version" to ProjectVersions.rsversion.toString(),
@@ -151,12 +147,10 @@ tasks {
 
         inputs.properties(tokens)
 
-        from("src/main/resources/")
-        include("**/*.properties")
-        into("${buildDir}/resources/main")
-
-        filter(ReplaceTokens::class, "tokens" to tokens)
-        filteringCharset = "UTF-8"
+        filesMatching("**/*.properties") {
+            filter(ReplaceTokens::class, "tokens" to tokens)
+            filteringCharset = "UTF-8"
+        }
     }
 
     register<Copy>("packInjectedClient") {
@@ -196,7 +190,7 @@ tasks {
     register<JavaExec>("RuneLite.main()") {
         group = "openosrs"
 
-        classpath = sourceSets["main"].runtimeClasspath
+        classpath = project.sourceSets.main.get().runtimeClasspath
         enableAssertions = true
         mainClass.set("net.runelite.client.RuneLite")
     }

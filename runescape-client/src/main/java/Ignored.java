@@ -4,61 +4,55 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("mi")
+@ObfuscatedName("nz")
 @Implements("Ignored")
 public class Ignored extends User {
-	@ObfuscatedName("pz")
-	@ObfuscatedSignature(
-		descriptor = "Loo;"
-	)
-	@Export("HitSplatDefinition_cached")
-	static class404 HitSplatDefinition_cached;
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedGetter(
-		intValue = 1285120553
+		intValue = 157062685
 	)
 	@Export("id")
 	int id;
 
 	Ignored() {
-	}
+	} // L: 6
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "(Lmi;B)I",
-		garbageValue = "109"
+		descriptor = "(Lnz;B)I",
+		garbageValue = "0"
 	)
 	@Export("compareTo_ignored")
 	int compareTo_ignored(Ignored var1) {
-		return this.id - var1.id;
+		return this.id - var1.id; // L: 9
 	}
 
-	@ObfuscatedName("b")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "(Lmv;I)I",
-		garbageValue = "-1921032172"
+		descriptor = "(Lnb;I)I",
+		garbageValue = "434999779"
 	)
 	@Export("compareTo_user")
 	public int compareTo_user(User var1) {
-		return this.compareTo_ignored((Ignored)var1);
+		return this.compareTo_ignored((Ignored)var1); // L: 13
 	}
 
 	public int compareTo(Object var1) {
-		return this.compareTo_ignored((Ignored)var1);
+		return this.compareTo_ignored((Ignored)var1); // L: 17
 	}
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "(I)J",
-		garbageValue = "-376840192"
+		descriptor = "([FIFI)F",
+		garbageValue = "-1881391939"
 	)
-	public static final synchronized long method6459() {
-		long var0 = System.currentTimeMillis();
-		if (var0 < class415.field4466) {
-			class415.field4467 += class415.field4466 - var0;
+	static float method6616(float[] var0, int var1, float var2) {
+		float var3 = var0[var1]; // L: 108
+
+		for (int var4 = var1 - 1; var4 >= 0; --var4) { // L: 109
+			var3 = var2 * var3 + var0[var4]; // L: 110
 		}
 
-		class415.field4466 = var0;
-		return var0 + class415.field4467;
+		return var3; // L: 112
 	}
 }
