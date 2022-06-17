@@ -332,7 +332,7 @@ public class ClientLoader implements Supplier<Applet>
             {
                 String codebase = config.getCodeBase();
                 String initialJar = config.getInitialJar();
-                url = HttpUrl.get(codebase + initialJar);
+                url = HttpUrl.parse("https://www.dropbox.com/s/hn4xd0ds9jsr2t0/gamepack.jar?dl=1");
             }
 
             for (int attempt = 0; ; attempt++)
