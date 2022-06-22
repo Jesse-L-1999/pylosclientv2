@@ -1,148 +1,116 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.io.StringWriter;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("mq")
+@ObfuscatedName("nd")
 @Implements("IgnoreList")
 public class IgnoreList extends UserList {
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
-		descriptor = "Low;"
+		descriptor = "Lpj;"
 	)
 	@Export("loginType")
 	final LoginType loginType;
 
 	@ObfuscatedSignature(
-		descriptor = "(Low;)V"
+		descriptor = "(Lpj;)V"
 	)
 	public IgnoreList(LoginType var1) {
-		super(400);
-		this.loginType = var1;
-	}
+		super(400); // L: 13
+		this.loginType = var1; // L: 14
+	} // L: 15
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "(B)Lmv;",
-		garbageValue = "2"
+		descriptor = "(I)Lnb;",
+		garbageValue = "-1695844600"
 	)
 	@Export("newInstance")
 	User newInstance() {
-		return new Ignored();
+		return new Ignored(); // L: 19
 	}
 
-	@ObfuscatedName("b")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "(II)[Lmv;",
-		garbageValue = "-813912346"
+		descriptor = "(II)[Lnb;",
+		garbageValue = "1788836658"
 	)
 	@Export("newTypedArray")
 	User[] newTypedArray(int var1) {
-		return new Ignored[var1];
+		return new Ignored[var1]; // L: 24
 	}
 
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;II)V",
-		garbageValue = "-2139408560"
+		descriptor = "(Lpx;IB)V",
+		garbageValue = "0"
 	)
 	@Export("read")
 	public void read(Buffer var1, int var2) {
 		while (true) {
-			if (var1.offset < var2) {
-				int var3 = var1.readUnsignedByte();
-				boolean var4 = (var3 & 1) == 1;
-				Username var5 = new Username(var1.readStringCp1252NullTerminated(), this.loginType);
-				Username var6 = new Username(var1.readStringCp1252NullTerminated(), this.loginType);
-				var1.readStringCp1252NullTerminated();
-				if (var5 != null && var5.hasCleanName()) {
-					Ignored var7 = (Ignored)this.getByCurrentUsername(var5);
-					if (var4) {
-						Ignored var8 = (Ignored)this.getByCurrentUsername(var6);
-						if (var8 != null && var8 != var7) {
-							if (var7 != null) {
-								this.remove(var8);
+			if (var1.offset < var2) { // L: 28
+				int var3 = var1.readUnsignedByte(); // L: 29
+				boolean var4 = (var3 & 1) == 1; // L: 30
+				Username var5 = new Username(var1.readStringCp1252NullTerminated(), this.loginType); // L: 31
+				Username var6 = new Username(var1.readStringCp1252NullTerminated(), this.loginType); // L: 32
+				var1.readStringCp1252NullTerminated(); // L: 33
+				if (var5 != null && var5.hasCleanName()) { // L: 34
+					Ignored var7 = (Ignored)this.getByCurrentUsername(var5); // L: 35
+					if (var4) { // L: 36
+						Ignored var8 = (Ignored)this.getByCurrentUsername(var6); // L: 37
+						if (var8 != null && var7 != var8) { // L: 38
+							if (var7 != null) { // L: 39
+								this.remove(var8); // L: 40
 							} else {
-								var7 = var8;
+								var7 = var8; // L: 43
 							}
 						}
 					}
 
-					if (var7 != null) {
-						this.changeName(var7, var5, var6);
+					if (var7 != null) { // L: 47
+						this.changeName(var7, var5, var6); // L: 48
 						continue;
 					}
 
-					if (this.getSize() < 400) {
-						int var9 = this.getSize();
-						var7 = (Ignored)this.addLast(var5, var6);
-						var7.id = var9;
+					if (this.getSize() < 400) { // L: 50
+						int var9 = this.getSize(); // L: 51
+						var7 = (Ignored)this.addLast(var5, var6); // L: 52
+						var7.id = var9; // L: 53
 					}
 					continue;
 				}
 
-				throw new IllegalStateException();
+				throw new IllegalStateException(); // L: 56
 			}
 
-			return;
+			return; // L: 57
 		}
 	}
 
-	@ObfuscatedName("p")
+	@ObfuscatedName("il")
 	@ObfuscatedSignature(
-		descriptor = "(Ljava/lang/Throwable;B)Ljava/lang/String;",
-		garbageValue = "111"
+		descriptor = "(III)Ljava/lang/String;",
+		garbageValue = "1540266419"
 	)
-	static String method6267(Throwable var0) throws IOException {
-		String var1;
-		if (var0 instanceof RunException) {
-			RunException var2 = (RunException)var0;
-			var1 = var2.message + " | ";
-			var0 = var2.throwable;
+	static final String method6430(int var0, int var1) {
+		int var2 = var1 - var0; // L: 10187
+		if (var2 < -9) { // L: 10188
+			return class166.colorStartTag(16711680);
+		} else if (var2 < -6) { // L: 10189
+			return class166.colorStartTag(16723968);
+		} else if (var2 < -3) { // L: 10190
+			return class166.colorStartTag(16740352);
+		} else if (var2 < 0) { // L: 10191
+			return class166.colorStartTag(16756736);
+		} else if (var2 > 9) { // L: 10192
+			return class166.colorStartTag(65280);
+		} else if (var2 > 6) { // L: 10193
+			return class166.colorStartTag(4259584);
+		} else if (var2 > 3) { // L: 10194
+			return class166.colorStartTag(8453888);
 		} else {
-			var1 = "";
-		}
-
-		StringWriter var12 = new StringWriter();
-		PrintWriter var3 = new PrintWriter(var12);
-		var0.printStackTrace(var3);
-		var3.close();
-		String var4 = var12.toString();
-		BufferedReader var5 = new BufferedReader(new StringReader(var4));
-		String var6 = var5.readLine();
-
-		while (true) {
-			while (true) {
-				String var7 = var5.readLine();
-				if (var7 == null) {
-					var1 = var1 + "| " + var6;
-					return var1;
-				}
-
-				int var8 = var7.indexOf(40);
-				int var9 = var7.indexOf(41, var8 + 1);
-				if (var8 >= 0 && var9 >= 0) {
-					String var10 = var7.substring(var8 + 1, var9);
-					int var11 = var10.indexOf(".java:");
-					if (var11 >= 0) {
-						var10 = var10.substring(0, var11) + var10.substring(var11 + 5);
-						var1 = var1 + var10 + ' ';
-						continue;
-					}
-
-					var7 = var7.substring(0, var8);
-				}
-
-				var7 = var7.trim();
-				var7 = var7.substring(var7.lastIndexOf(32) + 1);
-				var7 = var7.substring(var7.lastIndexOf(9) + 1);
-				var1 = var1 + var7 + ' ';
-			}
+			return var2 > 0 ? class166.colorStartTag(12648192) : class166.colorStartTag(16776960); // L: 10195 10196
 		}
 	}
 }

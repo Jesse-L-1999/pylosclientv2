@@ -1,60 +1,51 @@
 import net.runelite.mapping.Export;
-import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("ce")
+@ObfuscatedName("co")
 public class class78 {
-	@ObfuscatedName("oo")
-	@ObfuscatedGetter(
-		intValue = 603715761
-	)
-	static int field1000;
-
-	@ObfuscatedName("c")
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "(IB)Lfj;",
-		garbageValue = "-18"
+		descriptor = "(II)Lgv;",
+		garbageValue = "788038626"
 	)
-	@Export("WorldMapElement_get")
-	public static WorldMapElement WorldMapElement_get(int var0) {
-		return var0 >= 0 && var0 < WorldMapElement.WorldMapElement_cached.length && WorldMapElement.WorldMapElement_cached[var0] != null ? WorldMapElement.WorldMapElement_cached[var0] : new WorldMapElement(var0);
-	}
-
-	@ObfuscatedName("c")
-	@ObfuscatedSignature(
-		descriptor = "(II)Lfu;",
-		garbageValue = "-1066482349"
-	)
-	@Export("getInvDefinition")
-	public static InvDefinition getInvDefinition(int var0) {
-		InvDefinition var1 = (InvDefinition)InvDefinition.InvDefinition_cached.get((long)var0);
-		if (var1 != null) {
+	@Export("getParamDefinition")
+	public static ParamComposition getParamDefinition(int var0) {
+		ParamComposition var1 = (ParamComposition)ParamComposition.ParamDefinition_cached.get((long)var0); // L: 25
+		if (var1 != null) { // L: 26
 			return var1;
 		} else {
-			byte[] var2 = InvDefinition.InvDefinition_archive.takeFile(5, var0);
-			var1 = new InvDefinition();
-			if (var2 != null) {
+			byte[] var2 = ParamComposition.ParamDefinition_archive.takeFile(11, var0); // L: 27
+			var1 = new ParamComposition(); // L: 28
+			if (var2 != null) { // L: 29
 				var1.decode(new Buffer(var2));
 			}
 
-			InvDefinition.InvDefinition_cached.put(var1, (long)var0);
-			return var1;
+			var1.postDecode(); // L: 30
+			ParamComposition.ParamDefinition_cached.put(var1, (long)var0); // L: 31
+			return var1; // L: 32
 		}
 	}
 
 	@ObfuscatedName("w")
 	@ObfuscatedSignature(
-		descriptor = "(B)[I",
-		garbageValue = "21"
+		descriptor = "(CI)Z",
+		garbageValue = "2081460925"
 	)
-	public static int[] method2140() {
-		int[] var0 = new int[KeyHandler.field140];
-
-		for (int var1 = 0; var1 < KeyHandler.field140; ++var1) {
-			var0[var1] = KeyHandler.field139[var1];
-		}
-
-		return var0;
+	@Export("isAlphaNumeric")
+	public static boolean isAlphaNumeric(char var0) {
+		return var0 >= '0' && var0 <= '9' || var0 >= 'A' && var0 <= 'Z' || var0 >= 'a' && var0 <= 'z'; // L: 154
 	}
+
+	@ObfuscatedName("lf")
+	@ObfuscatedSignature(
+		descriptor = "(B)V",
+		garbageValue = "4"
+	)
+	@Export("Clan_leaveChat")
+	static final void Clan_leaveChat() {
+		PacketBufferNode var0 = WallDecoration.getPacketBufferNode(ClientPacket.field2970, Client.packetWriter.isaacCipher); // L: 12457
+		var0.packetBuffer.writeByte(0); // L: 12458
+		Client.packetWriter.addNode(var0); // L: 12459
+	} // L: 12460
 }

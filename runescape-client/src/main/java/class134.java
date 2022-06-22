@@ -1,103 +1,88 @@
+import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
-import net.runelite.rs.ScriptOpcodes;
 
-@ObfuscatedName("ef")
-public class class134 extends class142 {
-	@ObfuscatedName("c")
-	@ObfuscatedGetter(
-		intValue = 642006289
+@ObfuscatedName("eb")
+public class class134 extends class144 {
+	@ObfuscatedName("d")
+	@ObfuscatedSignature(
+		descriptor = "Llp;"
 	)
-	int field1552;
+	@Export("Widget_archive")
+	public static AbstractArchive Widget_archive;
+	@ObfuscatedName("o")
+	@ObfuscatedGetter(
+		intValue = -457086001
+	)
+	int field1608;
+	@ObfuscatedName("q")
+	byte field1607;
+	@ObfuscatedName("l")
+	@ObfuscatedGetter(
+		intValue = 369270557
+	)
+	int field1609;
+	@ObfuscatedName("k")
+	String field1606;
 	// $FF: synthetic field
 	@ObfuscatedSignature(
-		descriptor = "Len;"
+		descriptor = "Lee;"
 	)
-	final class143 this$0;
+	final class145 this$0;
 
 	@ObfuscatedSignature(
-		descriptor = "(Len;)V"
+		descriptor = "(Lee;)V"
 	)
-	class134(class143 var1) {
+	class134(class145 var1) {
 		this.this$0 = var1;
-		this.field1552 = -1;
+		this.field1608 = -1; // L: 101
+	} // L: 106
+
+	@ObfuscatedName("o")
+	@ObfuscatedSignature(
+		descriptor = "(Lpx;I)V",
+		garbageValue = "1212008489"
+	)
+	void vmethod3037(Buffer var1) {
+		this.field1608 = var1.readUnsignedShort(); // L: 109
+		this.field1607 = var1.readByte();
+		this.field1609 = var1.readUnsignedShort();
+		var1.readLong(); // L: 112
+		this.field1606 = var1.readStringCp1252NullTerminated(); // L: 113
+	} // L: 114
+
+	@ObfuscatedName("q")
+	@ObfuscatedSignature(
+		descriptor = "(Let;I)V",
+		garbageValue = "1640110130"
+	)
+	void vmethod3032(ClanChannel var1) {
+		ClanChannelMember var2 = (ClanChannelMember)var1.members.get(this.field1608); // L: 117
+		var2.rank = this.field1607; // L: 118
+		var2.world = this.field1609; // L: 119
+		var2.username = new Username(this.field1606); // L: 120
+	} // L: 121
+
+	@ObfuscatedName("r")
+	@ObfuscatedSignature(
+		descriptor = "(III)I",
+		garbageValue = "-574473090"
+	)
+	public static int method2841(int var0, int var1) {
+		int var2 = var0 >>> 31; // L: 110
+		return (var0 + var2) / var1 - var2; // L: 111
 	}
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("lu")
 	@ObfuscatedSignature(
-		descriptor = "(Lpi;B)V",
-		garbageValue = "4"
+		descriptor = "(I)V",
+		garbageValue = "-1592310985"
 	)
-	void vmethod3022(Buffer var1) {
-		this.field1552 = var1.readUnsignedShort();
-		var1.readUnsignedByte();
-		if (var1.readUnsignedByte() != 255) {
-			--var1.offset;
-			var1.readLong();
+	static void method2850() {
+		if (Client.oculusOrbState == 1) { // L: 12674
+			Client.field575 = true; // L: 12675
 		}
 
-	}
-
-	@ObfuscatedName("b")
-	@ObfuscatedSignature(
-		descriptor = "(Lei;B)V",
-		garbageValue = "40"
-	)
-	void vmethod3021(ClanChannel var1) {
-		var1.removeMember(this.field1552);
-	}
-
-	@ObfuscatedName("av")
-	@ObfuscatedSignature(
-		descriptor = "(ILbn;ZB)I",
-		garbageValue = "1"
-	)
-	static int method2824(int var0, Script var1, boolean var2) {
-		if (var0 == ScriptOpcodes.GETWINDOWMODE) {
-			Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = class143.getWindowedMode();
-			return 1;
-		} else {
-			int var3;
-			if (var0 == ScriptOpcodes.SETWINDOWMODE) {
-				var3 = Interpreter.Interpreter_intStack[--IsaacCipher.Interpreter_intStackSize];
-				if (var3 == 1 || var3 == 2) {
-					Occluder.setWindowedMode(var3);
-				}
-
-				return 1;
-			} else if (var0 == ScriptOpcodes.GETDEFAULTWINDOWMODE) {
-				Interpreter.Interpreter_intStack[++IsaacCipher.Interpreter_intStackSize - 1] = SecureRandomFuture.clientPreferences.windowMode;
-				return 1;
-			} else if (var0 != ScriptOpcodes.SETDEFAULTWINDOWMODE) {
-				if (var0 == 5310) {
-					--IsaacCipher.Interpreter_intStackSize;
-					return 1;
-				} else if (var0 == 5311) {
-					IsaacCipher.Interpreter_intStackSize -= 2;
-					return 1;
-				} else if (var0 == 5312) {
-					--IsaacCipher.Interpreter_intStackSize;
-					return 1;
-				} else if (var0 == 5350) {
-					class13.Interpreter_stringStackSize -= 2;
-					--IsaacCipher.Interpreter_intStackSize;
-					return 1;
-				} else if (var0 == 5351) {
-					--class13.Interpreter_stringStackSize;
-					return 1;
-				} else {
-					return 2;
-				}
-			} else {
-				var3 = Interpreter.Interpreter_intStack[--IsaacCipher.Interpreter_intStackSize];
-				if (var3 == 1 || var3 == 2) {
-					SecureRandomFuture.clientPreferences.windowMode = var3;
-					class127.savePreferences();
-				}
-
-				return 1;
-			}
-		}
-	}
+	} // L: 12677
 }

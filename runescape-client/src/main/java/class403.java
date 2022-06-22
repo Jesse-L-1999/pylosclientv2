@@ -1,39 +1,29 @@
-import java.util.Iterator;
-import net.runelite.mapping.ObfuscatedGetter;
+import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("oe")
-class class403 implements Iterator {
-	@ObfuscatedName("c")
-	@ObfuscatedGetter(
-		intValue = 1460216939
-	)
-	int field4432;
-	// $FF: synthetic field
+@ObfuscatedName("ox")
+public class class403 {
+	@ObfuscatedName("sg")
 	@ObfuscatedSignature(
-		descriptor = "Loo;"
+		descriptor = "Lbr;"
 	)
-	final class404 this$0;
+	@Export("decimator")
+	static Decimator decimator;
+	@ObfuscatedName("v")
+	static final int[] field4453;
+	@ObfuscatedName("y")
+	static final int[] field4450;
 
-	@ObfuscatedSignature(
-		descriptor = "(Loo;)V"
-	)
-	class403(class404 var1) {
-		this.this$0 = var1;
-	}
+	static {
+		field4453 = new int[2048]; // L: 13
+		field4450 = new int[2048]; // L: 14
+		double var0 = 0.0030679615757712823D; // L: 17
 
-	public void remove() {
-		throw new UnsupportedOperationException();
-	}
+		for (int var2 = 0; var2 < 2048; ++var2) { // L: 18
+			field4453[var2] = (int)(65536.0D * Math.sin(var0 * (double)var2)); // L: 19
+			field4450[var2] = (int)(65536.0D * Math.cos(var0 * (double)var2)); // L: 20
+		}
 
-	public Object next() {
-		int var1 = ++this.field4432 - 1;
-		class372 var2 = (class372)this.this$0.field4436.get((long)var1);
-		return var2 != null ? var2 : this.this$0.method7215(var1);
-	}
-
-	public boolean hasNext() {
-		return this.field4432 < this.this$0.method6759();
-	}
+	} // L: 22
 }

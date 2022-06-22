@@ -82,6 +82,9 @@ import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.events.OverlayMenuClicked;
 import net.runelite.client.game.SpriteManager;
 import net.runelite.client.input.KeyManager;
+import net.runelite.client.party.PartyMember;
+import net.runelite.client.party.PartyService;
+import net.runelite.client.party.messages.PartyChatMessage;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.raids.events.RaidReset;
@@ -94,11 +97,7 @@ import net.runelite.client.util.HotkeyListener;
 import net.runelite.client.util.ImageCapture;
 import net.runelite.client.util.Text;
 import static net.runelite.client.util.Text.sanitize;
-import net.runelite.client.ws.PartyMember;
-import net.runelite.client.ws.PartyService;
-import net.runelite.client.ws.WSClient;
 import net.runelite.http.api.chat.LayoutRoom;
-import net.runelite.http.api.ws.messages.party.PartyChatMessage;
 
 @PluginDescriptor(
 	name = "Chambers Of Xeric",
@@ -155,9 +154,6 @@ public class RaidsPlugin extends Plugin
 
 	@Inject
 	private PartyService party;
-
-	@Inject
-	private WSClient ws;
 
 	@Inject
 	private ChatCommandManager chatCommandManager;
@@ -264,7 +260,7 @@ public class RaidsPlugin extends Plugin
 	public void onVarbitChanged(VarbitChanged event)
 	{
 		int tempPartyID = client.getVar(VarPlayer.IN_RAID_PARTY);
-		boolean tempInRaid = client.getVar(Varbits.IN_RAID) == 1;
+		boolean tempInRaid = client.getVarbitValue(Varbits.IN_RAID) == 1;
 
 		// if the player's party state has changed
 		if (tempPartyID != raidPartyID)
@@ -321,8 +317,8 @@ public class RaidsPlugin extends Plugin
 
 				if (config.pointsMessage())
 				{
-					int totalPoints = client.getVar(Varbits.TOTAL_POINTS);
-					int personalPoints = client.getVar(Varbits.PERSONAL_POINTS);
+					int totalPoints = client.getVarbitValue(Varbits.TOTAL_POINTS);
+					int personalPoints = client.getVarbitValue(Varbits.PERSONAL_POINTS);
 
 					double percentage = personalPoints / (totalPoints / 100.0);
 
@@ -425,7 +421,7 @@ public class RaidsPlugin extends Plugin
 			return;
 		}
 
-		inRaidChambers = client.getVar(Varbits.IN_RAID) == 1;
+		inRaidChambers = client.getVarbitValue(Varbits.IN_RAID) == 1;
 
 		if (!inRaidChambers)
 		{
@@ -494,7 +490,7 @@ public class RaidsPlugin extends Plugin
 		{
 			final PartyChatMessage message = new PartyChatMessage(layoutMessage);
 			message.setMemberId(localMember.getMemberId());
-			ws.send(message);
+			party.send(message);
 		}
 	}
 

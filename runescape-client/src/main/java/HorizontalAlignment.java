@@ -4,129 +4,155 @@ import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("fc")
+@ObfuscatedName("fj")
 @Implements("HorizontalAlignment")
 public enum HorizontalAlignment implements MouseWheel {
-	@ObfuscatedName("c")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
-		descriptor = "Lfc;"
+		descriptor = "Lfj;"
 	)
-	field1829(0, 0),
-	@ObfuscatedName("b")
+	field1938(2, 0),
+	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "Lfc;"
+		descriptor = "Lfj;"
 	)
 	@Export("HorizontalAlignment_centered")
-	HorizontalAlignment_centered(2, 1),
-	@ObfuscatedName("p")
+	HorizontalAlignment_centered(0, 1),
+	@ObfuscatedName("l")
 	@ObfuscatedSignature(
-		descriptor = "Lfc;"
+		descriptor = "Lfj;"
 	)
-	field1826(1, 2);
+	field1937(1, 2);
 
-	@ObfuscatedName("r")
-	@ObfuscatedSignature(
-		descriptor = "Lcf;"
-	)
-	@Export("World_request")
-	static UrlRequest World_request;
-	@ObfuscatedName("m")
+	@ObfuscatedName("jt")
 	@ObfuscatedGetter(
-		intValue = -947111311
+		intValue = -88443571
+	)
+	@Export("oculusOrbFocalPointX")
+	static int oculusOrbFocalPointX;
+	@ObfuscatedName("k")
+	@ObfuscatedGetter(
+		intValue = -150444483
 	)
 	@Export("value")
 	public final int value;
-	@ObfuscatedName("t")
+	@ObfuscatedName("a")
 	@ObfuscatedGetter(
-		intValue = -968745241
+		intValue = -47587237
 	)
 	@Export("id")
 	final int id;
 
 	HorizontalAlignment(int var3, int var4) {
-		this.value = var3;
-		this.id = var4;
-	}
+		this.value = var3; // L: 14
+		this.id = var4; // L: 15
+	} // L: 16
 
-	@ObfuscatedName("b")
+	@ObfuscatedName("o")
 	@ObfuscatedSignature(
 		descriptor = "(B)I",
-		garbageValue = "48"
+		garbageValue = "30"
 	)
 	@Export("rsOrdinal")
 	public int rsOrdinal() {
-		return this.id;
+		return this.id; // L: 20
 	}
 
-	@ObfuscatedName("c")
+	@ObfuscatedName("hh")
 	@ObfuscatedSignature(
-		descriptor = "(Lpj;B)V",
-		garbageValue = "13"
+		descriptor = "(ZLpc;B)V",
+		garbageValue = "-31"
 	)
-	@Export("updatePlayer")
-	static final void updatePlayer(PacketBuffer var0) {
-		var0.importIndex();
-		int var1 = Client.localPlayerIndex;
-		Player var2 = class340.localPlayer = Client.players[var1] = new Player();
-		var2.index = var1;
-		int var3 = var0.readBits(30);
-		byte var4 = (byte)(var3 >> 28);
-		int var5 = var3 >> 14 & 16383;
-		int var6 = var3 & 16383;
-		var2.pathX[0] = var5 - class131.baseX;
-		var2.x = (var2.pathX[0] << 7) + (var2.transformedSize() << 6);
-		var2.pathY[0] = var6 - TileItem.baseY;
-		var2.y = (var2.pathY[0] << 7) + (var2.transformedSize() << 6);
-		class20.Client_plane = var2.plane = var4;
-		if (Players.field1248[var1] != null) {
-			var2.read(Players.field1248[var1]);
-		}
-
-		Players.Players_count = 0;
-		Players.Players_indices[++Players.Players_count - 1] = var1;
-		Players.field1243[var1] = 0;
-		Players.Players_emptyIdxCount = 0;
-
-		for (int var7 = 1; var7 < 2048; ++var7) {
-			if (var1 != var7) {
-				int var8 = var0.readBits(18);
-				int var9 = var8 >> 16;
-				int var10 = var8 >> 8 & 597;
-				int var11 = var8 & 597;
-				Players.Players_regions[var7] = (var10 << 14) + var11 + (var9 << 28);
-				Players.Players_orientations[var7] = 0;
-				Players.Players_targetIndices[var7] = -1;
-				Players.Players_emptyIndices[++Players.Players_emptyIdxCount - 1] = var7;
-				Players.field1243[var7] = 0;
+	@Export("updateNpcs")
+	static final void updateNpcs(boolean var0, PacketBuffer var1) {
+		Client.field621 = 0; // L: 8002
+		Client.field565 = 0; // L: 8003
+		PacketBuffer var2 = Client.packetWriter.packetBuffer; // L: 8005
+		var2.importIndex(); // L: 8006
+		int var3 = var2.readBits(8); // L: 8007
+		int var4;
+		if (var3 < Client.npcCount) { // L: 8008
+			for (var4 = var3; var4 < Client.npcCount; ++var4) { // L: 8009
+				Client.field616[++Client.field621 - 1] = Client.npcIndices[var4];
 			}
 		}
 
-		var0.exportIndex();
-	}
+		if (var3 > Client.npcCount) { // L: 8011
+			throw new RuntimeException("");
+		} else {
+			Client.npcCount = 0; // L: 8012
 
-	@ObfuscatedName("t")
-	@ObfuscatedSignature(
-		descriptor = "(Ljava/lang/Float;Ljava/lang/Float;I)V",
-		garbageValue = "-2046579641"
-	)
-	static void method3294(Float var0, Float var1) {
-		if (var0 + class112.field1361 < 1.3333334F) {
-			float var2 = var0 - 2.0F;
-			float var3 = var0 - 1.0F;
-			float var4 = (float)Math.sqrt((double)(var2 * var2 - 4.0F * var3 * var3));
-			float var5 = (var4 + -var2) * 0.5F;
-			if (var1 + class112.field1361 > var5) {
-				var1 = var5 - class112.field1361;
-			} else {
-				var5 = 0.5F * (-var2 - var4);
-				if (var1 < class112.field1361 + var5) {
-					var1 = class112.field1361 + var5;
+			for (var4 = 0; var4 < var3; ++var4) { // L: 8013
+				int var5 = Client.npcIndices[var4]; // L: 8014
+				NPC var6 = Client.npcs[var5]; // L: 8015
+				int var7 = var2.readBits(1); // L: 8016
+				if (var7 == 0) { // L: 8017
+					Client.npcIndices[++Client.npcCount - 1] = var5; // L: 8018
+					var6.npcCycle = Client.cycle; // L: 8019
+				} else {
+					int var8 = var2.readBits(2); // L: 8022
+					if (var8 == 0) { // L: 8023
+						Client.npcIndices[++Client.npcCount - 1] = var5; // L: 8024
+						var6.npcCycle = Client.cycle; // L: 8025
+						Client.field601[++Client.field565 - 1] = var5; // L: 8026
+					} else {
+						int var9;
+						int var10;
+						if (var8 == 1) { // L: 8029
+							Client.npcIndices[++Client.npcCount - 1] = var5; // L: 8030
+							var6.npcCycle = Client.cycle; // L: 8031
+							var9 = var2.readBits(3); // L: 8032
+							var6.method2340(var9, class193.field2251); // L: 8033
+							var10 = var2.readBits(1); // L: 8034
+							if (var10 == 1) { // L: 8035
+								Client.field601[++Client.field565 - 1] = var5;
+							}
+						} else if (var8 == 2) { // L: 8038
+							Client.npcIndices[++Client.npcCount - 1] = var5; // L: 8039
+							var6.npcCycle = Client.cycle; // L: 8040
+							if (var2.readBits(1) == 1) { // L: 8041
+								var9 = var2.readBits(3); // L: 8042
+								var6.method2340(var9, class193.field2248); // L: 8043
+								var10 = var2.readBits(3); // L: 8044
+								var6.method2340(var10, class193.field2248); // L: 8045
+							} else {
+								var9 = var2.readBits(3); // L: 8048
+								var6.method2340(var9, class193.field2249); // L: 8049
+							}
+
+							var9 = var2.readBits(1); // L: 8051
+							if (var9 == 1) {
+								Client.field601[++Client.field565 - 1] = var5; // L: 8052
+							}
+						} else if (var8 == 3) { // L: 8055
+							Client.field616[++Client.field621 - 1] = var5; // L: 8056
+						}
+					}
 				}
 			}
-		} else {
-			var0 = 1.3333334F - class112.field1361;
-			var1 = 0.33333334F - class112.field1361;
-		}
 
-	}
+			class82.method2098(var0, var1); // L: 8061
+			JagexCache.method3158(var1); // L: 8062
+
+			int var11;
+			for (var11 = 0; var11 < Client.field621; ++var11) { // L: 8063
+				var3 = Client.field616[var11]; // L: 8064
+				if (Client.npcs[var3].npcCycle != Client.cycle) { // L: 8065
+					Client.npcs[var3].definition = null; // L: 8066
+					Client.npcs[var3] = null; // L: 8067
+				}
+			}
+
+			if (var1.offset != Client.packetWriter.serverPacketLength) { // L: 8070
+				throw new RuntimeException(var1.offset + "," + Client.packetWriter.serverPacketLength);
+			} else {
+				for (var11 = 0; var11 < Client.npcCount; ++var11) { // L: 8071
+					if (Client.npcs[Client.npcIndices[var11]] == null) { // L: 8072
+						throw new RuntimeException(var11 + "," + Client.npcCount); // L: 8073
+					}
+				}
+
+			}
+		}
+	} // L: 8076
 }

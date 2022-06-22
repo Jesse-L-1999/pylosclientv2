@@ -3,64 +3,92 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
+import net.runelite.rs.ScriptOpcodes;
 
-@ObfuscatedName("gh")
+@ObfuscatedName("gg")
 @Implements("FaceNormal")
 public class FaceNormal {
-	@ObfuscatedName("c")
+	@ObfuscatedName("jg")
 	@ObfuscatedGetter(
-		intValue = -38617703
+		intValue = 1186041129
+	)
+	@Export("cameraZ")
+	static int cameraZ;
+	@ObfuscatedName("o")
+	@ObfuscatedGetter(
+		intValue = 1839266109
 	)
 	@Export("x")
 	int x;
-	@ObfuscatedName("b")
+	@ObfuscatedName("q")
 	@ObfuscatedGetter(
-		intValue = -1161789305
+		intValue = 475209611
 	)
 	@Export("y")
 	int y;
-	@ObfuscatedName("p")
+	@ObfuscatedName("l")
 	@ObfuscatedGetter(
-		intValue = 1924631327
+		intValue = 1225057041
 	)
 	@Export("z")
 	int z;
 
 	FaceNormal() {
-	}
+	} // L: 8
 
-	@ObfuscatedName("n")
+	@ObfuscatedName("e")
 	@ObfuscatedSignature(
-		descriptor = "(IIB)I",
-		garbageValue = "37"
+		descriptor = "(ILbb;ZI)I",
+		garbageValue = "-1800924378"
 	)
-	public static int method4142(int var0, int var1) {
-		int var2 = var0 >>> 31;
-		return (var0 + var2) / var1 - var2;
-	}
-
-	@ObfuscatedName("hr")
-	@ObfuscatedSignature(
-		descriptor = "(IIII)I",
-		garbageValue = "-2015271850"
-	)
-	@Export("getTileHeight")
-	static final int getTileHeight(int var0, int var1, int var2) {
-		int var3 = var0 >> 7;
-		int var4 = var1 >> 7;
-		if (var3 >= 0 && var4 >= 0 && var3 <= 103 && var4 <= 103) {
-			int var5 = var2;
-			if (var2 < 3 && (Tiles.Tiles_renderFlags[1][var3][var4] & 2) == 2) {
-				var5 = var2 + 1;
+	static int method4212(int var0, Script var1, boolean var2) {
+		Widget var7;
+		if (var0 != ScriptOpcodes.CC_CALLONRESIZE && var0 != ScriptOpcodes.IF_CALLONRESIZE) { // L: 1269
+			int var4;
+			if (var0 == ScriptOpcodes.CC_TRIGGEROP) { // L: 1286
+				var7 = var2 ? Interpreter.scriptDotWidget : KeyHandler.scriptActiveWidget; // L: 1287
+				var4 = Interpreter.Interpreter_intStack[--class12.Interpreter_intStackSize]; // L: 1288
+				if (var4 >= 1 && var4 <= 10) { // L: 1289
+					class93 var8 = new class93(var4, var7.id, var7.childIndex, var7.itemId); // L: 1292
+					Interpreter.field821.add(var8); // L: 1293
+					return 1; // L: 1294
+				} else {
+					throw new RuntimeException(); // L: 1290
+				}
+			} else if (var0 == ScriptOpcodes.IF_TRIGGEROP) { // L: 1296
+				class12.Interpreter_intStackSize -= 3; // L: 1297
+				int var3 = Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize]; // L: 1298
+				var4 = Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize + 1]; // L: 1299
+				int var5 = Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize + 2]; // L: 1300
+				if (var5 >= 1 && var5 <= 10) { // L: 1301
+					class93 var6 = new class93(var5, var3, var4, class92.getWidget(var3).itemId); // L: 1304
+					Interpreter.field821.add(var6); // L: 1305
+					return 1; // L: 1306
+				} else {
+					throw new RuntimeException(); // L: 1302
+				}
+			} else {
+				return 2; // L: 1308
+			}
+		} else if (Interpreter.field823 >= 10) { // L: 1270
+			throw new RuntimeException(); // L: 1271
+		} else {
+			if (var0 >= 2000) { // L: 1274
+				var7 = class92.getWidget(Interpreter.Interpreter_intStack[--class12.Interpreter_intStackSize]); // L: 1275
+			} else {
+				var7 = var2 ? Interpreter.scriptDotWidget : KeyHandler.scriptActiveWidget; // L: 1277
 			}
 
-			int var6 = var0 & 127;
-			int var7 = var1 & 127;
-			int var8 = (128 - var6) * Tiles.Tiles_heights[var5][var3][var4] + var6 * Tiles.Tiles_heights[var5][var3 + 1][var4] >> 7;
-			int var9 = var6 * Tiles.Tiles_heights[var5][var3 + 1][var4 + 1] + Tiles.Tiles_heights[var5][var3][var4 + 1] * (128 - var6) >> 7;
-			return var8 * (128 - var7) + var9 * var7 >> 7;
-		} else {
-			return 0;
+			if (var7.onResize == null) { // L: 1278
+				return 0;
+			} else {
+				ScriptEvent var9 = new ScriptEvent(); // L: 1279
+				var9.widget = var7; // L: 1280
+				var9.args = var7.onResize; // L: 1281
+				var9.field1054 = Interpreter.field823 + 1; // L: 1282
+				Client.scriptEvents.addFirst(var9); // L: 1283
+				return 1; // L: 1284
+			}
 		}
 	}
 }

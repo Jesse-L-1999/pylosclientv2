@@ -38,9 +38,11 @@ import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import net.runelite.api.Animation;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
 import net.runelite.api.DecorativeObject;
+import net.runelite.api.DynamicObject;
 import net.runelite.api.GameObject;
 import net.runelite.api.GraphicsObject;
 import net.runelite.api.ItemLayer;
@@ -59,7 +61,6 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
-import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
@@ -355,7 +356,21 @@ class DevToolsOverlay extends Overlay
 			{
 				if (gameObject != null && gameObject.getSceneMinLocation().equals(tile.getSceneLocation()))
 				{
-					renderTileObject(graphics, gameObject, player, GREEN);
+					if (player.getLocalLocation().distanceTo(gameObject.getLocalLocation()) <= MAX_DISTANCE)
+					{
+						StringBuilder stringBuilder = new StringBuilder();
+						stringBuilder.append("ID: ").append(gameObject.getId());
+						if (gameObject.getRenderable() instanceof DynamicObject)
+						{
+							Animation animation = ((DynamicObject) gameObject.getRenderable()).getAnimation();
+							if (animation != null)
+							{
+								stringBuilder.append(" A: ").append(animation.getId());
+							}
+						}
+
+						OverlayUtil.renderTileOverlay(graphics, gameObject, stringBuilder.toString(), GREEN);
+					}
 				}
 			}
 		}
@@ -404,11 +419,18 @@ class DevToolsOverlay extends Overlay
 			return;
 		}
 
-		for (WidgetItem item : inventoryWidget.getWidgetItems())
+		for (Widget item : inventoryWidget.getDynamicChildren())
 		{
-			Rectangle slotBounds = item.getCanvasBounds();
+			Rectangle slotBounds = item.getBounds();
+			int itemId = item.getItemId();
 
-			String idText = "" + item.getId();
+			if (itemId == 6512)
+			{
+				continue;
+			}
+
+			String idText = "" + itemId;
+
 			FontMetrics fm = graphics.getFontMetrics();
 			Rectangle2D textBounds = fm.getStringBounds(idText, graphics);
 

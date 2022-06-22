@@ -1,14 +1,25 @@
 import java.util.function.Consumer;
+import net.runelite.api.Actor;
 import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
+import net.runelite.api.NPC;
+import net.runelite.api.Player;
+import net.runelite.api.events.NpcSpawned;
+import net.runelite.api.widgets.Widget;
+import net.runelite.rs.api.RSClient;
+import net.runelite.rs.api.RSNPC;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class RuneLiteMenuEntry implements MenuEntry
 {
+	private static RSClient client;
+
 	public Consumer consumer;
 	public int idx;
 
 	public RuneLiteMenuEntry()
 	{
+		idx = 499;
 	}
 
 	public RuneLiteMenuEntry(int idx)
@@ -323,6 +334,210 @@ public class RuneLiteMenuEntry implements MenuEntry
 	}
 
 	@Override
+	public boolean isItemOp()
+	{
+		MenuAction menuAction = this.getType();
+		if (menuAction == MenuAction.CC_OP || menuAction == MenuAction.CC_OP_LOW_PRIORITY)
+		{
+			int identifier = this.getIdentifier();
+			int param1 = this.getParam1();
+
+			if (param1 == 9764864)
+			{
+				switch (identifier)
+				{
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 6:
+					case 7:
+						return true;
+					case 5:
+				}
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public int getItemOp()
+	{
+		MenuAction menuAction = this.getType();
+		if (menuAction == MenuAction.CC_OP || menuAction == MenuAction.CC_OP_LOW_PRIORITY)
+		{
+			int identifier = this.getIdentifier();
+			int param0 = this.getParam0();
+			int param1 = this.getParam1();
+
+			if (param1 == 9764864)
+			{
+				switch (identifier)
+				{
+					case 1:
+						Widget widget = client.getWidget(param1);
+						if (widget != null && param0 != -1)
+						{
+							widget = widget.getChild(param0);
+							if (widget != null && widget.getItemId() > -1)
+							{
+								int shiftClickActionIndex = client.getItemComposition(widget.getItemId()).getShiftClickActionIndex();
+
+								if (shiftClickActionIndex >= 0)
+								{
+									return shiftClickActionIndex + 1;
+								}
+							}
+						}
+						break;
+					case 2:
+						return 1;
+					case 3:
+						return 2;
+					case 4:
+						return 3;
+					case 5:
+					default:
+						break;
+					case 6:
+						return 4;
+					case 7:
+						return 5;
+				}
+			}
+		}
+
+		return -1;
+	}
+
+	@Override
+	public int getItemId()
+	{
+		MenuAction menuAction = this.getType();
+		if (menuAction == MenuAction.CC_OP || menuAction == MenuAction.CC_OP_LOW_PRIORITY)
+		{
+			int param1 = this.getParam1();
+			int param0 = this.getParam0();
+
+			if (param1 == 9764864)
+			{
+				Widget widget = client.getWidget(param1);
+				if (param0 != -1)
+				{
+					widget = widget.getChild(param0);
+					return widget.getItemId();
+				}
+			}
+		}
+
+		return -1;
+	}
+
+	@Override
+	public Widget getWidget()
+	{
+		int param1 = this.getParam1();
+		int param0 = this.getParam0();
+
+		Widget widget = client.getWidget(param1);
+
+		if (widget == null)
+		{
+			return null;
+		}
+
+		if (param0 != -1)
+		{
+			Widget child = widget.getChild(param0);
+
+			if (child != null)
+			{
+				return child;
+			}
+		}
+
+		return widget;
+	}
+
+	@Override
+	public NPC getNpc()
+	{
+		NPC[] npcs = client.getCachedNPCs();
+		NPC npc = null;
+
+		MenuAction menuAction = this.getType();
+
+		if (menuAction == MenuAction.NPC_FIRST_OPTION ||
+			menuAction == MenuAction.NPC_SECOND_OPTION ||
+			menuAction == MenuAction.NPC_THIRD_OPTION ||
+			menuAction == MenuAction.NPC_FOURTH_OPTION ||
+			menuAction == MenuAction.NPC_FIFTH_OPTION ||
+			menuAction == MenuAction.WIDGET_TARGET_ON_NPC ||
+			menuAction == MenuAction.EXAMINE_NPC)
+		{
+			int identifier = this.getIdentifier();
+
+			if (identifier >= 0 && identifier < npcs.length)
+			{
+				npc = npcs[identifier];
+			}
+		}
+
+		return npc;
+	}
+
+	@Override
+	public Player getPlayer()
+	{
+		Player[] players = client.getCachedPlayers();
+		Player player = null;
+
+		MenuAction menuAction = this.getType();
+
+		if (menuAction == MenuAction.PLAYER_FIRST_OPTION ||
+			menuAction == MenuAction.PLAYER_SECOND_OPTION ||
+			menuAction == MenuAction.PLAYER_THIRD_OPTION ||
+			menuAction == MenuAction.PLAYER_FOURTH_OPTION ||
+			menuAction == MenuAction.PLAYER_FIFTH_OPTION ||
+			menuAction == MenuAction.PLAYER_SIXTH_OPTION ||
+			menuAction == MenuAction.PLAYER_SEVENTH_OPTION ||
+			menuAction == MenuAction.PLAYER_EIGTH_OPTION ||
+			menuAction == MenuAction.WIDGET_TARGET_ON_PLAYER ||
+			menuAction == MenuAction.RUNELITE_PLAYER)
+		{
+			int identifier = this.getIdentifier();
+
+			if (identifier >= 0 && identifier < players.length)
+			{
+				player = players[identifier];
+			}
+		}
+
+		return player;
+	}
+
+	@Override
+	public Actor getActor()
+	{
+		NPC npc = getNpc();
+
+		if (npc != null)
+		{
+			return npc;
+		}
+
+		Player player = getPlayer();
+
+		if (player != null)
+		{
+			return player;
+		}
+
+		return null;
+	}
+
+	@Override
 	public int hashCode()
 	{
 		byte b = 1;
@@ -346,6 +561,5 @@ public class RuneLiteMenuEntry implements MenuEntry
 	public String toString()
 	{
 		return "MenuEntryImpl(getOption=" + this.getOption() + ", getTarget=" + this.getTarget() + ", getIdentifier=" + this.getIdentifier() + ", getType=" + this.getType() + ", getParam0=" + this.getParam0() + ", getParam1=" + this.getParam1() + ", isForceLeftClick=" + this.isForceLeftClick() + ", isDeprioritized=" + this.isDeprioritized() + ")";
-
 	}
 }
